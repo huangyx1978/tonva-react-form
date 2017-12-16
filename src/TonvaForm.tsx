@@ -33,7 +33,7 @@ export class TonvaForm extends React.Component<TonvaFormProps, {}> {
         </div>;
     }
 }
-
+/*
 export namespace TonvaForm {    
     @observer 
     export class Row extends React.Component<{row:number|string}> {
@@ -68,3 +68,4 @@ export namespace TonvaForm {
         }
     }
 }
+*/

@@ -23,7 +23,6 @@ export abstract class CharsControl extends Control {
         }
     }
 
-    protected inputType: string;
     protected element: HTMLInputElement;
     @observable protected isOK?: boolean;
     @observable protected error: string;
@@ -33,7 +32,6 @@ export abstract class CharsControl extends Control {
     protected setProps() {
         super.setProps();
         _.assign(this.props, {
-            type: this.inputType,
             ref: this.ref,
             onBlur: this.onBlur,
             onFocus: this.onFocus,

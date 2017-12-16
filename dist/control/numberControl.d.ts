@@ -3,7 +3,6 @@ import { CharsControl } from './charsControl';
 export declare class NumberControl extends CharsControl {
     protected field: IntField | DecField | NumberField;
     protected value: number;
-    protected inputType: string;
     protected extraChars: number[];
     protected init(): void;
     protected parseValue(value?: string): any;

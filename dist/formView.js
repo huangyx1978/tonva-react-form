@@ -15,7 +15,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import * as React from 'react';
 import { computed } from 'mobx';
 import { ButtonsControl } from './control';
-import { bootstrapRowCreator } from './rowContainer';
+import { bootstrapCreateRow, elementCreateRow } from './rowContainer';
 export class FormView {
     constructor(props, initValues) {
         this.rows = [];
@@ -65,11 +65,18 @@ export class FormView {
         this.buttonsRow = this.buildRow({ createControl: this.createButtons.bind(this) }, undefined);
     }
     buildRow(formRow, formRowCreator) {
-        let createRow = formRow.createRow;
-        if (createRow === undefined) {
-            createRow = formRowCreator;
-            if (createRow === undefined)
-                createRow = bootstrapRowCreator;
+        let createRow;
+        let type = formRow.type;
+        if (type !== undefined) {
+            createRow = elementCreateRow;
+        }
+        else {
+            createRow = formRow.createRow;
+            if (createRow === undefined) {
+                createRow = formRowCreator;
+                if (createRow === undefined)
+                    createRow = bootstrapCreateRow;
+            }
         }
         let row = createRow(this, formRow);
         return row;
@@ -79,27 +86,27 @@ export class FormView {
     }
     render() {
         return React.createElement("form", { onSubmit: this.onSubmit },
-            "form test",
             this.rows.map((row, index) => row.render(index)),
             this.buttons());
     }
-    row(key) {
-        let index = this.rows.findIndex(r => r.key === key);
-        if (index < 0)
-            return null;
-        return this.rows[index].render(index);
-    }
-    others() {
-        let ret = [];
-        let len = this.rows.length;
-        for (let i = 0; i < len; i++) {
-            let r = this.rows[i];
-            if (r.key !== undefined)
-                continue;
-            ret.push(r.render(i));
+    /*
+        row(fieldName:string):JSX.Element {
+            let index = this.rows.findIndex(r => r.contains(fieldName));
+            if (index < 0) return null;
+            return this.rows[index].render(index);
         }
-        return ret;
-    }
+    
+        others():JSX.Element[] {
+            let ret = [];
+            let len = this.rows.length;
+            for (let i=0; i<len; i++) {
+                let r = this.rows[i];
+                if (r.key !== undefined) continue;
+                ret.push(r.render(i));
+            }
+            return ret;
+        }
+    */
     buttons() {
         return this.buttonsRow.render(this.rows.length);
     }

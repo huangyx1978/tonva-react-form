@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Control } from './control';
+import { Control, ControlBase } from './control';
 export class UnknownControl extends Control {
     render() {
         return React.createElement("div", { className: "col-sm-10" },
@@ -13,6 +13,16 @@ export class UnknownControl extends Control {
                     "face: ",
                     JSON.stringify(this.face),
                     React.createElement("br", null))));
+    }
+}
+export class EmptyControl extends ControlBase {
+    constructor(formView, element) {
+        super(formView);
+        this.element = element;
+    }
+    render() {
+        return React.createElement("div", { className: "col-sm-10" },
+            React.createElement("div", { className: "form-control-static" }, this.element));
     }
 }
 //# sourceMappingURL=unknownControl.js.map

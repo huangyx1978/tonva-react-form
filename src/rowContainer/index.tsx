@@ -1,24 +1,32 @@
 import * as React from 'react';
-import {FormView, FormRow} from '../formView';
-import {Control, createControl, CreateControl} from '../control';
+import {FormView, FormRow, FieldRow, GroupRow, LabelFormRow} from '../formView';
+import {Control, ControlBase, createControl, CreateControl} from '../control';
 
 export type CreateRow = (form:FormView, row: FormRow)=>RowContainer;
 
 export abstract class RowContainer {
     protected form:FormView;
     protected row: FormRow;
-    protected control: Control;
+    protected control: ControlBase;
     constructor(form:FormView, row: FormRow) {
         this.form = form;
         this.row = row;
-        let cc:CreateControl = row.createControl;
-        if (cc === undefined) cc = form.createControl;
-        if (cc === undefined) cc = createControl;
-        this.control = cc(form, row);
+        if ((row as JSX.Element).type === undefined) {
+            let cc:CreateControl = (row as LabelFormRow).createControl;
+            if (cc === undefined) cc = form.createControl;
+            if (cc === undefined) cc = createControl;
+            this.control = cc(form, row);
+        }
     }
     abstract render(key:number|string):JSX.Element;
 
-    get key():number|string {return this.row.key}
+    contains(fieldName:string):boolean {
+        let field = (this.row as FieldRow).field;
+        if (field !== undefined) return fieldName === field.name;
+        let group = (this.row as GroupRow).group;
+        if (group !== undefined) return group.find(g => g.field.name === fieldName)!==undefined;
+        return false;
+    }
     get hasError():boolean {return this.control.hasError;}
     get filled():boolean {return this.control.filled;}
     readValues(values:any):any {
@@ -32,11 +40,19 @@ export abstract class RowContainer {
     }
 }
 
+class ElementRowContainer extends RowContainer {
+    render(key:number|string):JSX.Element {
+        return <div key={key} className="form-group">{this.row as JSX.Element}</div>;
+    }
+    get hasError():boolean {return false;}
+    get filled():boolean {return false;}
+}
+
 class BootStrapRowContainer extends RowContainer {
     render(key:number|string):JSX.Element {
         return <div key={key} className='form-group row'>
             <label className='col-sm-2 col-form-label'>
-                {this.row.label}
+                {(this.row as LabelFormRow).label}
             </label>
             {this.control.render()}
         </div>;
@@ -45,6 +61,10 @@ class BootStrapRowContainer extends RowContainer {
     }
 }
 
-export function bootstrapRowCreator(form:FormView, row: FormRow):RowContainer {
+export function bootstrapCreateRow(form:FormView, row: FormRow):RowContainer {
     return new BootStrapRowContainer(form, row);
+}
+
+export function elementCreateRow(form:FormView, row: FormRow):RowContainer {
+    return new ElementRowContainer(form, row);
 }

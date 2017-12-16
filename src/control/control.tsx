@@ -13,11 +13,16 @@ export abstract class ControlBase {
         this.formView = formView;
     }
     abstract render():JSX.Element;
+    get hasError():boolean {return false;}
+    get filled():boolean {return false;}
+    readValues(values:any):any {}
+    setError(fieldName:string, error:string) {}
+    setInitValues(values: any) {}
 }
 
 export abstract class Control extends ControlBase {
     protected field: Field;
-    protected face:Face;
+    protected face: Face;
     protected props: any;
     protected rules: Rule[];
 

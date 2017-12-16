@@ -4,14 +4,24 @@ export class RowContainer {
     constructor(form, row) {
         this.form = form;
         this.row = row;
-        let cc = row.createControl;
-        if (cc === undefined)
-            cc = form.createControl;
-        if (cc === undefined)
-            cc = createControl;
-        this.control = cc(form, row);
+        if (row.type === undefined) {
+            let cc = row.createControl;
+            if (cc === undefined)
+                cc = form.createControl;
+            if (cc === undefined)
+                cc = createControl;
+            this.control = cc(form, row);
+        }
     }
-    get key() { return this.row.key; }
+    contains(fieldName) {
+        let field = this.row.field;
+        if (field !== undefined)
+            return fieldName === field.name;
+        let group = this.row.group;
+        if (group !== undefined)
+            return group.find(g => g.field.name === fieldName) !== undefined;
+        return false;
+    }
     get hasError() { return this.control.hasError; }
     get filled() { return this.control.filled; }
     readValues(values) {
@@ -27,6 +37,13 @@ export class RowContainer {
             this.control.setInitValues(values);
     }
 }
+class ElementRowContainer extends RowContainer {
+    render(key) {
+        return React.createElement("div", { key: key, className: "form-group" }, this.row);
+    }
+    get hasError() { return false; }
+    get filled() { return false; }
+}
 class BootStrapRowContainer extends RowContainer {
     render(key) {
         return React.createElement("div", { key: key, className: 'form-group row' },
@@ -35,7 +52,10 @@ class BootStrapRowContainer extends RowContainer {
         //has-success is-valid
     }
 }
-export function bootstrapRowCreator(form, row) {
+export function bootstrapCreateRow(form, row) {
     return new BootStrapRowContainer(form, row);
+}
+export function elementCreateRow(form, row) {
+    return new ElementRowContainer(form, row);
 }
 //# sourceMappingURL=index.js.map

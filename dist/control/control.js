@@ -9,6 +9,11 @@ export class ControlBase {
     constructor(formView) {
         this.formView = formView;
     }
+    get hasError() { return false; }
+    get filled() { return false; }
+    readValues(values) { }
+    setError(fieldName, error) { }
+    setInitValues(values) { }
 }
 export class Control extends ControlBase {
     constructor(formView, field, face) {

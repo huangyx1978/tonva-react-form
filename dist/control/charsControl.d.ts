@@ -2,7 +2,6 @@
 import { Control } from './control';
 export declare abstract class CharsControl extends Control {
     protected init(): void;
-    protected inputType: string;
     protected element: HTMLInputElement;
     protected isOK?: boolean;
     protected error: string;

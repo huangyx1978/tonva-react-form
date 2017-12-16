@@ -260,8 +260,8 @@ interface ResultProps {
 }
 class ResultPage extends React.Component<ResultProps, null> {
     render() {
-        let {return:ret, onNext, onFinish} = this.props;
         let {success, message, result} = ret;
+        let {return:ret, onNext, onFinish} = this.props;
         if (message === undefined) {
             message = success === true? '提交成功': '提交发生错误'
         }

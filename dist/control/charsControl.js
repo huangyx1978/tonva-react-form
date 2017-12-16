@@ -28,7 +28,6 @@ export class CharsControl extends Control {
     setProps() {
         super.setProps();
         _.assign(this.props, {
-            type: this.inputType,
             ref: this.ref,
             onBlur: this.onBlur,
             onFocus: this.onFocus,

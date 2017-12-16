@@ -5,7 +5,7 @@ import {Rule} from './rule';
 import {Field} from './field';
 import {Face} from './face';
 import {CreateControl, ButtonsControl} from './control';
-import {RowContainer, CreateRow, bootstrapRowCreator} from './rowContainer';
+import {RowContainer, CreateRow, bootstrapCreateRow, elementCreateRow} from './rowContainer';
 
 export interface FieldView {
     field: Field;
@@ -13,10 +13,10 @@ export interface FieldView {
 }
 
 export interface LabeledRow {
-    key?: number|string;
     label?: string;
     createRow?: CreateRow;
     createControl?: CreateControl;
+    help?: JSX.Element;
 }
 
 export interface FieldRow extends LabeledRow, FieldView {
@@ -26,7 +26,8 @@ export interface GroupRow extends LabeledRow {
     group: FieldView[];
 }
 
-export type FormRow = FieldRow|GroupRow|LabeledRow;
+export type LabelFormRow = FieldRow|GroupRow|LabeledRow;
+export type FormRow = LabelFormRow|JSX.Element;
 
 export interface SubmitResult {
     success: boolean;
@@ -104,10 +105,17 @@ export class FormView {
     }
 
     private buildRow(formRow: FormRow, formRowCreator: CreateRow):RowContainer {
-        let createRow = formRow.createRow;
-        if (createRow === undefined) {
-            createRow = formRowCreator;
-            if (createRow === undefined) createRow = bootstrapRowCreator;
+        let createRow:CreateRow;
+        let type = (formRow as JSX.Element).type;
+        if (type !== undefined) {
+            createRow = elementCreateRow;
+        }
+        else {
+            createRow = (formRow as (FieldRow | GroupRow | LabeledRow)).createRow;
+            if (createRow === undefined) {
+                createRow = formRowCreator;
+                if (createRow === undefined) createRow = bootstrapCreateRow;
+            }
         }
         let row = createRow(this, formRow);
         return row;
@@ -119,14 +127,13 @@ export class FormView {
 
     render():JSX.Element {
         return <form onSubmit={this.onSubmit}>
-            form test
             {this.rows.map((row,index) => row.render(index))}
             {this.buttons()}
         </form>;
     }
-
-    row(key:number|string):JSX.Element {
-        let index = this.rows.findIndex(r => r.key === key);
+/*
+    row(fieldName:string):JSX.Element {
+        let index = this.rows.findIndex(r => r.contains(fieldName));
         if (index < 0) return null;
         return this.rows[index].render(index);
     }
@@ -141,7 +148,7 @@ export class FormView {
         }
         return ret;
     }
-
+*/
     buttons():JSX.Element {
         return this.buttonsRow.render(this.rows.length);
     }

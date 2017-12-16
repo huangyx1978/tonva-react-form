@@ -10,17 +10,18 @@ export interface FieldView {
     face?: Face;
 }
 export interface LabeledRow {
-    key?: number | string;
     label?: string;
     createRow?: CreateRow;
     createControl?: CreateControl;
+    help?: JSX.Element;
 }
 export interface FieldRow extends LabeledRow, FieldView {
 }
 export interface GroupRow extends LabeledRow {
     group: FieldView[];
 }
-export declare type FormRow = FieldRow | GroupRow | LabeledRow;
+export declare type LabelFormRow = FieldRow | GroupRow | LabeledRow;
+export declare type FormRow = LabelFormRow | JSX.Element;
 export interface SubmitResult {
     success: boolean;
     message?: string;
@@ -53,8 +54,6 @@ export declare class FormView {
     private buildRow(formRow, formRowCreator);
     private createButtons(form, row);
     render(): JSX.Element;
-    row(key: number | string): JSX.Element;
-    others(): JSX.Element[];
     buttons(): JSX.Element;
     onSubmit(event: FormEvent<HTMLFormElement>): Promise<void>;
 }

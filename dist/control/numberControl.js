@@ -6,10 +6,6 @@ const ErrMax = '最大值为';
 const KeyCode_Neg = 45;
 const KeyCode_Dot = 46;
 export class NumberControl extends CharsControl {
-    constructor() {
-        super(...arguments);
-        this.inputType = "number";
-    }
     init() {
         super.init();
         this.extraChars = [];
@@ -49,6 +45,7 @@ export class NumberControl extends CharsControl {
     setProps() {
         super.setProps();
         _.assign(this.props, {
+            type: 'number',
             onKeyPress: this.onKeyPress.bind(this),
         });
     }

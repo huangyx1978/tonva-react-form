@@ -13,28 +13,3 @@ export declare class TonvaForm extends React.Component<TonvaFormProps, {}> {
     componentDidMount(): void;
     render(): JSX.Element;
 }
-export declare namespace TonvaForm {
-    class Row extends React.Component<{
-        row: number | string;
-    }> {
-        static contextTypes: {
-            formView: any;
-        };
-        context: TonvaFormProps;
-        render(): JSX.Element;
-    }
-    class Others extends React.Component {
-        static contextTypes: {
-            formView: any;
-        };
-        context: TonvaFormProps;
-        render(): JSX.Element[];
-    }
-    class Buttons extends React.Component {
-        static contextTypes: {
-            formView: any;
-        };
-        context: TonvaFormProps;
-        render(): JSX.Element;
-    }
-}

@@ -31,42 +31,40 @@ TonvaForm = __decorate([
     observer
 ], TonvaForm);
 export { TonvaForm };
-(function (TonvaForm) {
-    let Row = class Row extends React.Component {
+/*
+export namespace TonvaForm {
+    @observer
+    export class Row extends React.Component<{row:number|string}> {
+        static contextTypes = {
+            formView: PropTypes.object
+        }
+        context: TonvaFormProps;
         render() {
             return this.context.formView.row(this.props.row);
         }
-    };
-    Row.contextTypes = {
-        formView: PropTypes.object
-    };
-    Row = __decorate([
-        observer
-    ], Row);
-    TonvaForm.Row = Row;
-    let Others = class Others extends React.Component {
+    }
+
+    @observer
+    export class Others extends React.Component {
+        static contextTypes = {
+            formView: PropTypes.object
+        }
+        context: TonvaFormProps;
         render() {
             return this.context.formView.others();
         }
-    };
-    Others.contextTypes = {
-        formView: PropTypes.object
-    };
-    Others = __decorate([
-        observer
-    ], Others);
-    TonvaForm.Others = Others;
-    let Buttons = class Buttons extends React.Component {
+    }
+
+    @observer
+    export class Buttons extends React.Component {
+        static contextTypes = {
+            formView: PropTypes.object
+        }
+        context: TonvaFormProps;
         render() {
             return this.context.formView.buttons();
         }
-    };
-    Buttons.contextTypes = {
-        formView: PropTypes.object
-    };
-    Buttons = __decorate([
-        observer
-    ], Buttons);
-    TonvaForm.Buttons = Buttons;
-})(TonvaForm || (TonvaForm = {}));
+    }
+}
+*/ 
 //# sourceMappingURL=TonvaForm.js.map

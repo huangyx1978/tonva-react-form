@@ -13,7 +13,6 @@ const KeyCode_Dot = 46;
 export class NumberControl extends CharsControl {
     protected field: IntField | DecField | NumberField;
     protected value: number;
-    protected inputType: string = "number";
     protected extraChars: number[];
     
     protected init() {
@@ -48,6 +47,7 @@ export class NumberControl extends CharsControl {
     protected setProps() {
         super.setProps();
         _.assign(this.props, {
+            type: 'number',
             onKeyPress: this.onKeyPress.bind(this),
         });
     }
