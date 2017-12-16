@@ -84,6 +84,14 @@ export class FormView {
     createButtons(form, row) {
         return new ButtonsControl(form);
     }
+    isOk() {
+        let isOk = true;
+        for (let row of this.rows) {
+            if (!row.isOk())
+                isOk = false;
+        }
+        return isOk;
+    }
     render() {
         return React.createElement("form", { onSubmit: this.onSubmit },
             this.rows.map((row, index) => row.render(index)),
@@ -113,6 +121,8 @@ export class FormView {
     onSubmit(event) {
         return __awaiter(this, void 0, void 0, function* () {
             event.preventDefault();
+            if (!this.isOk())
+                return;
             let values = this.readValues();
             yield this.props.onSumit(values);
         });

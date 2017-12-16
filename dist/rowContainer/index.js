@@ -13,6 +13,9 @@ export class RowContainer {
             this.control = cc(form, row);
         }
     }
+    isOk() {
+        return this.control.isOk();
+    }
     contains(fieldName) {
         let field = this.row.field;
         if (field !== undefined)

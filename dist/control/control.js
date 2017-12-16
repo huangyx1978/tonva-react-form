@@ -14,6 +14,8 @@ export class ControlBase {
     readValues(values) { }
     setError(fieldName, error) { }
     setInitValues(values) { }
+    isOk() { this.validate(); return !this.hasError; }
+    validate() { }
 }
 export class Control extends ControlBase {
     constructor(formView, field, face) {
@@ -44,7 +46,7 @@ export class Control extends ControlBase {
         };
     }
     ;
-    get hasError() { return false; }
+    get hasError() { return this.error !== undefined; }
     get filled() {
         let ret = this.value !== undefined && this.value !== this.field.defaultValue;
         return ret;
@@ -54,7 +56,37 @@ export class Control extends ControlBase {
     }
     setError(fieldName, error) { }
     setInitValues(values) { }
+    getValueFromElement() { }
+    validate() {
+        try {
+            let v = this.getValueFromElement();
+            if (this.rules.length > 0) {
+                let isOk;
+                for (let rule of this.rules) {
+                    let err = rule(v);
+                    if (err === true) {
+                        isOk = true;
+                    }
+                    else if (err !== undefined) {
+                        this.error = err;
+                        return;
+                    }
+                }
+                this.isOK = isOk;
+            }
+            this.value = v;
+        }
+        catch (e) {
+            this.error = e.message;
+        }
+    }
 }
+__decorate([
+    observable
+], Control.prototype, "isOK", void 0);
+__decorate([
+    observable
+], Control.prototype, "error", void 0);
 __decorate([
     observable
 ], Control.prototype, "value", void 0);

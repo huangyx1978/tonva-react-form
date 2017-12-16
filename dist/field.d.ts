@@ -40,7 +40,7 @@ export interface BoolField extends FieldBase {
     type: 'bool';
     trueValue?: any;
     falseValue?: any;
-    defaultValue?: boolean;
+    defaultValue?: any;
 }
 export declare type Field = IdField | NumberField | IntField | DecField | StringField | DateField | BoolField;
 export interface Fields {

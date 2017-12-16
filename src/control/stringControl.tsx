@@ -13,4 +13,9 @@ export class StringControl extends CharsControl {
         });
         return p;
     };
+    protected parseValue(value?:string):any {
+        if (value === undefined) return undefined;
+        if (value.trim().length === 0) return undefined;
+        return value;
+    }
 }

@@ -2,6 +2,14 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Control } from './control';
 export class CheckControl extends Control {
+    init() {
+        super.init();
+        let { trueValue, falseValue } = this.field;
+        if (trueValue === undefined)
+            this.trueValue = 1;
+        if (falseValue === undefined)
+            this.falseValue = 0;
+    }
     setProps() {
         super.setProps();
         _.assign(this.props, {
@@ -14,10 +22,11 @@ export class CheckControl extends Control {
             v = this.field.defaultValue;
         }
         if (v !== undefined) {
-            this.element.checked = v !== 0;
-            this.value = v;
+            this.element.checked = v === this.trueValue;
+            this.value = this.getValueFromElement();
         }
     }
+    getValueFromElement() { return this.element.checked ? this.trueValue : this.falseValue; }
     onChange() {
         this.value = this.element.checked ? 1 : 0;
     }

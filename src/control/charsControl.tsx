@@ -21,10 +21,7 @@ export abstract class CharsControl extends Control {
     }
 
     protected element: HTMLInputElement;
-    @observable protected isOK?: boolean;
-    @observable protected error: string;
-
-    @computed get hasError():boolean {return this.error !== undefined;}
+    protected getValueFromElement():any {return this.parseValue(this.element.value)}
 
     protected setProps() {
         super.setProps();
@@ -42,27 +39,7 @@ export abstract class CharsControl extends Control {
     };
     protected parseValue(value?:string):any {return value;}
     private onBlur() {
-        try {
-            let v = this.parseValue(this.element.value);
-            if (this.rules.length > 0) {
-                let isOk:boolean;
-                for (let rule of this.rules) {
-                    let err = rule(v);
-                    if (err === true) {
-                        isOk = true;
-                    }
-                    else if (err !== undefined) {
-                        this.error = err;
-                        return;
-                    }
-                }
-                this.isOK = isOk;
-            }
-            this.value = v;
-        }
-        catch (e) {
-            this.error = e.message;
-        }
+        this.validate();
     }
     private onFocus() {
         this.error = undefined;

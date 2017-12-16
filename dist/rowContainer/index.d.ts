@@ -8,6 +8,7 @@ export declare abstract class RowContainer {
     protected control: ControlBase;
     constructor(form: FormView, row: FormRow);
     abstract render(key: number | string): JSX.Element;
+    isOk(): boolean;
     contains(fieldName: string): boolean;
     readonly hasError: boolean;
     readonly filled: boolean;

@@ -1,11 +1,4 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 import * as React from 'react';
-import { observable, computed } from 'mobx';
 import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import { Control } from './control';
@@ -21,7 +14,7 @@ export class CharsControl extends Control {
             });
         }
     }
-    get hasError() { return this.error !== undefined; }
+    getValueFromElement() { return this.parseValue(this.element.value); }
     setProps() {
         super.setProps();
         _.assign(this.props, {
@@ -39,27 +32,7 @@ export class CharsControl extends Control {
     ;
     parseValue(value) { return value; }
     onBlur() {
-        try {
-            let v = this.parseValue(this.element.value);
-            if (this.rules.length > 0) {
-                let isOk;
-                for (let rule of this.rules) {
-                    let err = rule(v);
-                    if (err === true) {
-                        isOk = true;
-                    }
-                    else if (err !== undefined) {
-                        this.error = err;
-                        return;
-                    }
-                }
-                this.isOK = isOk;
-            }
-            this.value = v;
-        }
-        catch (e) {
-            this.error = e.message;
-        }
+        this.validate();
     }
     onFocus() {
         this.error = undefined;
@@ -98,13 +71,4 @@ export class CharsControl extends Control {
             this.renderError());
     }
 }
-__decorate([
-    observable
-], CharsControl.prototype, "isOK", void 0);
-__decorate([
-    observable
-], CharsControl.prototype, "error", void 0);
-__decorate([
-    computed
-], CharsControl.prototype, "hasError", null);
 //# sourceMappingURL=charsControl.js.map

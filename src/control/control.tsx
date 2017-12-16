@@ -18,6 +18,8 @@ export abstract class ControlBase {
     readValues(values:any):any {}
     setError(fieldName:string, error:string) {}
     setInitValues(values: any) {}
+    isOk():boolean {this.validate(); return !this.hasError;}
+    protected validate() {}
 }
 
 export abstract class Control extends ControlBase {
@@ -27,6 +29,8 @@ export abstract class Control extends ControlBase {
     protected rules: Rule[];
 
     protected element: HTMLElement;
+    @observable protected isOK?: boolean;
+    @observable protected error: string;
     @observable protected value: any;
 
     constructor(formView:FormView, field:Field, face:Face) {
@@ -53,7 +57,7 @@ export abstract class Control extends ControlBase {
             name: this.field.name,
         }
     };
-    @computed get hasError():boolean {return false;}
+    @computed get hasError():boolean {return this.error !== undefined;}
     @computed get filled():boolean {
         let ret = this.value !== undefined && this.value !== this.field.defaultValue;
         return ret;
@@ -63,4 +67,28 @@ export abstract class Control extends ControlBase {
     }
     setError(fieldName:string, error:string) {}
     setInitValues(values: any) {}
+    protected getValueFromElement():any {}
+    protected validate() {
+        try {
+            let v = this.getValueFromElement();
+            if (this.rules.length > 0) {
+                let isOk:boolean;
+                for (let rule of this.rules) {
+                    let err = rule(v);
+                    if (err === true) {
+                        isOk = true;
+                    }
+                    else if (err !== undefined) {
+                        this.error = err;
+                        return;
+                    }
+                }
+                this.isOK = isOk;
+            }
+            this.value = v;
+        }
+        catch (e) {
+            this.error = e.message;
+        }
+    }
 }

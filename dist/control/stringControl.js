@@ -10,5 +10,12 @@ export class StringControl extends CharsControl {
         return p;
     }
     ;
+    parseValue(value) {
+        if (value === undefined)
+            return undefined;
+        if (value.trim().length === 0)
+            return undefined;
+        return value;
+    }
 }
 //# sourceMappingURL=stringControl.js.map

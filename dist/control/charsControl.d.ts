@@ -3,9 +3,7 @@ import { Control } from './control';
 export declare abstract class CharsControl extends Control {
     protected init(): void;
     protected element: HTMLInputElement;
-    protected isOK?: boolean;
-    protected error: string;
-    readonly hasError: boolean;
+    protected getValueFromElement(): any;
     protected setProps(): any;
     protected parseValue(value?: string): any;
     private onBlur();

@@ -19,6 +19,10 @@ export abstract class RowContainer {
         }
     }
     abstract render(key:number|string):JSX.Element;
+    
+    isOk():boolean {
+        return this.control.isOk();
+    }
 
     contains(fieldName:string):boolean {
         let field = (this.row as FieldRow).field;

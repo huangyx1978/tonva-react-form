@@ -3,13 +3,23 @@ import {observable} from 'mobx';
 import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import {FormView} from '../formView';
-import {Field} from '../field';
+import {Field, BoolField} from '../field';
 import {Face, CheckBoxFace} from '../face';
 import {Control} from './control';
 
-export class CheckControl extends Control {
+export class CheckControl extends Control {    
     protected element: HTMLInputElement;
+    protected field: BoolField;
     protected face: CheckBoxFace;
+    private trueValue: any;
+    private falseValue: any;
+
+    protected init() {
+        super.init();
+        let {trueValue, falseValue} = this.field;
+        if (trueValue === undefined) this.trueValue = 1;
+        if (falseValue === undefined) this.falseValue = 0;
+    }
 
     setProps() {
         super.setProps();
@@ -23,14 +33,16 @@ export class CheckControl extends Control {
         if (v === undefined) {
             v = this.field.defaultValue;
         }
-        if (v !== undefined) {
-            this.element.checked = v !== 0;
-            this.value = v;
+        if (v !== undefined) {            
+            this.element.checked = v === this.trueValue;
+            this.value = this.getValueFromElement();
         }
     }
 
+    protected getValueFromElement():any { return this.element.checked? this.trueValue:this.falseValue; }
+
     private onChange() {
-        this.value = this.element.checked? 1:0;
+        this.value = this.getValueFromElement();
     }
 
     render():JSX.Element {

@@ -125,6 +125,14 @@ export class FormView {
         return new ButtonsControl(form);
     }
 
+    private isOk():boolean {
+        let isOk = true;
+        for (let row of this.rows) {
+            if (!row.isOk()) isOk = false;
+        }
+        return isOk;
+    }
+
     render():JSX.Element {
         return <form onSubmit={this.onSubmit}>
             {this.rows.map((row,index) => row.render(index))}
@@ -155,6 +163,7 @@ export class FormView {
 
     async onSubmit(event:FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        if (!this.isOk()) return;
         let values = this.readValues();
         await this.props.onSumit(values);
     }

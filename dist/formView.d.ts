@@ -53,6 +53,7 @@ export declare class FormView {
     private buildRows(props);
     private buildRow(formRow, formRowCreator);
     private createButtons(form, row);
+    private isOk();
     render(): JSX.Element;
     buttons(): JSX.Element;
     onSubmit(event: FormEvent<HTMLFormElement>): Promise<void>;

@@ -12,6 +12,8 @@ export declare abstract class ControlBase {
     readValues(values: any): any;
     setError(fieldName: string, error: string): void;
     setInitValues(values: any): void;
+    isOk(): boolean;
+    protected validate(): void;
 }
 export declare abstract class Control extends ControlBase {
     protected field: Field;
@@ -19,6 +21,8 @@ export declare abstract class Control extends ControlBase {
     protected props: any;
     protected rules: Rule[];
     protected element: HTMLElement;
+    protected isOK?: boolean;
+    protected error: string;
     protected value: any;
     constructor(formView: FormView, field: Field, face: Face);
     private ref(element);
@@ -29,4 +33,6 @@ export declare abstract class Control extends ControlBase {
     readValues(values: any): any;
     setError(fieldName: string, error: string): void;
     setInitValues(values: any): void;
+    protected getValueFromElement(): any;
+    protected validate(): void;
 }
