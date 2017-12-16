@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import {FormView} from '../formView';
 import {Field} from '../field';
-import {Face, InputFace} from '../face';
+import {Face} from '../face';
 import {ControlBase} from './control';
 
 export class ButtonsControl extends ControlBase {

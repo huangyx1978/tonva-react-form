@@ -9,6 +9,7 @@ import {Control, ControlBase} from './control';
 import {ButtonsControl} from './buttonsControl';
 import {CheckControl} from './checkControl';
 import {RadioControl} from './radioControl';
+import {TextAreaControl} from './textAreaControl';
 import {SelectControl} from './selectControl';
 import {UnknownControl, EmptyControl} from './unknownControl';
 import {StringControl} from './stringControl';
@@ -20,34 +21,40 @@ import { PickIdControl } from './pickIdControl';
 export type CreateControl = (form:FormView, row: FormRow) => ControlBase
 
 export const createControl:CreateControl = (form:FormView, row: LabelFormRow):ControlBase => {
+    let label = row.label;
     if ((<GroupRow>row).group !== undefined)
-        return createGroupControl(form, row as GroupRow);
+        return createGroupControl(form, label, row as GroupRow);
     if ((<FieldRow>row).field !== undefined)
-        return createFieldControl(form, row as FieldRow);
+        return createFieldControl(form, label, row as FieldRow);
     return new EmptyControl(form, row.help);
 }
 
-function createFieldControl(form:FormView, fieldRow: FieldRow):Control {
+const controls:{[type:string]: new (formView:FormView, field:Field, face:Face) => Control} = {
+    "string": StringControl,
+    "number": NumberControl,
+    "checkbox": CheckControl,
+    "radiobox": RadioControl,
+    "select": SelectControl,
+    "pick-id": PickIdControl,
+    "textarea": TextAreaControl,
+};
+const defaultFaces:{[type:string]: Face} = {
+    "string": {type:'string'},
+    "number": {type:'number'},
+    "int": {type:'number'},
+    "dec": {type:'number'},
+    "bool": {type:'checkbox'},
+}
+function createFieldControl(form:FormView, label:string, fieldRow: FieldRow):Control {
     let {field, face} = fieldRow;
-    if (face !== undefined) {
-        switch (face.type) {
-            case 'checkbox': return new CheckControl(form, field, face);
-            case 'radiobox': return new RadioControl(form, field, face);
-            case 'select': return new SelectControl(form, field, face);
-            case 'pick-id': return new PickIdControl(form ,field, face);
-        }
+    if (face === undefined) {
+        face = defaultFaces[field.type];
+        if (face === undefined) return new UnknownControl(form, field, face);
     }
-    switch (field.type) {
-        default: return new UnknownControl(form, field, face);
-        case 'string':
-            return new StringControl(form, field, face);
-        case 'number':
-        case 'int':
-        case 'dec':
-            return new NumberControl(form, field, face);
-    }
+    let control = controls[face.type] || UnknownControl;
+    return new control(form, field, face);
 }
 
-function createGroupControl(form:FormView, groupRow: GroupRow):Control {
+function createGroupControl(form:FormView, label:string, groupRow: GroupRow):Control {
     return new UnknownControl(form, groupRow as any, undefined);
 }

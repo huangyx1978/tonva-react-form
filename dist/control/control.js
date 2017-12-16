@@ -23,6 +23,9 @@ export class Control extends ControlBase {
         this.init();
         this.setProps();
     }
+    ref(element) {
+        this.element = element;
+    }
     init() {
         this.rules = [];
         let r = this.field.rules;
@@ -36,6 +39,7 @@ export class Control extends ControlBase {
     ;
     setProps() {
         return this.props = {
+            ref: this.ref.bind(this),
             name: this.field.name,
         };
     }

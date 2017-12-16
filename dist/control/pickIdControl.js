@@ -24,16 +24,16 @@ export class PickIdControl extends Control {
         return __awaiter(this, void 0, void 0, function* () {
             let ret = yield this.face.pick(this.face);
             this.value = ret.id;
-            this.element = ret.element;
+            this.message = ret.message;
         });
     }
     render() {
         return React.createElement("div", { className: "col-sm-10" },
             React.createElement("div", { className: "form-control-static " },
-                React.createElement("button", { className: "form-control btn btn-outline-info", type: "button", style: { textAlign: 'left', paddingLeft: '0.75rem' }, onClick: this.onClick }, this.value === undefined ? this.face.text || '请选择Id' : this.element)));
+                React.createElement("button", { className: "form-control btn btn-outline-info", type: "button", style: { textAlign: 'left', paddingLeft: '0.75rem' }, onClick: this.onClick }, this.value === undefined ? this.face.text || '请选择Id' : this.message)));
     }
 }
 __decorate([
     observable
-], PickIdControl.prototype, "element", void 0);
+], PickIdControl.prototype, "message", void 0);
 //# sourceMappingURL=pickIdControl.js.map

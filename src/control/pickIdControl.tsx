@@ -10,7 +10,7 @@ import {Control} from './control';
 export class PickIdControl extends Control {
     protected face: IdPickFace;
     protected value: number;
-    @observable private element: string|JSX.Element;
+    @observable private message: string|JSX.Element;
     constructor(formView:FormView, field:Field, face:Face) {
         super(formView, field, face);
         this.onClick = this.onClick.bind(this);
@@ -19,7 +19,7 @@ export class PickIdControl extends Control {
     private async onClick() {
         let ret = await this.face.pick(this.face);
         this.value = ret.id;
-        this.element = ret.element;
+        this.message = ret.message;
     }
     render():JSX.Element {
         return <div className="col-sm-10">
@@ -28,7 +28,7 @@ export class PickIdControl extends Control {
                     type="button"
                     style={{textAlign:'left', paddingLeft:'0.75rem'}}
                     onClick={this.onClick}>
-                    {this.value === undefined? this.face.text || '请选择Id' : this.element}
+                    {this.value === undefined? this.face.text || '请选择Id' : this.message}
                 </button>
             </div>
         </div>;

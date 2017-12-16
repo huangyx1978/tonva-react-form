@@ -13,9 +13,6 @@ const TxtRequired = '必须填入要求内容';
 export class CharsControl extends Control {
     init() {
         super.init();
-        this.ref = this.ref.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.onFocus = this.onFocus.bind(this);
         if (this.field.required === true) {
             this.rules.push((v) => {
                 if (v === undefined)
@@ -28,9 +25,8 @@ export class CharsControl extends Control {
     setProps() {
         super.setProps();
         _.assign(this.props, {
-            ref: this.ref,
-            onBlur: this.onBlur,
-            onFocus: this.onFocus,
+            onBlur: this.onBlur.bind(this),
+            onFocus: this.onFocus.bind(this),
         });
         let face = this.face;
         if (face !== undefined) {
@@ -41,9 +37,6 @@ export class CharsControl extends Control {
         return this.props;
     }
     ;
-    ref(element) {
-        this.element = element;
-    }
     parseValue(value) { return value; }
     onBlur() {
         try {
@@ -72,14 +65,16 @@ export class CharsControl extends Control {
         this.error = undefined;
         this.formView.clearErrors();
     }
-    renderInput() {
-        let cn = classNames({
+    className() {
+        return classNames({
             "form-control": true,
             "has-success": this.isOK === true,
             "is-invalid": this.error !== undefined,
             "is-valid": this.error === undefined && this.isOK === true,
         });
-        return React.createElement("input", Object.assign({ className: cn }, this.props));
+    }
+    renderInput() {
+        return React.createElement("input", Object.assign({ className: this.className() }, this.props));
     }
     renderError() {
         if (this.error === undefined)

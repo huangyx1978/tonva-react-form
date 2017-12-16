@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import {FormView} from '../formView';
 import {Field} from '../field';
-import {Face, InputFace} from '../face';
+import {Face} from '../face';
 import {Rule} from '../rule';
 
 export abstract class ControlBase {
@@ -26,6 +26,7 @@ export abstract class Control extends ControlBase {
     protected props: any;
     protected rules: Rule[];
 
+    protected element: HTMLElement;
     @observable protected value: any;
 
     constructor(formView:FormView, field:Field, face:Face) {
@@ -34,6 +35,9 @@ export abstract class Control extends ControlBase {
         this.face = face;
         this.init();
         this.setProps();
+    }
+    private ref(element: HTMLElement) {
+        this.element = element;
     }
     protected init() {
         this.rules = [];
@@ -45,6 +49,7 @@ export abstract class Control extends ControlBase {
     };
     protected setProps():any {
         return this.props = {
+            ref: this.ref.bind(this),
             name: this.field.name,
         }
     };

@@ -1,9 +1,16 @@
 export interface FieldFaceBase {
 }
 
-export interface InputFace extends FieldFaceBase {
-    type: 'input';
+export interface Placeholder {
     placeholder?: string;
+}
+
+export interface StringFace extends FieldFaceBase, Placeholder {
+    type: 'string';
+}
+
+export interface NumberFace extends FieldFaceBase, Placeholder {
+    type: 'number';
 }
 
 export interface CheckBoxFace extends FieldFaceBase {
@@ -23,9 +30,14 @@ export interface RadioFace extends FieldFaceBase {
     list: Option[];
 }
 
+export interface TextAreaFace extends FieldFaceBase, Placeholder {
+    type: 'textarea';
+    maxLength?: number;
+}
+
 export interface IdPickResult {
     id: number; 
-    element: string|JSX.Element;
+    message: string|JSX.Element;
 }
 export type IdPick = (face: IdPickFace) => Promise<IdPickResult>;
 export interface IdPickFace extends FieldFaceBase {
@@ -34,4 +46,4 @@ export interface IdPickFace extends FieldFaceBase {
     pick: IdPick;
 }
 
-export type Face = InputFace | CheckBoxFace | SelectFace | RadioFace | IdPickFace;
+export type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | IdPickFace;

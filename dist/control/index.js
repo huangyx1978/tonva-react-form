@@ -4,39 +4,47 @@ export * from './stringControl';
 export * from './numberControl';
 import { CheckControl } from './checkControl';
 import { RadioControl } from './radioControl';
+import { TextAreaControl } from './textAreaControl';
 import { SelectControl } from './selectControl';
 import { UnknownControl, EmptyControl } from './unknownControl';
 import { StringControl } from './stringControl';
 import { NumberControl } from './numberControl';
 import { PickIdControl } from './pickIdControl';
 export const createControl = (form, row) => {
+    let label = row.label;
     if (row.group !== undefined)
-        return createGroupControl(form, row);
+        return createGroupControl(form, label, row);
     if (row.field !== undefined)
-        return createFieldControl(form, row);
+        return createFieldControl(form, label, row);
     return new EmptyControl(form, row.help);
 };
-function createFieldControl(form, fieldRow) {
+const controls = {
+    "string": StringControl,
+    "number": NumberControl,
+    "checkbox": CheckControl,
+    "radiobox": RadioControl,
+    "select": SelectControl,
+    "pick-id": PickIdControl,
+    "textarea": TextAreaControl,
+};
+const defaultFaces = {
+    "string": { type: 'string' },
+    "number": { type: 'number' },
+    "int": { type: 'number' },
+    "dec": { type: 'number' },
+    "bool": { type: 'checkbox' },
+};
+function createFieldControl(form, label, fieldRow) {
     let { field, face } = fieldRow;
-    if (face !== undefined) {
-        switch (face.type) {
-            case 'checkbox': return new CheckControl(form, field, face);
-            case 'radiobox': return new RadioControl(form, field, face);
-            case 'select': return new SelectControl(form, field, face);
-            case 'pick-id': return new PickIdControl(form, field, face);
-        }
+    if (face === undefined) {
+        face = defaultFaces[field.type];
+        if (face === undefined)
+            return new UnknownControl(form, field, face);
     }
-    switch (field.type) {
-        default: return new UnknownControl(form, field, face);
-        case 'string':
-            return new StringControl(form, field, face);
-        case 'number':
-        case 'int':
-        case 'dec':
-            return new NumberControl(form, field, face);
-    }
+    let control = controls[face.type] || UnknownControl;
+    return new control(form, field, face);
 }
-function createGroupControl(form, groupRow) {
+function createGroupControl(form, label, groupRow) {
     return new UnknownControl(form, groupRow, undefined);
 }
 //# sourceMappingURL=index.js.map

@@ -18,8 +18,10 @@ export declare abstract class Control extends ControlBase {
     protected face: Face;
     protected props: any;
     protected rules: Rule[];
+    protected element: HTMLElement;
     protected value: any;
     constructor(formView: FormView, field: Field, face: Face);
+    private ref(element);
     protected init(): void;
     protected setProps(): any;
     readonly hasError: boolean;

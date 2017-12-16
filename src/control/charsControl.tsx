@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import {FormView} from '../formView';
 import {Field} from '../field';
-import {Face, InputFace} from '../face';
+import {Face, Placeholder} from '../face';
 import {Control} from './control';
 
 const TxtRequired = '必须填入要求内容';
@@ -12,9 +12,6 @@ const TxtRequired = '必须填入要求内容';
 export abstract class CharsControl extends Control {
     protected init() {
         super.init();
-        this.ref = this.ref.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.onFocus = this.onFocus.bind(this);
         if (this.field.required === true) {
             this.rules.push((v) => {
                 if (v===undefined) return TxtRequired;
@@ -32,11 +29,10 @@ export abstract class CharsControl extends Control {
     protected setProps() {
         super.setProps();
         _.assign(this.props, {
-            ref: this.ref,
-            onBlur: this.onBlur,
-            onFocus: this.onFocus,
+            onBlur: this.onBlur.bind(this),
+            onFocus: this.onFocus.bind(this),
         });
-        let face = this.face as InputFace;
+        let face = this.face as Placeholder;
         if (face !== undefined) {
             _.assign(this.props, {
                 placeholder: face.placeholder,
@@ -44,9 +40,6 @@ export abstract class CharsControl extends Control {
         }
         return this.props;
     };
-    private ref(element: HTMLInputElement) {
-        this.element = element;
-    }
     protected parseValue(value?:string):any {return value;}
     private onBlur() {
         try {
@@ -75,14 +68,16 @@ export abstract class CharsControl extends Control {
         this.error = undefined;
         this.formView.clearErrors();
     }
-    protected renderInput():JSX.Element {
-        let cn = classNames({
+    protected className() {
+        return classNames({
             "form-control": true,
             "has-success": this.isOK === true,
             "is-invalid": this.error !== undefined,
             "is-valid": this.error === undefined && this.isOK === true,
         });
-        return <input className={cn} {...this.props} />;
+    }
+    protected renderInput():JSX.Element {
+        return <input className={this.className()} {...this.props} />;
     }
     protected renderError():JSX.Element {
         if (this.error === undefined) return null;

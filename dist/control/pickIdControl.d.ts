@@ -6,7 +6,7 @@ import { Control } from './control';
 export declare class PickIdControl extends Control {
     protected face: IdPickFace;
     protected value: number;
-    private element;
+    private message;
     constructor(formView: FormView, field: Field, face: Face);
     private onClick();
     render(): JSX.Element;
