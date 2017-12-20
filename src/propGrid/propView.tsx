@@ -1,11 +1,17 @@
-import {PropContainer} from './propContainer';
+import {ListViewProps} from '../listView';
+import {PropRow, PropBorder, PropGap, PropContainer,
+    StringPropRow, NumberPropRow, ListPropRow, ComponentPropRow} from './row';
 
 export interface Format {
 
 }
 
-export interface LabeledProp {
-    label: string;
+export interface PropBase {
+    onClick?: ()=>void;
+}
+
+export interface LabeledProp extends PropBase {
+    label?: string;
 }
 
 export interface StringProp extends LabeledProp {
@@ -25,31 +31,53 @@ export interface FormatProp extends LabeledProp {
 
 export interface ListProp extends LabeledProp {
     type: 'list';
-    name: string;
-    format: Format;
+    list: string | any[];  // string 表示名字，否则就是值
+    row: new (props:any) => React.Component;
 }
 
-export type Prop = StringProp | NumberProp | FormatProp | ListProp;
-
-export interface PropViewProps {
-    rows: (Prop|Prop[])[];
+export interface ComponentProp extends LabeledProp {
+    type: 'component';
+    component: JSX.Element;
 }
+
+export type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentProp | string;
 
 export class PropView {
-    private props: PropViewProps;
-    private initValues:any;
-    private containers: PropContainer[];
+    private props: Prop[];
+    private values:any;
+    private rows: PropRow[];
 
-    constructor(props:PropViewProps, initValues?:any) {
+    constructor(props:Prop[], values?:any) {
         this.props = props;
-        this.initValues = initValues;
+        this.values = values;
         this.buildRows();
     }
 
     private buildRows() {
-        let {rows} = this.props;
-        this.containers = [];
+        this.rows = [];
+        let isGap:boolean = true;
+        for (let prop of this.props) {
+            if (typeof prop === 'string') {
+                this.rows.push(new PropGap());
+                isGap = true;
+            }
+            else {
+                if (!isGap) this.rows.push(new PropBorder());
+                let row;
+                switch (prop.type) {
+                    default: continue;
+                    case 'string': row = new StringPropRow(prop, this.values); break;
+                    case 'number': row = new NumberPropRow(prop, this.values); break;
+                    case 'list': row = new ListPropRow(prop, this.values); break;
+                    case 'component': row = new ComponentPropRow(prop, this.values); break;
+                }
+                this.rows.push(row);
+                isGap = false;
+            }
+        }
+    }
 
-
+    render() {
+        return this.rows.map((row, index) => row.render(String(index)));
     }
 }

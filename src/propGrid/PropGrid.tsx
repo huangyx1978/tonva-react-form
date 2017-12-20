@@ -1,21 +1,24 @@
 import * as React from 'react';
+import {observer} from 'mobx-react';
+import {Prop, PropView} from './propView';
+import {PropContainer, PropBorder, PropGap} from './row';
 
 export interface PropGridProps {
-    icon: string;
-    main: string|JSX.Element;
-    discription: string | JSX.Element;
+    rows: Prop[];
+    values: any;
 }
 
+@observer
 export class PropGrid extends React.Component<PropGridProps> {
+    private propView: PropView;
+    constructor(props:PropGridProps) {
+        super(props);
+        this.propView = new PropView(this.props.rows, this.props.values);
+    }
+
     render() {
-        let {icon, main, discription} = this.props;
-        let disp;
-        if (typeof discription === 'string')
-            disp = <p>{discription}</p>;
-        else
-            disp = discription;
-        return <div>
-            PropGrid
+        return <div className="container bg-white">
+            {this.propView.render()}
         </div>;
     }
 }
