@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from 'react';
-import '../css/va-badge-icon.css';
-export interface BadgeIconProps {
+import '../css/va-badge.css';
+export interface BadgeProps {
     className?: string;
     badge?: string | number;
     size?: 'sm' | 'lg';
@@ -9,6 +9,6 @@ export interface BadgeIconProps {
     badgeAlign?: 'left' | 'center' | 'right';
     badgeVertical?: 'top' | 'middle' | 'bottom';
 }
-export declare class BadgeIcon extends React.Component<BadgeIconProps> {
+export declare class Badge extends React.Component<BadgeProps> {
     render(): JSX.Element;
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import '../css/va-badge-icon.css';
-export class BadgeIcon extends React.Component {
+import '../css/va-badge.css';
+export class Badge extends React.Component {
     render() {
         let { className, badge, size, color, badgeAlign, badgeVertical, children } = this.props;
         let cn = classNames(className, 'va-badge', size && 'va-badge-' + size, 'va-badge-' + (color || 'secondary'), badgeAlign && 'va-badg-' + badgeAlign, badgeVertical && 'va-badg-' + badgeVertical);
@@ -11,4 +11,4 @@ export class BadgeIcon extends React.Component {
             React.createElement("b", null, badge));
     }
 }
-//# sourceMappingURL=BadgeIcon.js.map
+//# sourceMappingURL=Badge.js.map

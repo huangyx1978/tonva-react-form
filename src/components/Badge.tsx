@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import '../css/va-badge-icon.css';
+import '../css/va-badge.css';
 
-export interface BadgeIconProps {
+export interface BadgeProps {
     className?: string;
-    icon: string;
     badge?: string|number;
     size?: 'sm'|'lg';
     color?: 'secondary'|'success'|'danger'|'primary'|'info'|'warning';
@@ -12,9 +11,9 @@ export interface BadgeIconProps {
     badgeVertical?: 'top'|'middle'|'bottom';
 }
 
-export class BadgeIcon extends React.Component<BadgeIconProps> {
+export class Badge extends React.Component<BadgeProps> {
     render() {
-        let {className, icon, badge, size, color, badgeAlign, badgeVertical} = this.props;
+        let {className, badge, size, color, badgeAlign, badgeVertical, children} = this.props;
         let cn = classNames(
             className,
             'va-badge',
@@ -25,8 +24,8 @@ export class BadgeIcon extends React.Component<BadgeIconProps> {
         );
         //"va-badge va-badge-success va-badge-lg va-badge-right va-badge-top"
         return <div className={cn}>
-            <img src={icon} />
-            <i>{badge}</i>
+            {children}
+            <b>{badge}</b>
         </div>;
     }
 }
