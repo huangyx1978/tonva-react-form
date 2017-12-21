@@ -28,7 +28,7 @@ export class Selectable extends ListBase {
                         onChange={(e)=>this.onSelect(item, e.target.checked)} />
                     <span className="custom-control-indicator" />
                 </label>
-                {this.renderContent(item, index)}
+                {this.renderContent(item.item, index)}
             </label>
         </li>
     }

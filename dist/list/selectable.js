@@ -26,7 +26,7 @@ export class Selectable extends ListBase {
                         //checked={selected}
                         onChange: (e) => this.onSelect(item, e.target.checked) }),
                     React.createElement("span", { className: "custom-control-indicator" })),
-                this.renderContent(item, index)));
+                this.renderContent(item.item, index)));
     }
 }
 __decorate([
