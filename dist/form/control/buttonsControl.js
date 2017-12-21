@@ -17,7 +17,7 @@ export class ButtonsControl extends ControlBase {
         let { submitButton, otherButton, onOther } = props;
         let btnOther;
         if (otherButton !== undefined) {
-            btnOther = React.createElement("button", { className: "btn btn-link ml-auto", onClick: this.otherClick }, otherButton);
+            btnOther = React.createElement("button", { className: "btn btn-outline-info ml-auto", onClick: this.otherClick }, otherButton);
         }
         return React.createElement("div", { className: "col-sm-10" },
             React.createElement("div", { className: "d-flex justify-content-start" },

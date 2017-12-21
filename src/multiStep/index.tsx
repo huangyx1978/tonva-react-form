@@ -59,7 +59,7 @@ export class MultiStep extends React.Component<MultiStepProps, MultiStepState> {
         }
         let {header, footer} = this.props;
         let btnContent = step.next === undefined?
-            {prefix: 'cloud-upload', text: '提交'} :
+            {prefix: 'cloud-upload', text: this.props.submitButton || '提交'} :
             {suffix: 'arrow-right', text: '下一步'}
         let formProps = {
             formRows: step.formRows,
@@ -122,7 +122,7 @@ export class MultiStep extends React.Component<MultiStepProps, MultiStepState> {
     }
 }
 
-const ButtonConten = (props:{prefix?:string, text?:string, suffix?:string}) => {
+const ButtonConten = (props:{prefix?:string, text?:string|JSX.Element, suffix?:string}) => {
     let {prefix, text, suffix} = props;
     let pIcon, sIcon;
     if (prefix !== undefined) pIcon = <i className={className('fa', 'fa-' + prefix)} />;

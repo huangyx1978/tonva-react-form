@@ -23,7 +23,7 @@ export class ButtonsControl extends ControlBase {
         let {submitButton, otherButton, onOther} = props;
         let btnOther;
         if (otherButton !== undefined) {
-            btnOther = <button className="btn btn-link ml-auto" onClick={this.otherClick}>
+            btnOther = <button className="btn btn-outline-info ml-auto" onClick={this.otherClick}>
                 {otherButton}
             </button>
         }

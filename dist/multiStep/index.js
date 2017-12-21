@@ -27,7 +27,7 @@ export class MultiStep extends React.Component {
         }
         let { header, footer } = this.props;
         let btnContent = step.next === undefined ?
-            { prefix: 'cloud-upload', text: '提交' } :
+            { prefix: 'cloud-upload', text: this.props.submitButton || '提交' } :
             { suffix: 'arrow-right', text: '下一步' };
         let formProps = {
             formRows: step.formRows,

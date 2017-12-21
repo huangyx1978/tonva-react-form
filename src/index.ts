@@ -7,3 +7,4 @@ export * from './listView';
 export * from './searchBox';
 export * from './multiStep';
 export * from './uid';
+export * from './list';
