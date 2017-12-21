@@ -5,7 +5,6 @@ export interface ListProps {
     items: any[];
     item: {
         className?: string|string[];
-        contentClass?: string|string[];
         render: (item:any, index:number) => JSX.Element;
         onSelect?: (item:any, isSelected:boolean, anySelected:boolean)=>void;
         onClick?: (item:any)=>void;

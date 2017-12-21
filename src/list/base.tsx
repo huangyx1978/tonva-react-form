@@ -13,7 +13,7 @@ export abstract class ListBase {
     get items() {return this.props.items}
     abstract render(item:any, index:number):JSX.Element;
     protected renderContent(item:any, index:number) {
-        let {contentClass, render} = this.props.item;
-        return <div className={classNames(contentClass)}>{render(item, index)}</div>
+        let {render} = this.props.item;
+        return render(item, index);
     }
 }
