@@ -4,7 +4,7 @@ import {ListBase} from './base';
 
 export class Static extends ListBase {
     render(item:any, index:number):JSX.Element {
-        let {className, render} = this.props.item;
+        let {className, render} = this.list.props.item;
         return <li key={index} className={classNames(className)}>
             {this.renderContent(item, index)}
         </li>

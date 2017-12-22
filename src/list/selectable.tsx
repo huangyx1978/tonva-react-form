@@ -10,16 +10,16 @@ export interface SelectableItem {
 
 export class Selectable extends ListBase {
     private _items: SelectableItem[];
-    @computed get items() {return this._items = this.props.items.map(v => {return {selected:false, item:v}})}
+    @computed get items() {return this._items = this.list.props.items.map(v => {return {selected:false, item:v}})}
     private onSelect(item:SelectableItem, selected:boolean) {
         item.selected = selected;
         let anySelected = this._items.some(v => v.selected);
-        this.props.item.onSelect(item.item, selected, anySelected);
+        this.list.props.item.onSelect(item.item, selected, anySelected);
     }
     //w-100 mb-0 pl-3
     //m-0 w-100
     render(item:SelectableItem, index:number):JSX.Element {
-        let {className, render, onSelect} = this.props.item;
+        let {className, render, onSelect} = this.list.props.item;
         return <li key={index} className={classNames(className)}>
             <label className="">
                 <label className="custom-control custom-checkbox">

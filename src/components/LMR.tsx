@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {observer} from 'mobx-react';
 import * as classNames from 'classnames';
 import '../css/va-lmr.css';
 
@@ -8,6 +9,7 @@ export interface LMRProps {
     right?: JSX.Element;
 }
 
+@observer
 export class LMR extends React.Component<LMRProps> {
     render() {
         let {className, left, children, right} = this.props;

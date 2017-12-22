@@ -8,5 +8,6 @@
 .va-lmr > div {
     display: flex;
     flex: 1;
+    flex-direction: column;
     margin: 0 15px;
 }

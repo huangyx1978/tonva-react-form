@@ -17,14 +17,15 @@ export class List extends React.Component<ListProps> {
         let {item} = this.props;
         let {onClick, onSelect} = item;
         if (onSelect !== undefined)
-            this.listBase = new Selectable(this, props);
+            this.listBase = new Selectable(this);
         else if (onClick !== undefined)
-            this.listBase = new Clickable(this, props);
+            this.listBase = new Clickable(this);
         else
-            this.listBase = new Static(this, props);
+            this.listBase = new Static(this);
     }
     render() {
-        let {className, items, header, footer, loading, none, item} = this.props;
+        let {className, header, footer, loading, none, item} = this.props;
+        let items = this.listBase.items;
         function staticRow(row:StaticRow, type:string) {
             if (row === undefined) return;
             return <li className={"va-list-"+type}>{
@@ -37,7 +38,7 @@ export class List extends React.Component<ListProps> {
         else if (items.length === 0)
             content = staticRow(none, 'none');
         else 
-            content = this.listBase.items.map((item, index) => this.listBase.render(item, index));
+            content = items.map((item, index) => this.listBase.render(item, index));
         return <ul className={classNames('va-list', className)}>
             {staticRow(header, 'header')}
             {content}

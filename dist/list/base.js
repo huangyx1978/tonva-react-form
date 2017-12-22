@@ -1,11 +1,12 @@
 export class ListBase {
-    constructor(list, props) {
+    //protected props: ListProps;
+    constructor(list) {
         this.list = list;
-        this.props = props;
+        //this.props = props;
     }
-    get items() { return this.props.items; }
+    get items() { return this.list.props.items; }
     renderContent(item, index) {
-        let { render } = this.props.item;
+        let { render } = this.list.props.item;
         return render(item, index);
     }
 }

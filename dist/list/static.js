@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 import { ListBase } from './base';
 export class Static extends ListBase {
     render(item, index) {
-        let { className, render } = this.props.item;
+        let { className, render } = this.list.props.item;
         return React.createElement("li", { key: index, className: classNames(className) }, this.renderContent(item, index));
     }
 }

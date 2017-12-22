@@ -9,16 +9,16 @@ import { computed } from 'mobx';
 import * as classNames from 'classnames';
 import { ListBase } from './base';
 export class Selectable extends ListBase {
-    get items() { return this._items = this.props.items.map(v => { return { selected: false, item: v }; }); }
+    get items() { return this._items = this.list.props.items.map(v => { return { selected: false, item: v }; }); }
     onSelect(item, selected) {
         item.selected = selected;
         let anySelected = this._items.some(v => v.selected);
-        this.props.item.onSelect(item.item, selected, anySelected);
+        this.list.props.item.onSelect(item.item, selected, anySelected);
     }
     //w-100 mb-0 pl-3
     //m-0 w-100
     render(item, index) {
-        let { className, render, onSelect } = this.props.item;
+        let { className, render, onSelect } = this.list.props.item;
         return React.createElement("li", { key: index, className: classNames(className) },
             React.createElement("label", { className: "" },
                 React.createElement("label", { className: "custom-control custom-checkbox" },

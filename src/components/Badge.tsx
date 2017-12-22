@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {observer} from 'mobx-react';
 import * as classNames from 'classnames';
 import '../css/va-badge.css';
 
@@ -11,6 +12,7 @@ export interface BadgeProps {
     badgeVertical?: 'top'|'middle'|'bottom';
 }
 
+@observer
 export class Badge extends React.Component<BadgeProps> {
     render() {
         let {className, badge, size, color, badgeAlign, badgeVertical, children} = this.props;
@@ -25,7 +27,7 @@ export class Badge extends React.Component<BadgeProps> {
         //"va-badge va-badge-success va-badge-lg va-badge-right va-badge-top"
         return <div className={cn}>
             {children}
-            <b>{badge}</b>
+            {badge && <b>{badge}</b>}
         </div>;
     }
 }
