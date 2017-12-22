@@ -33,6 +33,19 @@ ul.va-list>li>label>div {
     flex:1;
 }
 
-.li-content {
-    padding: 0px 16px;
+li.va-list-loading {
+    color: green;
+    font-size: smaller;
+    padding: 8px 16px;
+}
+li.va-list-none {
+    color: #e0e0e0;
+    font-size: smaller;
+    padding: 8px 16px;
+}
+li.va-list-header {
+    padding: 4px 16px;
+}
+li.va-list-footer {
+    padding: 4px 16px;
 }
