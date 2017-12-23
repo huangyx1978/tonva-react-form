@@ -22,9 +22,9 @@ export class PickIdControl extends Control {
     }
     onClick() {
         return __awaiter(this, void 0, void 0, function* () {
-            let { pick, fromItem } = this.face;
-            let item = yield pick(this.face);
-            let { id, caption } = fromItem(item);
+            let { pick, fromPickedItem } = this.face;
+            let item = yield pick(this.face, this.formView.readValues());
+            let { id, caption } = fromPickedItem(item);
             this.value = id;
             this.caption = caption || String(id);
         });

@@ -54,7 +54,7 @@ export class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
                     className="form-control" 
                     placeholder={placeholder}
                     maxLength={maxLength} />
-                <button className="input-group-addon" type="button" disabled={this.state.disabled}>
+                <button className="input-group-addon" type="submit" disabled={this.state.disabled}>
                     <i className='fa fa-search' />
                     <i className="fa"/>
                     {buttonText}

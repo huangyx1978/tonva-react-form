@@ -21,6 +21,7 @@ export declare type Option = string | number | {
 export interface SelectFace extends FieldFaceBase {
     type: 'select';
     list: Option[];
+    default?: string | number;
 }
 export interface RadioFace extends FieldFaceBase {
     type: 'radiobox';
@@ -30,15 +31,15 @@ export interface TextAreaFace extends FieldFaceBase, Placeholder {
     type: 'textarea';
     maxLength?: number;
 }
-export declare type FromItem = (item: any) => {
+export declare type FromPicked = (item: any) => {
     id: number;
     caption?: string | JSX.Element;
 };
-export declare type IdPick = (face: IdPickFace) => Promise<any>;
+export declare type IdPick = (face: IdPickFace, params: any) => Promise<any>;
 export interface IdPickFace extends FieldFaceBase {
     type: 'pick-id';
     initCaption: string | JSX.Element;
     pick: IdPick;
-    fromItem: FromItem;
+    fromPickedItem: FromPicked;
 }
 export declare type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | IdPickFace;

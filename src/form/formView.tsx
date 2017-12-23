@@ -163,9 +163,7 @@ export class FormView {
     buttons():JSX.Element {
         return this.buttonsRow.render(this.uid + this.rows.length);
     }
-
     
-
     async onSubmit(event:FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (!this.isOk()) return;

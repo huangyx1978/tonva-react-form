@@ -9,7 +9,7 @@ import {Control} from './control';
 
 export class PickIdControl extends Control {
     protected face: IdPickFace;
-    protected value: number;
+    // protected value: number;
     @observable private caption: string|JSX.Element;
     constructor(formView:FormView, field:Field, face:Face) {
         super(formView, field, face);
@@ -17,9 +17,9 @@ export class PickIdControl extends Control {
     }
 
     private async onClick() {
-        let {pick, fromItem} = this.face;
-        let item = await pick(this.face);
-        let {id, caption} = fromItem(item);
+        let {pick, fromPickedItem} = this.face;
+        let item = await pick(this.face, this.formView.readValues());
+        let {id, caption} = fromPickedItem(item);
         this.value = id;
         this.caption = caption || String(id);
     }

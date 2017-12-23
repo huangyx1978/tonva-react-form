@@ -25,7 +25,7 @@ export declare abstract class Control extends ControlBase {
     protected error: string;
     protected value: any;
     constructor(formView: FormView, field: Field, face: Face);
-    private ref(element);
+    protected ref(element: HTMLElement): void;
     protected init(): void;
     protected setProps(): any;
     readonly hasError: boolean;

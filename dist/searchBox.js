@@ -34,7 +34,7 @@ export class SearchBox extends React.Component {
             React.createElement("div", { className: "input-group input-group-sm" },
                 lab,
                 React.createElement("input", { onChange: this.onChange, type: "text", name: "key", className: "form-control", placeholder: placeholder, maxLength: maxLength }),
-                React.createElement("button", { className: "input-group-addon", type: "button", disabled: this.state.disabled },
+                React.createElement("button", { className: "input-group-addon", type: "submit", disabled: this.state.disabled },
                     React.createElement("i", { className: 'fa fa-search' }),
                     React.createElement("i", { className: "fa" }),
                     buttonText)));

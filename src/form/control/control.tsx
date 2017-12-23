@@ -40,7 +40,7 @@ export abstract class Control extends ControlBase {
         this.init();
         this.setProps();
     }
-    private ref(element: HTMLElement) {
+    protected ref(element: HTMLElement) {
         this.element = element;
     }
     protected init() {
@@ -67,7 +67,7 @@ export abstract class Control extends ControlBase {
     }
     setError(fieldName:string, error:string) {}
     setInitValues(values: any) {}
-    protected getValueFromElement():any {}
+    protected getValueFromElement():any {return this.value;}
     protected validate() {
         try {
             let v = this.getValueFromElement();

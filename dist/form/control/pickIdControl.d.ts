@@ -5,7 +5,6 @@ import { Face, IdPickFace } from '../face';
 import { Control } from './control';
 export declare class PickIdControl extends Control {
     protected face: IdPickFace;
-    protected value: number;
     private caption;
     constructor(formView: FormView, field: Field, face: Face);
     private onClick();

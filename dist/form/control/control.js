@@ -56,7 +56,7 @@ export class Control extends ControlBase {
     }
     setError(fieldName, error) { }
     setInitValues(values) { }
-    getValueFromElement() { }
+    getValueFromElement() { return this.value; }
     validate() {
         try {
             let v = this.getValueFromElement();
