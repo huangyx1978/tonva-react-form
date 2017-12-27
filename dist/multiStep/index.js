@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import * as className from 'classnames';
-import { FormView, TonvaForm } from '../form';
+import { TonvaForm } from '../form';
 export class MultiStep extends React.Component {
     constructor(props) {
         super(props);
@@ -83,7 +83,7 @@ export class MultiStep extends React.Component {
         return React.createElement("div", { className: className },
             React.createElement("div", null,
                 header && header(step, num),
-                React.createElement(TonvaForm, { key: stepName, formView: new FormView(topView.props, this.values) }),
+                React.createElement(TonvaForm, Object.assign({ key: stepName, initValues: this.values }, topView.props)),
                 footer && footer(step, num)));
     }
 }

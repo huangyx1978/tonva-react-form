@@ -8,23 +8,26 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import * as classNames from 'classnames';
 import { observer } from 'mobx-react';
+import { FormView } from './formView';
 let TonvaForm = class TonvaForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.formView = new FormView(this.props, this.props.initValues);
+    }
     getChildContext() {
-        return {
-            formView: this.props.formView
-        };
+        return this.formView;
     }
     componentDidMount() {
-        this.props.formView.setInitValues();
+        this.formView.setInitValues();
     }
     componentWillUpdate() {
-        this.props.formView.setInitValues();
+        this.formView.setInitValues();
     }
     render() {
-        let { className, formView, children } = this.props;
+        let { className, children } = this.props;
         return React.createElement("div", { className: classNames('container', 'mt-4', className) }, children === undefined ?
-            formView.render() :
-            React.createElement("form", { onSubmit: this.props.formView.onSubmit }, children));
+            this.formView.render() :
+            React.createElement("form", { onSubmit: this.formView.onSubmit }, children));
     }
 };
 TonvaForm.childContextTypes = {
@@ -34,40 +37,4 @@ TonvaForm = __decorate([
     observer
 ], TonvaForm);
 export { TonvaForm };
-/*
-export namespace TonvaForm {
-    @observer
-    export class Row extends React.Component<{row:number|string}> {
-        static contextTypes = {
-            formView: PropTypes.object
-        }
-        context: TonvaFormProps;
-        render() {
-            return this.context.formView.row(this.props.row);
-        }
-    }
-
-    @observer
-    export class Others extends React.Component {
-        static contextTypes = {
-            formView: PropTypes.object
-        }
-        context: TonvaFormProps;
-        render() {
-            return this.context.formView.others();
-        }
-    }
-
-    @observer
-    export class Buttons extends React.Component {
-        static contextTypes = {
-            formView: PropTypes.object
-        }
-        context: TonvaFormProps;
-        render() {
-            return this.context.formView.buttons();
-        }
-    }
-}
-*/ 
 //# sourceMappingURL=TonvaForm.js.map

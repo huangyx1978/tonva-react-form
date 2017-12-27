@@ -5,5 +5,6 @@ import "../css/va-list.css";
 export declare class List extends React.Component<ListProps> {
     private listBase;
     constructor(props: ListProps);
+    selectedItems: any[];
     render(): JSX.Element;
 }

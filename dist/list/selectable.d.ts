@@ -11,5 +11,6 @@ export declare class Selectable extends ListBase {
         item: any;
     }[];
     private onSelect(item, selected);
+    selectedItems: any[];
     render(item: SelectableItem, index: number): JSX.Element;
 }

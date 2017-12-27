@@ -25,7 +25,7 @@ ul.va-list>li>label {
 }
 ul.va-list>li>label>label {
     display: flex;
-    margin: 0;
+    margin: 0 -15px 0 0;
     align-items: center;
 }
 ul.va-list>li>label>div {

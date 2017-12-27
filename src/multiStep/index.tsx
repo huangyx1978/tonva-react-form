@@ -115,7 +115,7 @@ export class MultiStep extends React.Component<MultiStepProps, MultiStepState> {
         return <div className={className}>
             <div>
                 {header && header(step, num)}
-                <TonvaForm key={stepName} formView={new FormView(topView.props, this.values)} />
+                <TonvaForm key={stepName} initValues={this.values} {...topView.props} />
                 {footer && footer(step, num)}
             </div>
         </div>;

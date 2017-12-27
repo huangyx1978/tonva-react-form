@@ -11,6 +11,8 @@ export abstract class ListBase {
         //this.props = props;
     }
     get items() {return this.list.props.items}
+    get selectedItems():any[] { return; }
+    set selectedItems(value: any[]) {}
     abstract render(item:any, index:number):JSX.Element;
     protected renderContent(item:any, index:number) {
         let {render} = this.list.props.item;

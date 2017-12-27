@@ -5,6 +5,8 @@ export class ListBase {
         //this.props = props;
     }
     get items() { return this.list.props.items; }
+    get selectedItems() { return; }
+    set selectedItems(value) { }
     renderContent(item, index) {
         let { render } = this.list.props.item;
         return render(item, index);

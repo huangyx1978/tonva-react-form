@@ -23,11 +23,21 @@ let List = class List extends React.Component {
         else
             this.listBase = new Static(this);
     }
+    get selectedItems() {
+        return this.listBase.selectedItems;
+    }
+    set selectedItems(value) {
+        this.listBase.selectedItems = value;
+    }
     render() {
         let { className, header, footer, loading, none, item } = this.props;
+        if (loading === undefined)
+            loading = 'loading';
+        if (none === undefined)
+            none = 'none';
         let items = this.listBase.items;
         function staticRow(row, type) {
-            if (row === undefined)
+            if (!row)
                 return;
             return React.createElement("li", { className: "va-list-" + type }, typeof row === 'function' ? row(items) : row);
         }
