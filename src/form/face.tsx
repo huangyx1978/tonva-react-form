@@ -37,12 +37,14 @@ export interface TextAreaFace extends FieldFaceBase, Placeholder {
 }
 
 export type FromPicked = (item:any)=>{id:number, caption?:string|JSX.Element};
+export type ItemFromId = (id:number)=>any;
 export type IdPick = (face: IdPickFace, params:any) => Promise<any>;
 export interface IdPickFace extends FieldFaceBase {
     type: 'pick-id';
     initCaption: string|JSX.Element;
     pick: IdPick;
-    fromPickedItem: FromPicked;
+    fromPicked: FromPicked;
+    itemFromId?: ItemFromId;
 }
 
 export type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | IdPickFace;

@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 export class FA extends React.Component {
     render() {
         let { name, className, size, spin, fixWidth, border, pull, pulse, rotate, flip, inverse } = this.props;
-        let cn = classNames(className, 'fa', 'fa-' + name, size && 'fa-' + size, fixWidth && 'fa-fw', border && 'fa-border', pull && 'fa-pull-' + pull, spin && 'fa-spin', pulse && 'fa-pulse', rotate && 'fa-rotate-' + rotate, flip && 'fa-flip-' + flip, inverse && 'fa-inverse');
+        let cn = classNames(className, 'fa', name && ('fa-' + name), size && 'fa-' + size, fixWidth && 'fa-fw', border && 'fa-border', pull && 'fa-pull-' + pull, spin && 'fa-spin', pulse && 'fa-pulse', rotate && 'fa-rotate-' + rotate, flip && 'fa-flip-' + flip, inverse && 'fa-inverse');
         return React.createElement("i", { className: cn });
     }
 }

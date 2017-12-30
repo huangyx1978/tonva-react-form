@@ -22,17 +22,51 @@ export class PickIdControl extends Control {
     }
     onClick() {
         return __awaiter(this, void 0, void 0, function* () {
-            let { pick, fromPickedItem } = this.face;
+            let { pick, fromPicked } = this.face;
             let item = yield pick(this.face, this.formView.readValues());
-            let { id, caption } = fromPickedItem(item);
+            if (item === undefined) {
+                this.value = undefined;
+                return;
+            }
+            if (fromPicked === undefined) {
+                this.value = item.id;
+                return;
+            }
+            let { id, caption } = fromPicked(item);
             this.value = id;
-            this.caption = caption || String(id);
+            this.caption = caption;
         });
+    }
+    setInitValues(values) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let v = values[this.field.name];
+            this.value = v;
+        });
+    }
+    buildCaption() {
+        let { itemFromId, fromPicked, initCaption } = this.face;
+        if (this.value === undefined) {
+            return initCaption || '请选择Id';
+        }
+        if (this.caption !== undefined) {
+            return this.caption;
+        }
+        if (itemFromId !== undefined) {
+            if (fromPicked !== undefined) {
+                let item = itemFromId(this.value);
+                if (item) {
+                    let ret = fromPicked(item);
+                    if (ret !== undefined)
+                        return ret.caption;
+                }
+            }
+        }
+        return String(this.value);
     }
     render() {
         return React.createElement("div", { className: "col-sm-10" },
             React.createElement("div", { className: "form-control-static " },
-                React.createElement("button", { className: "form-control btn btn-outline-info", type: "button", style: { textAlign: 'left', paddingLeft: '0.75rem' }, onClick: this.onClick }, this.value === undefined ? this.face.initCaption || '请选择Id' : this.caption)));
+                React.createElement("button", { className: "form-control btn btn-outline-info", type: "button", style: { textAlign: 'left', paddingLeft: '0.75rem' }, onClick: this.onClick }, this.buildCaption())));
     }
 }
 __decorate([

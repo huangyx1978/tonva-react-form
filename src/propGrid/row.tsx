@@ -5,6 +5,7 @@ import {ListView} from '../listView';
 import {LabeledProp, StringProp, NumberProp, ListProp, ComponentProp} from './propView';
 
 export abstract class PropRow {
+    setValues(values: any) {}
     abstract render(key:string): any;
 }
 
@@ -19,26 +20,41 @@ export class PropBorder extends PropRow {
 }
 
 export class PropGap extends PropRow {
+    private param: string;
+    constructor(param?: string) {
+        super();
+        this.param = param;
+    }
     render(key:string): JSX.Element {
-        return <div key={'_g_' + key} className="row py-2" style={{backgroundColor: '#f0f0f0'}} />;
+        let w: string;
+        switch (this.param) {
+            default: w = 'py-2'; break;
+            case '=': w = 'py-1'; break;
+            case '-': w = 'pb-1'; break;
+        }
+        let cn = className('row', w);
+        return <div key={'_g_' + key} className={cn} style={{backgroundColor: '#f0f0f0'}} />;
     }
 }
 
 export abstract class LabeledPropRow extends PropRow {
     protected prop: LabeledProp;
-    protected values: any;
-    constructor(prop: LabeledProp, values: any) {
+    protected content: any;
+    //protected values: any;
+    constructor(prop: LabeledProp) {
         super();
         this.prop = prop;
-        this.values = values;
+        //this.values = values;
     }
     render(key:string):any {
-        let {onClick} = this.prop;
+        let {onClick, bk} = this.prop;
         let style;
         if (onClick !== undefined) {
             style = {cursor: 'pointer'};
         }
-        return <div key={key} className="row bg-white" onClick={onClick} style={style}>
+        if (bk === undefined) bk = 'bg-white';
+        let cn = className('row', bk);
+        return <div key={key} className={cn} onClick={onClick} style={style}>
             {this.renderLabel()}
             {this.renderProp()}
         </div>;
@@ -62,29 +78,39 @@ export abstract class LabeledPropRow extends PropRow {
         </div>;
     }
     protected renderPropContent():any {
-        return 'content';
+        return this.content;
     }
 }
 
 export class StringPropRow extends LabeledPropRow {
     protected prop: StringProp;
-    protected renderPropContent() {
-        return this.values[this.prop.name];
+    setValues(values:any) {
+        if (values === undefined) this.content = undefined;
+        else this.content = values[this.prop.name];
     }
 }
 
 export class NumberPropRow extends LabeledPropRow {
     protected prop: NumberProp;
-    protected renderPropContent() {
-        return this.values[this.prop.name];
+    setValues(values:any) {
+        if (values === undefined) this.content = undefined;
+        else this.content = values[this.prop.name];
     }
 }
 
 export class ListPropRow extends LabeledPropRow {
     protected prop: ListProp;
+    setValues(values:any) {
+        if (values === undefined) this.content = undefined;
+        else {
+            let list = this.prop.list;
+            if (typeof list === 'string') this.content = values[list];
+            else this.content = undefined;
+        }
+    }
     protected renderPropBody() {
         let {list, row} = this.prop;
-        let items:any[] = typeof list === 'string'? this.values[name] : list;
+        let items:any[] = typeof list === 'string'? this.content : list;
         if (items === undefined) return <div/>;
         // new row(item)
         return <div>

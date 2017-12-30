@@ -1,5 +1,7 @@
 import * as React from 'react';
+import * as className from 'classnames';
 export class PropRow {
+    setValues(values) { }
 }
 export class PropBorder extends PropRow {
     render(key) {
@@ -9,23 +11,44 @@ export class PropBorder extends PropRow {
     }
 }
 export class PropGap extends PropRow {
+    constructor(param) {
+        super();
+        this.param = param;
+    }
     render(key) {
-        return React.createElement("div", { key: '_g_' + key, className: "row py-2", style: { backgroundColor: '#f0f0f0' } });
+        let w;
+        switch (this.param) {
+            default:
+                w = 'py-2';
+                break;
+            case '=':
+                w = 'py-1';
+                break;
+            case '-':
+                w = 'pb-1';
+                break;
+        }
+        let cn = className('row', w);
+        return React.createElement("div", { key: '_g_' + key, className: cn, style: { backgroundColor: '#f0f0f0' } });
     }
 }
 export class LabeledPropRow extends PropRow {
-    constructor(prop, values) {
+    //protected values: any;
+    constructor(prop) {
         super();
         this.prop = prop;
-        this.values = values;
+        //this.values = values;
     }
     render(key) {
-        let { onClick } = this.prop;
+        let { onClick, bk } = this.prop;
         let style;
         if (onClick !== undefined) {
             style = { cursor: 'pointer' };
         }
-        return React.createElement("div", { key: key, className: "row bg-white", onClick: onClick, style: style },
+        if (bk === undefined)
+            bk = 'bg-white';
+        let cn = className('row', bk);
+        return React.createElement("div", { key: key, className: cn, onClick: onClick, style: style },
             this.renderLabel(),
             this.renderProp());
     }
@@ -43,23 +66,40 @@ export class LabeledPropRow extends PropRow {
         return React.createElement("div", { className: "form-control-plaintext" }, this.renderPropContent());
     }
     renderPropContent() {
-        return 'content';
+        return this.content;
     }
 }
 export class StringPropRow extends LabeledPropRow {
-    renderPropContent() {
-        return this.values[this.prop.name];
+    setValues(values) {
+        if (values === undefined)
+            this.content = undefined;
+        else
+            this.content = values[this.prop.name];
     }
 }
 export class NumberPropRow extends LabeledPropRow {
-    renderPropContent() {
-        return this.values[this.prop.name];
+    setValues(values) {
+        if (values === undefined)
+            this.content = undefined;
+        else
+            this.content = values[this.prop.name];
     }
 }
 export class ListPropRow extends LabeledPropRow {
+    setValues(values) {
+        if (values === undefined)
+            this.content = undefined;
+        else {
+            let list = this.prop.list;
+            if (typeof list === 'string')
+                this.content = values[list];
+            else
+                this.content = undefined;
+        }
+    }
     renderPropBody() {
         let { list, row } = this.prop;
-        let items = typeof list === 'string' ? this.values[name] : list;
+        let items = typeof list === 'string' ? this.content : list;
         if (items === undefined)
             return React.createElement("div", null);
         // new row(item)

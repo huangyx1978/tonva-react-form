@@ -12,6 +12,7 @@ export interface PropBase {
 
 export interface LabeledProp extends PropBase {
     label?: string;
+    bk?: string;
 }
 
 export interface StringProp extends LabeledProp {
@@ -44,12 +45,12 @@ export type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentPr
 
 export class PropView {
     private props: Prop[];
-    private values:any;
+    //private values:any;
     private rows: PropRow[];
 
-    constructor(props:Prop[], values?:any) {
+    constructor(props:Prop[]) {
         this.props = props;
-        this.values = values;
+        //this.values = values;
         this.buildRows();
     }
 
@@ -58,7 +59,7 @@ export class PropView {
         let isGap:boolean = true;
         for (let prop of this.props) {
             if (typeof prop === 'string') {
-                this.rows.push(new PropGap());
+                this.rows.push(new PropGap(prop));
                 isGap = true;
             }
             else {
@@ -66,15 +67,19 @@ export class PropView {
                 let row;
                 switch (prop.type) {
                     default: continue;
-                    case 'string': row = new StringPropRow(prop, this.values); break;
-                    case 'number': row = new NumberPropRow(prop, this.values); break;
-                    case 'list': row = new ListPropRow(prop, this.values); break;
-                    case 'component': row = new ComponentPropRow(prop, this.values); break;
+                    case 'string': row = new StringPropRow(prop); break;
+                    case 'number': row = new NumberPropRow(prop); break;
+                    case 'list': row = new ListPropRow(prop); break;
+                    case 'component': row = new ComponentPropRow(prop); break;
                 }
                 this.rows.push(row);
                 isGap = false;
             }
         }
+    }
+
+    setValues(values: any) {
+        for (let r of this.rows) r.setValues(values);
     }
 
     render() {

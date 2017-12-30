@@ -19,7 +19,7 @@ export class FA extends React.Component<FAProps> {
     render() {
         let {name, className, size, spin, fixWidth, border, pull, pulse, rotate, flip, inverse} = this.props;
         let cn = classNames(className, 'fa',
-            'fa-' + name,
+            name && ('fa-' + name),
             size && 'fa-'+size,
             fixWidth && 'fa-fw',
             border && 'fa-border',

@@ -18,11 +18,10 @@ import { uid } from '../uid';
 import { ButtonsControl } from './control';
 import { bootstrapCreateRow, elementCreateRow } from './rowContainer';
 export class FormView {
-    constructor(props, initValues) {
+    constructor(props) {
         this.rows = [];
         this.uid = uid();
         this.props = props;
-        this.initValues = initValues;
         this.buildRows(props);
         this.createControl = props.createControl;
         this.onSubmit = this.onSubmit.bind(this);
@@ -48,23 +47,24 @@ export class FormView {
             row.setError(fieldName, error);
         }
     }
-    setInitValues() {
-        if (this.initValues === undefined)
+    setInitValues(initValues) {
+        if (initValues === undefined)
             return;
         for (let row of this.rows) {
-            row.setInitValues(this.initValues);
+            row.setInitValues(initValues);
         }
     }
     buildRows(props) {
         let { formRows, createRow } = props;
-        if (formRows === undefined) {
-            console.log('TonvaForm need formRows defined');
-            return;
+        if (formRows !== undefined) {
+            for (let row of formRows) {
+                this.rows.push(this.buildRow(row, createRow));
+            }
+            this.buttonsRow = this.buildRow({ createControl: this.createButtons.bind(this) }, undefined);
         }
-        for (let row of formRows) {
-            this.rows.push(this.buildRow(row, createRow));
+        else {
+            this.rows.push(elementCreateRow(this, React.createElement("div", { className: "text-warning" }, "TonvaForm need formRows defined")));
         }
-        this.buttonsRow = this.buildRow({ createControl: this.createButtons.bind(this) }, undefined);
     }
     buildRow(formRow, formRowCreator) {
         let createRow;
@@ -99,25 +99,9 @@ export class FormView {
             this.rows.map((row, index) => row.render(this.uid + index)),
             this.buttons());
     }
-    /*
-        row(fieldName:string):JSX.Element {
-            let index = this.rows.findIndex(r => r.contains(fieldName));
-            if (index < 0) return null;
-            return this.rows[index].render(index);
-        }
-    
-        others():JSX.Element[] {
-            let ret = [];
-            let len = this.rows.length;
-            for (let i=0; i<len; i++) {
-                let r = this.rows[i];
-                if (r.key !== undefined) continue;
-                ret.push(r.render(i));
-            }
-            return ret;
-        }
-    */
     buttons() {
+        if (this.buttonsRow === undefined)
+            return;
         return this.buttonsRow.render(this.uid + this.rows.length);
     }
     onSubmit(event) {

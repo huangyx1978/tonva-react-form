@@ -5,33 +5,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import * as classNames from 'classnames';
 import { observer } from 'mobx-react';
 import { FormView } from './formView';
 let TonvaForm = class TonvaForm extends React.Component {
     constructor(props) {
         super(props);
-        this.formView = new FormView(this.props, this.props.initValues);
-    }
-    getChildContext() {
-        return this.formView;
+        this.formView = new FormView(this.props);
     }
     componentDidMount() {
-        this.formView.setInitValues();
+        this.formView.setInitValues(this.props.initValues);
     }
-    componentWillUpdate() {
-        this.formView.setInitValues();
-    }
+    /*
+        static childContextTypes = {
+            formView: PropTypes.object
+        }
+        getChildContext(): FormView {
+            return this.formView;
+        }
+    */
+    /*
+        componentDidMount() {
+        }*/
+    /*
+        componentWillUpdate() {
+            this.formView.setInitValues();
+        }
+    */
     render() {
-        let { className, children } = this.props;
+        let { className, children, initValues } = this.props;
+        //let formView = new FormView(this.props);
+        //formView.setInitValues();
         return React.createElement("div", { className: classNames('container', 'mt-4', className) }, children === undefined ?
             this.formView.render() :
             React.createElement("form", { onSubmit: this.formView.onSubmit }, children));
     }
-};
-TonvaForm.childContextTypes = {
-    formView: PropTypes.object
 };
 TonvaForm = __decorate([
     observer

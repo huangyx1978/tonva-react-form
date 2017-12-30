@@ -15,13 +15,43 @@ export class PickIdControl extends Control {
         super(formView, field, face);
         this.onClick = this.onClick.bind(this);
     }
-
     private async onClick() {
-        let {pick, fromPickedItem} = this.face;
+        let {pick, fromPicked} = this.face;
         let item = await pick(this.face, this.formView.readValues());
-        let {id, caption} = fromPickedItem(item);
+        if (item === undefined) {
+            this.value = undefined;
+            return;
+        }
+        if (fromPicked === undefined) {
+            this.value = item.id;
+            return;
+        }
+        let {id, caption} = fromPicked(item);
         this.value = id;
-        this.caption = caption || String(id);
+        this.caption = caption;
+    }
+    async setInitValues(values: any) {
+        let v = values[this.field.name];
+        this.value = v;
+    }
+    private buildCaption():string|JSX.Element {
+        let {itemFromId, fromPicked, initCaption} = this.face;
+        if (this.value === undefined) {
+            return initCaption || '请选择Id';
+        }
+        if (this.caption !== undefined) {
+            return this.caption;
+        }
+        if (itemFromId !== undefined) {
+            if (fromPicked !== undefined) {
+                let item = itemFromId(this.value);
+                if (item) {
+                    let ret = fromPicked(item);
+                    if (ret !== undefined) return ret.caption;
+                }
+            }
+        }
+        return String(this.value);
     }
     render():JSX.Element {
         return <div className="col-sm-10">
@@ -30,7 +60,7 @@ export class PickIdControl extends Control {
                     type="button"
                     style={{textAlign:'left', paddingLeft:'0.75rem'}}
                     onClick={this.onClick}>
-                    {this.value === undefined? this.face.initCaption || '请选择Id' : this.caption}
+                    {this.buildCaption()}
                 </button>
             </div>
         </div>;

@@ -33,7 +33,7 @@ export class CheckControl extends Control {
         if (v === undefined) {
             v = this.field.defaultValue;
         }
-        if (v !== undefined) {            
+        if (v !== undefined) {
             this.element.checked = v === this.trueValue;
             this.value = this.getValueFromElement();
         }

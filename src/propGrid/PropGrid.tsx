@@ -10,15 +10,29 @@ export interface PropGridProps {
 
 @observer
 export class PropGrid extends React.Component<PropGridProps> {
+/*
     private propView: PropView;
     constructor(props:PropGridProps) {
         super(props);
-        this.propView = new PropView(this.props.rows, this.props.values);
+    }
+*/
+/*
+    componentWillMount() {
+        this.propView = new PropView(this.props.rows);
+        this.propView.setValues(this.props.values);
     }
 
+    componentWillReceiveProps(nextProps: Readonly<PropGridProps>, nextContext: any) {
+        this.propView = new PropView(this.props.rows);
+        this.propView.setValues(nextProps.values);
+        this.forceUpdate();
+    }
+*/
     render() {
-        return <div className="container bg-white">
-            {this.propView.render()}
+        let propView = new PropView(this.props.rows);
+        propView.setValues(this.props.values);
+        return <div className="container">
+            {propView.render()}
         </div>;
     }
 }

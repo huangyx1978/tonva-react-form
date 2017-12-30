@@ -39,18 +39,17 @@ export interface FormProps {
 }
 export declare class FormView {
     uid: string;
-    private initValues;
     private rows;
     private buttonsRow;
     props: FormProps;
     createControl?: CreateControl;
-    constructor(props: FormProps, initValues?: any);
+    constructor(props: FormProps);
     readonly hasError: boolean;
     readonly nothing: boolean;
     readValues(): any;
     clearErrors(): void;
     setError(fieldName: string, error: string): void;
-    setInitValues(): void;
+    setInitValues(initValues: any): void;
     private buildRows(props);
     private buildRow(formRow, formRowCreator);
     private createButtons(form, row);

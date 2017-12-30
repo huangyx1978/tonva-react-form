@@ -6,6 +6,7 @@ export interface PropBase {
 }
 export interface LabeledProp extends PropBase {
     label?: string;
+    bk?: string;
 }
 export interface StringProp extends LabeledProp {
     type: 'string';
@@ -31,9 +32,9 @@ export interface ComponentProp extends LabeledProp {
 export declare type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentProp | string;
 export declare class PropView {
     private props;
-    private values;
     private rows;
-    constructor(props: Prop[], values?: any);
+    constructor(props: Prop[]);
     private buildRows();
+    setValues(values: any): void;
     render(): any[];
 }

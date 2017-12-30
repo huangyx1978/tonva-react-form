@@ -6,7 +6,5 @@ export interface PropGridProps {
     values: any;
 }
 export declare class PropGrid extends React.Component<PropGridProps> {
-    private propView;
-    constructor(props: PropGridProps);
     render(): JSX.Element;
 }

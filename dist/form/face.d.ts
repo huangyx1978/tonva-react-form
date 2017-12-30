@@ -35,11 +35,13 @@ export declare type FromPicked = (item: any) => {
     id: number;
     caption?: string | JSX.Element;
 };
+export declare type ItemFromId = (id: number) => any;
 export declare type IdPick = (face: IdPickFace, params: any) => Promise<any>;
 export interface IdPickFace extends FieldFaceBase {
     type: 'pick-id';
     initCaption: string | JSX.Element;
     pick: IdPick;
-    fromPickedItem: FromPicked;
+    fromPicked: FromPicked;
+    itemFromId?: ItemFromId;
 }
 export declare type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | IdPickFace;

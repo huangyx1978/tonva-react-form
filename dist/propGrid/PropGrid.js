@@ -8,12 +8,28 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { PropView } from './propView';
 let PropGrid = class PropGrid extends React.Component {
-    constructor(props) {
-        super(props);
-        this.propView = new PropView(this.props.rows, this.props.values);
-    }
+    /*
+        private propView: PropView;
+        constructor(props:PropGridProps) {
+            super(props);
+        }
+    */
+    /*
+        componentWillMount() {
+            this.propView = new PropView(this.props.rows);
+            this.propView.setValues(this.props.values);
+        }
+    
+        componentWillReceiveProps(nextProps: Readonly<PropGridProps>, nextContext: any) {
+            this.propView = new PropView(this.props.rows);
+            this.propView.setValues(nextProps.values);
+            this.forceUpdate();
+        }
+    */
     render() {
-        return React.createElement("div", { className: "container bg-white" }, this.propView.render());
+        let propView = new PropView(this.props.rows);
+        propView.setValues(this.props.values);
+        return React.createElement("div", { className: "container" }, propView.render());
     }
 };
 PropGrid = __decorate([
