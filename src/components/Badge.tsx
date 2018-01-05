@@ -24,10 +24,11 @@ export class Badge extends React.Component<BadgeProps> {
             badgeAlign && 'va-badg-'+badgeAlign,
             badgeVertical && 'va-badg-'+badgeVertical,
         );
-        //"va-badge va-badge-success va-badge-lg va-badge-right va-badge-top"
+        let b;
+        if (badge) b = <b>{badge}</b>;
         return <div className={cn}>
             {children}
-            {badge && <b>{badge}</b>}
+            {b}
         </div>;
     }
 }
