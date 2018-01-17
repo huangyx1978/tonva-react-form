@@ -65,8 +65,8 @@ export class CharsControl extends Control {
         this.element.value = v;
         this.value = v;
     }
-    render() {
-        return React.createElement("div", { className: "col-sm-10" },
+    renderControl() {
+        return React.createElement(React.Fragment, null,
             this.renderInput(),
             this.renderError());
     }

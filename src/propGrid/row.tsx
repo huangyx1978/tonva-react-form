@@ -2,6 +2,7 @@ import * as React from 'react';
 import {observer} from 'mobx-react';
 import * as className from 'classnames';
 import {ListView} from '../listView';
+import {PropGridProps} from './PropGrid';
 import {LabeledProp, StringProp, NumberProp, ListProp, ComponentProp} from './propView';
 
 export abstract class PropRow {
@@ -37,12 +38,17 @@ export class PropGap extends PropRow {
     }
 }
 
+const valueAlignStart = ['d-flex', 'justify-content-start'];
+const valueAlignCenter = ['d-flex', 'justify-content-center'];
+const valueAlignEnd = ['d-flex', 'justify-content-end'];
 export abstract class LabeledPropRow extends PropRow {
+    protected gridProps: PropGridProps;
     protected prop: LabeledProp;
     protected content: any;
     //protected values: any;
-    constructor(prop: LabeledProp) {
+    constructor(gridProps:PropGridProps, prop: LabeledProp) {
         super();
+        this.gridProps = gridProps;
         this.prop = prop;
         //this.values = values;
     }
@@ -68,7 +74,14 @@ export abstract class LabeledPropRow extends PropRow {
     }
     protected renderProp():any {
         let {label} = this.prop;
-        return <div className={label===undefined? "col-sm-12":"col-sm-10"}>
+        let align;
+        switch (this.gridProps.alignValue) {
+            case 'left': align = valueAlignStart; break;
+            case 'center': align = valueAlignCenter; break;
+            case 'right': align = valueAlignEnd; break;
+        }
+        let cn = className(align, label===undefined? "col-sm-12":"col-sm-10", "-items-right");
+        return <div className={cn}>
             {this.renderPropBody()}
         </div>;
     }

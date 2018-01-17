@@ -63,10 +63,9 @@ export class PickIdControl extends Control {
         }
         return String(this.value);
     }
-    render() {
-        return React.createElement("div", { className: "col-sm-10" },
-            React.createElement("div", { className: "form-control-static " },
-                React.createElement("button", { className: "form-control btn btn-outline-info", type: "button", style: { textAlign: 'left', paddingLeft: '0.75rem' }, onClick: this.onClick }, this.buildCaption())));
+    renderControl() {
+        return React.createElement("div", { className: "form-control-static " },
+            React.createElement("button", { className: "form-control btn btn-outline-info", type: "button", style: { textAlign: 'left', paddingLeft: '0.75rem' }, onClick: this.onClick }, this.buildCaption()));
     }
 }
 __decorate([

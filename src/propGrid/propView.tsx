@@ -1,4 +1,5 @@
 import {ListViewProps} from '../listView';
+import {PropGridProps} from './PropGrid';
 import {PropRow, PropBorder, PropGap, PropContainer,
     StringPropRow, NumberPropRow, ListPropRow, ComponentPropRow} from './row';
 
@@ -44,11 +45,13 @@ export interface ComponentProp extends LabeledProp {
 export type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentProp | string;
 
 export class PropView {
+    private gridProps:PropGridProps
     private props: Prop[];
     //private values:any;
     private rows: PropRow[];
 
-    constructor(props:Prop[]) {
+    constructor(gridProps:PropGridProps, props:Prop[]) {
+        this.gridProps = gridProps;
         this.props = props;
         //this.values = values;
         this.buildRows();
@@ -67,10 +70,10 @@ export class PropView {
                 let row;
                 switch (prop.type) {
                     default: continue;
-                    case 'string': row = new StringPropRow(prop); break;
-                    case 'number': row = new NumberPropRow(prop); break;
-                    case 'list': row = new ListPropRow(prop); break;
-                    case 'component': row = new ComponentPropRow(prop); break;
+                    case 'string': row = new StringPropRow(this.gridProps, prop); break;
+                    case 'number': row = new NumberPropRow(this.gridProps, prop); break;
+                    case 'list': row = new ListPropRow(this.gridProps, prop); break;
+                    case 'component': row = new ComponentPropRow(this.gridProps, prop); break;
                 }
                 this.rows.push(row);
                 isGap = false;

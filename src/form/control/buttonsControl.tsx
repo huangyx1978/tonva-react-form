@@ -18,7 +18,7 @@ export class ButtonsControl extends ControlBase {
         let values = this.formView.readValues();
         onOther(values);
     }
-    render():JSX.Element {
+    renderControl():JSX.Element {
         let {nothing, hasError, props} = this.formView;
         let {submitButton, otherButton, onOther} = props;
         let btnOther;
@@ -27,17 +27,15 @@ export class ButtonsControl extends ControlBase {
                 {otherButton}
             </button>
         }
-        return <div className="col-sm-10">
-            <div className="d-flex justify-content-start">
-                <button
-                    className="btn btn-primary"
-                    type="submit" 
-                    //disabled={nothing || hasError}
-                    >
-                    {submitButton || '提交'}
-                </button>
-                {btnOther}
-            </div>
+        return <div className="d-flex justify-content-start">
+            <button
+                className="btn btn-primary"
+                type="submit" 
+                //disabled={nothing || hasError}
+                >
+                {submitButton || '提交'}
+            </button>
+            {btnOther}
         </div>;
     }
 }

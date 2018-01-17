@@ -33,6 +33,11 @@ ul.va-list>li>label>div {
     flex:1;
 }
 
+li.va-list-before {
+    color: green;
+    font-size: smaller;
+    padding: 8px 16px;
+}
 li.va-list-loading {
     color: green;
     font-size: smaller;

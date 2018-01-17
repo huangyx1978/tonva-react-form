@@ -4,10 +4,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+import * as React from 'react';
 import { observable, computed } from 'mobx';
 export class ControlBase {
     constructor(formView) {
         this.formView = formView;
+    }
+    render() {
+        return React.createElement("div", { className: "col-sm-10" }, this.renderControl());
     }
     get hasError() { return false; }
     get filled() { return false; }
@@ -79,6 +83,15 @@ export class Control extends ControlBase {
         catch (e) {
             this.error = e.message;
         }
+    }
+    render() {
+        let { notes } = this.face;
+        let n;
+        if (notes !== undefined)
+            n = React.createElement("small", { className: "text-muted" }, notes);
+        return React.createElement("div", { className: "col-sm-10" },
+            this.renderControl(),
+            n);
     }
 }
 __decorate([

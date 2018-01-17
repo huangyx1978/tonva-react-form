@@ -5,8 +5,8 @@ import '../css/va-lmr.css';
 
 export interface LMRProps {
     className?: string | string[];
-    left?: JSX.Element;
-    right?: JSX.Element;
+    left?: string|JSX.Element;
+    right?: string|JSX.Element;
 }
 
 @observer

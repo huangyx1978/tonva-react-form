@@ -13,5 +13,5 @@ export declare abstract class CharsControl extends Control {
     protected renderError(): JSX.Element;
     setError(fieldName: string, error: string): void;
     setInitValues(values: any): void;
-    render(): JSX.Element;
+    renderControl(): JSX.Element;
 }

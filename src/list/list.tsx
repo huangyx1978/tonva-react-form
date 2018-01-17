@@ -2,13 +2,30 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import {observable, computed} from 'mobx';
 import {observer} from 'mobx-react';
-import {StaticRow, ListProps} from './listProps';
 import {ListBase} from './base';
 import {Clickable} from './clickable';
 import {Static} from './static';
 import {Selectable} from './selectable';
 import "../css/va-list.css";
 import Row from 'reactstrap/lib/Row';
+
+export type StaticRow = string|JSX.Element|((items:any)=>string|JSX.Element);
+
+export interface ListProps {
+    className?: string|string[];
+    items: any[];
+    item: {
+        className?: string|string[];
+        render: (item:any, index:number) => JSX.Element;
+        onSelect?: (item:any, isSelected:boolean, anySelected:boolean)=>void;
+        onClick?: (item:any)=>void;
+    };
+    header?: StaticRow;
+    footer?: StaticRow;
+    before?: StaticRow;
+    loading?: StaticRow;
+    none?: StaticRow;
+}
 
 @observer
 export class List extends React.Component<ListProps> {
@@ -31,7 +48,8 @@ export class List extends React.Component<ListProps> {
         this.listBase.selectedItems = value;
     }
     render() {
-        let {className, header, footer, loading, none, item} = this.props;
+        let {className, header, footer, before, loading, none, item} = this.props;
+        if (before === undefined) before = 'before';
         if (loading === undefined) loading = 'loading';
         if (none === undefined) none = 'none';
         let items = this.listBase.items;
@@ -42,7 +60,9 @@ export class List extends React.Component<ListProps> {
             </li>;
         }
         let content:any;
-        if (items === undefined)
+        if (items === null)
+            content = staticRow(before, 'before');
+        else if (items === undefined)
             content = staticRow(loading, 'loading');
         else if (items.length === 0)
             content = staticRow(none, 'none');

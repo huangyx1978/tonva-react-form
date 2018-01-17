@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { PropGridProps } from './PropGrid';
 import { LabeledProp, StringProp, NumberProp, ListProp, ComponentProp } from './propView';
 export declare abstract class PropRow {
     setValues(values: any): void;
@@ -13,9 +14,10 @@ export declare class PropGap extends PropRow {
     render(key: string): JSX.Element;
 }
 export declare abstract class LabeledPropRow extends PropRow {
+    protected gridProps: PropGridProps;
     protected prop: LabeledProp;
     protected content: any;
-    constructor(prop: LabeledProp);
+    constructor(gridProps: PropGridProps, prop: LabeledProp);
     render(key: string): any;
     protected renderLabel(): any;
     protected renderProp(): any;

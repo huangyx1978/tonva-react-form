@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { PropGridProps } from './PropGrid';
 export interface Format {
 }
 export interface PropBase {
@@ -31,9 +32,10 @@ export interface ComponentProp extends LabeledProp {
 }
 export declare type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentProp | string;
 export declare class PropView {
+    private gridProps;
     private props;
     private rows;
-    constructor(props: Prop[]);
+    constructor(gridProps: PropGridProps, props: Prop[]);
     private buildRows();
     setValues(values: any): void;
     render(): any[];

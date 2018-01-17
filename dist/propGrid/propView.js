@@ -1,6 +1,7 @@
 import { PropBorder, PropGap, StringPropRow, NumberPropRow, ListPropRow, ComponentPropRow } from './row';
 export class PropView {
-    constructor(props) {
+    constructor(gridProps, props) {
+        this.gridProps = gridProps;
         this.props = props;
         //this.values = values;
         this.buildRows();
@@ -20,16 +21,16 @@ export class PropView {
                 switch (prop.type) {
                     default: continue;
                     case 'string':
-                        row = new StringPropRow(prop);
+                        row = new StringPropRow(this.gridProps, prop);
                         break;
                     case 'number':
-                        row = new NumberPropRow(prop);
+                        row = new NumberPropRow(this.gridProps, prop);
                         break;
                     case 'list':
-                        row = new ListPropRow(prop);
+                        row = new ListPropRow(this.gridProps, prop);
                         break;
                     case 'component':
-                        row = new ComponentPropRow(prop);
+                        row = new ComponentPropRow(this.gridProps, prop);
                         break;
                 }
                 this.rows.push(row);

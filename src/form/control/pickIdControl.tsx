@@ -53,16 +53,14 @@ export class PickIdControl extends Control {
         }
         return String(this.value);
     }
-    render():JSX.Element {
-        return <div className="col-sm-10">
-            <div className="form-control-static ">
-                <button className="form-control btn btn-outline-info"
-                    type="button"
-                    style={{textAlign:'left', paddingLeft:'0.75rem'}}
-                    onClick={this.onClick}>
-                    {this.buildCaption()}
-                </button>
-            </div>
+    renderControl():JSX.Element {
+        return <div className="form-control-static ">
+            <button className="form-control btn btn-outline-info"
+                type="button"
+                style={{textAlign:'left', paddingLeft:'0.75rem'}}
+                onClick={this.onClick}>
+                {this.buildCaption()}
+            </button>
         </div>;
     }
 }

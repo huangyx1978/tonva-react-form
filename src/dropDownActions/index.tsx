@@ -37,7 +37,7 @@ export class DropdownActions extends React.Component<DropdownActionsProps, Dropd
         if (isRight === undefined) isRight = true;
         let hasIcon = actions.some(v => v.icon!==undefined);
         return <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} size="sm">
-            <DropdownToggle caret={true} size="sm">
+            <DropdownToggle caret={true} size="sm" className="cursor-pointer">
                 <i className={classNames('fa', 'fa-'+(icon||'ellipsis-v'))} />
             </DropdownToggle>
             <DropdownMenu right={isRight}>

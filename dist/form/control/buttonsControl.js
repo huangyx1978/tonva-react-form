@@ -12,17 +12,16 @@ export class ButtonsControl extends ControlBase {
         let values = this.formView.readValues();
         onOther(values);
     }
-    render() {
+    renderControl() {
         let { nothing, hasError, props } = this.formView;
         let { submitButton, otherButton, onOther } = props;
         let btnOther;
         if (otherButton !== undefined) {
             btnOther = React.createElement("button", { className: "btn btn-outline-info ml-auto", onClick: this.otherClick }, otherButton);
         }
-        return React.createElement("div", { className: "col-sm-10" },
-            React.createElement("div", { className: "d-flex justify-content-start" },
-                React.createElement("button", { className: "btn btn-primary", type: "submit" }, submitButton || '提交'),
-                btnOther));
+        return React.createElement("div", { className: "d-flex justify-content-start" },
+            React.createElement("button", { className: "btn btn-primary", type: "submit" }, submitButton || '提交'),
+            btnOther);
     }
 }
 //# sourceMappingURL=buttonsControl.js.map

@@ -12,7 +12,7 @@ export interface TonvaFormProps extends FormProps {
 
 @observer 
 export class TonvaForm extends React.Component<TonvaFormProps, {}> {
-    private formView: FormView;
+    formView: FormView;
     constructor(props:TonvaFormProps) {
         super(props);
         this.formView = new FormView(this.props);

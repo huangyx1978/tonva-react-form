@@ -13,5 +13,5 @@ export declare class CheckControl extends Control {
     setInitValues(values: any): void;
     protected getValueFromElement(): any;
     private onChange();
-    render(): JSX.Element;
+    renderControl(): JSX.Element;
 }

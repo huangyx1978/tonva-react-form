@@ -6,7 +6,8 @@ import { Rule } from '../rule';
 export declare abstract class ControlBase {
     protected formView: FormView;
     constructor(formView: FormView);
-    abstract render(): JSX.Element;
+    render(): JSX.Element;
+    protected abstract renderControl(): JSX.Element;
     readonly hasError: boolean;
     readonly filled: boolean;
     readValues(values: any): any;
@@ -35,4 +36,5 @@ export declare abstract class Control extends ControlBase {
     setInitValues(values: any): void;
     protected getValueFromElement(): any;
     protected validate(): void;
+    render(): JSX.Element;
 }

@@ -30,7 +30,9 @@ let List = class List extends React.Component {
         this.listBase.selectedItems = value;
     }
     render() {
-        let { className, header, footer, loading, none, item } = this.props;
+        let { className, header, footer, before, loading, none, item } = this.props;
+        if (before === undefined)
+            before = 'before';
         if (loading === undefined)
             loading = 'loading';
         if (none === undefined)
@@ -42,7 +44,9 @@ let List = class List extends React.Component {
             return React.createElement("li", { className: "va-list-" + type }, typeof row === 'function' ? row(items) : row);
         }
         let content;
-        if (items === undefined)
+        if (items === null)
+            content = staticRow(before, 'before');
+        else if (items === undefined)
             content = staticRow(loading, 'loading');
         else if (items.length === 0)
             content = staticRow(none, 'none');

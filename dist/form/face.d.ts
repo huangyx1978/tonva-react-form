@@ -1,5 +1,6 @@
 /// <reference types="react" />
 export interface FieldFaceBase {
+    notes?: string;
 }
 export interface Placeholder {
     placeholder?: string;

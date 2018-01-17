@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import {List} from './list';
-import {ListProps} from './listProps';
+import {List, ListProps} from './list';
 
 export abstract class ListBase {
     protected list: List;

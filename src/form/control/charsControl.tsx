@@ -69,10 +69,10 @@ export abstract class CharsControl extends Control {
         this.element.value = v;
         this.value = v;
     }
-    render():JSX.Element {
-        return <div className="col-sm-10">
+    renderControl():JSX.Element {
+        return <React.Fragment>
             {this.renderInput()}
             {this.renderError()}
-        </div>;
+        </React.Fragment>;
     }
 }

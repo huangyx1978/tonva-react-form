@@ -12,7 +12,12 @@ export abstract class ControlBase {
     constructor(formView:FormView) {
         this.formView = formView;
     }
-    abstract render():JSX.Element;
+    render():JSX.Element {
+        return <div className="col-sm-10">
+            {this.renderControl()}
+        </div>;
+    }
+    protected abstract renderControl():JSX.Element;
     get hasError():boolean {return false;}
     get filled():boolean {return false;}
     readValues(values:any):any {}
@@ -90,5 +95,14 @@ export abstract class Control extends ControlBase {
         catch (e) {
             this.error = e.message;
         }
+    }
+    render():JSX.Element {
+        let {notes} = this.face;
+        let n;
+        if (notes !== undefined) n = <small className="text-muted">{notes}</small>;
+        return <div className="col-sm-10">
+            {this.renderControl()}
+            {n}
+        </div>;
     }
 }

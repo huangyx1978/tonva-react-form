@@ -45,9 +45,8 @@ export class CheckControl extends Control {
         this.value = this.getValueFromElement();
     }
 
-    render():JSX.Element {
-        return <div className="col-sm-10">
-            <div className="form-control-static">
+    renderControl():JSX.Element {
+        return <div className="form-control-static">
             <label className="form-control">
                 <label className="custom-control custom-checkbox mb-0">
                     <input type='checkbox'
@@ -58,8 +57,7 @@ export class CheckControl extends Control {
                     <span className="custom-control-indicator" />
                     <span className="custom-control-description">{this.face.label}</span>
                 </label>
-                </label>
-            </div>
+            </label>
         </div>;
     }
 }

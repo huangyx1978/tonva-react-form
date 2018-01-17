@@ -32,10 +32,14 @@ export class PropGap extends PropRow {
         return React.createElement("div", { key: '_g_' + key, className: cn, style: { backgroundColor: '#f0f0f0' } });
     }
 }
+const valueAlignStart = ['d-flex', 'justify-content-start'];
+const valueAlignCenter = ['d-flex', 'justify-content-center'];
+const valueAlignEnd = ['d-flex', 'justify-content-end'];
 export class LabeledPropRow extends PropRow {
     //protected values: any;
-    constructor(prop) {
+    constructor(gridProps, prop) {
         super();
+        this.gridProps = gridProps;
         this.prop = prop;
         //this.values = values;
     }
@@ -60,7 +64,20 @@ export class LabeledPropRow extends PropRow {
     }
     renderProp() {
         let { label } = this.prop;
-        return React.createElement("div", { className: label === undefined ? "col-sm-12" : "col-sm-10" }, this.renderPropBody());
+        let align;
+        switch (this.gridProps.alignValue) {
+            case 'left':
+                align = valueAlignStart;
+                break;
+            case 'center':
+                align = valueAlignCenter;
+                break;
+            case 'right':
+                align = valueAlignEnd;
+                break;
+        }
+        let cn = className(align, label === undefined ? "col-sm-12" : "col-sm-10", "-items-right");
+        return React.createElement("div", { className: cn }, this.renderPropBody());
     }
     renderPropBody() {
         return React.createElement("div", { className: "form-control-plaintext" }, this.renderPropContent());

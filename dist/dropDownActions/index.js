@@ -20,7 +20,7 @@ export class DropdownActions extends React.Component {
             isRight = true;
         let hasIcon = actions.some(v => v.icon !== undefined);
         return React.createElement(ButtonDropdown, { isOpen: this.state.dropdownOpen, toggle: this.toggle, size: "sm" },
-            React.createElement(DropdownToggle, { caret: true, size: "sm" },
+            React.createElement(DropdownToggle, { caret: true, size: "sm", className: "cursor-pointer" },
                 React.createElement("i", { className: classNames('fa', 'fa-' + (icon || 'ellipsis-v')) })),
             React.createElement(DropdownMenu, { right: isRight }, actions.map((v, index) => {
                 let { icon, caption, action } = v;

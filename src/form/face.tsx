@@ -1,4 +1,5 @@
 export interface FieldFaceBase {
+    notes?: string;
 }
 
 export interface Placeholder {

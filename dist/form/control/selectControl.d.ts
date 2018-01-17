@@ -8,5 +8,5 @@ export declare class SelectControl extends Control {
     protected face: SelectFace;
     protected element: HTMLSelectElement;
     protected getValueFromElement(): any;
-    render(): JSX.Element;
+    renderControl(): JSX.Element;
 }

@@ -28,7 +28,7 @@ export class SelectControl extends Control {
         }
         return v;
     }
-    render():JSX.Element {
+    renderControl():JSX.Element {
         let {list} = this.face;
         let def = this.face.default;
         let options: any[] = [];
@@ -43,12 +43,10 @@ export class SelectControl extends Control {
             }
             return <option key={index} value={v}>{t}</option>;
         }));
-        return <div className="col-sm-10">
-            <div className="form-control-static">
-                <select name={this.field.name} className="form-control" ref={this.ref}>
-                    {options}
-                </select>
-            </div>
+        return <div className="form-control-static">
+            <select name={this.field.name} className="form-control" ref={this.ref}>
+                {options}
+            </select>
         </div>;
     }
 }

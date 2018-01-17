@@ -23,7 +23,7 @@ export class SelectControl extends Control {
         }
         return v;
     }
-    render() {
+    renderControl() {
         let { list } = this.face;
         let def = this.face.default;
         let options = [];
@@ -39,9 +39,8 @@ export class SelectControl extends Control {
             }
             return React.createElement("option", { key: index, value: v }, t);
         }));
-        return React.createElement("div", { className: "col-sm-10" },
-            React.createElement("div", { className: "form-control-static" },
-                React.createElement("select", { name: this.field.name, className: "form-control", ref: this.ref }, options)));
+        return React.createElement("div", { className: "form-control-static" },
+            React.createElement("select", { name: this.field.name, className: "form-control", ref: this.ref }, options));
     }
 }
 //# sourceMappingURL=selectControl.js.map

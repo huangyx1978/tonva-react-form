@@ -1,2 +1,1 @@
-export {List} from './list';
-export {ListProps} from './listProps';
+export {List, ListProps} from './list';
