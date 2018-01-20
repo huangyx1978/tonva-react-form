@@ -20,6 +20,7 @@ export interface ListProps {
         onSelect?: (item:any, isSelected:boolean, anySelected:boolean)=>void;
         onClick?: (item:any)=>void;
     };
+    selectedItems?:any[];
     header?: StaticRow;
     footer?: StaticRow;
     before?: StaticRow;
@@ -68,6 +69,7 @@ export class List extends React.Component<ListProps> {
             content = staticRow(none, 'none');
         else 
             content = items.map((item, index) => this.listBase.render(item, index));
+        console.log('list: %s', header);
         return <ul className={classNames('va-list', className)}>
             {staticRow(header, 'header')}
             {content}

@@ -11,6 +11,7 @@ export interface ListProps {
         onSelect?: (item: any, isSelected: boolean, anySelected: boolean) => void;
         onClick?: (item: any) => void;
     };
+    selectedItems?: any[];
     header?: StaticRow;
     footer?: StaticRow;
     before?: StaticRow;

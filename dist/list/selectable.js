@@ -8,15 +8,33 @@ import * as React from 'react';
 import { computed } from 'mobx';
 import * as classNames from 'classnames';
 import { ListBase } from './base';
+import { uid } from '../uid';
 export class Selectable extends ListBase {
-    get items() { return this._items = this.list.props.items.map(v => { return { selected: false, item: v }; }); }
+    get items() {
+        let { items, selectedItems } = this.list.props;
+        if (items === undefined)
+            return;
+        return this._items = items.map(v => {
+            let selected = false;
+            if (selectedItems !== undefined) {
+                let f = selectedItems.find(si => si === v);
+                if (f !== undefined)
+                    selected = true;
+            }
+            return {
+                selected: selected,
+                item: v,
+                labelId: uid()
+            };
+        });
+    }
     onSelect(item, selected) {
         item.selected = selected;
         let anySelected = this._items.some(v => v.selected);
         this.list.props.item.onSelect(item.item, selected, anySelected);
     }
     get selectedItems() {
-        return this._items.filter(v => v.selected === true);
+        return this._items.filter(v => v.selected === true).map(v => v.item);
     }
     set selectedItems(value) {
         if (value === undefined)
@@ -44,17 +62,25 @@ export class Selectable extends ListBase {
     //m-0 w-100
     render(item, index) {
         let { className, render, onSelect } = this.list.props.item;
+        let { labelId, selected } = item;
         return React.createElement("li", { key: index, className: classNames(className) },
-            React.createElement("label", null,
-                React.createElement("label", { className: "custom-control custom-checkbox" },
-                    React.createElement("input", { type: 'checkbox', className: "custom-control-input", 
-                        //checked={selected}
-                        onChange: (e) => this.onSelect(item, e.target.checked) }),
-                    React.createElement("span", { className: "custom-control-indicator" })),
-                this.renderContent(item.item, index)));
+            React.createElement("div", { className: "d-flex align-items-center px-3" },
+                React.createElement("input", { className: "", type: "checkbox", value: "", id: labelId, defaultChecked: selected, onChange: (e) => this.onSelect(item, e.target.checked) }),
+                React.createElement("label", { className: "", style: { flex: 1 }, htmlFor: labelId }, this.renderContent(item.item, index))));
     }
 }
 __decorate([
     computed
 ], Selectable.prototype, "items", null);
+/*
+<label>
+<label className="custom-control custom-checkbox">
+    <input type='checkbox' className="custom-control-input"
+        //checked={selected}
+        onChange={(e)=>this.onSelect(item, e.target.checked)} />
+    <span className="custom-control-indicator" />
+</label>
+{this.renderContent(item.item, index)}
+</label>
+*/
 //# sourceMappingURL=selectable.js.map

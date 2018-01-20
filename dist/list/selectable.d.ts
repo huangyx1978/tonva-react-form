@@ -3,12 +3,14 @@ import { ListBase } from './base';
 export interface SelectableItem {
     selected: boolean;
     item: any;
+    labelId: string;
 }
 export declare class Selectable extends ListBase {
     private _items;
     readonly items: {
         selected: boolean;
         item: any;
+        labelId: string;
     }[];
     private onSelect(item, selected);
     selectedItems: any[];

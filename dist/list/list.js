@@ -52,6 +52,7 @@ let List = class List extends React.Component {
             content = staticRow(none, 'none');
         else
             content = items.map((item, index) => this.listBase.render(item, index));
+        console.log('list: %s', header);
         return React.createElement("ul", { className: classNames('va-list', className) },
             staticRow(header, 'header'),
             content,
