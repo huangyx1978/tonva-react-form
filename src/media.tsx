@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as className from 'classnames';
+import {observer} from 'mobx-react';
 
 export interface MediaProps {
     icon: string|JSX.Element;

@@ -20,6 +20,7 @@ export interface ListProps {
         onSelect?: (item:any, isSelected:boolean, anySelected:boolean)=>void;
         onClick?: (item:any)=>void;
     };
+    compare?:(item:any, selectItem)=>boolean;
     selectedItems?:any[];
     header?: StaticRow;
     footer?: StaticRow;
@@ -49,10 +50,11 @@ export class List extends React.Component<ListProps> {
         this.listBase.selectedItems = value;
     }
     render() {
-        let {className, header, footer, before, loading, none, item} = this.props;
+        let {className, header, footer, before, loading, none, item, selectedItems} = this.props;
         if (before === undefined) before = 'before';
         if (loading === undefined) loading = 'loading';
         if (none === undefined) none = 'none';
+        this.listBase.selectedItems = selectedItems;
         let items = this.listBase.items;
         function staticRow(row:StaticRow, type:string) {
             if (!row) return;

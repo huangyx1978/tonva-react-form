@@ -12,17 +12,31 @@ export interface SelectableItem {
 
 export class Selectable extends ListBase {
     private _items: SelectableItem[];
+    private input: HTMLInputElement;
     @computed get items() {
-        let {items, selectedItems} = this.list.props;
+        let {items, selectedItems, compare} = this.list.props;
         if (items === undefined) return;
+        if (selectedItems === undefined) {
+            return this._items = items.map(v => {
+                return {
+                    selected:false, 
+                    item:v, 
+                    labelId:uid()
+                };
+            });
+        }
+        if (compare === undefined) {
+            return this._items = items.map(v => {
+                return {
+                    selected:selectedItems.find(si => si === v) !== undefined, 
+                    item:v, 
+                    labelId:uid()
+                };
+            });
+        }
         return this._items = items.map(v => {
-            let selected = false;
-            if (selectedItems !== undefined) {
-                let f = selectedItems.find(si => si === v);
-                if (f !== undefined) selected = true;
-            }
             return {
-                selected:selected, 
+                selected:selectedItems.find(si => compare(v, si)) !== undefined, 
                 item:v, 
                 labelId:uid()
             };
@@ -39,6 +53,7 @@ export class Selectable extends ListBase {
     }
     set selectedItems(value: any[]) {
         if (value === undefined) return;
+        if (this._items === undefined) return;
         let sLen = this._items.length;
         let list = value.slice();
         for (let n=0; n<sLen; n++) {
@@ -64,9 +79,15 @@ export class Selectable extends ListBase {
         let {labelId, selected} = item;
         return <li key={index} className={classNames(className)}>
             <div className="d-flex align-items-center px-3">
-                <input className="" type="checkbox" value="" id={labelId}
+                <input ref={input=>{
+                        if (!input) return;
+                        this.input = input; input.checked = selected;
+                    }}
+                    className="" type="checkbox" value="" id={labelId}
                     defaultChecked={selected}
-                    onChange={(e)=>this.onSelect(item, e.target.checked)} />
+                    onChange={(e)=>{
+                        this.onSelect(item, e.target.checked)} 
+                    }/>
                 <label className="" style={{flex:1}} htmlFor={labelId}>
                     {this.renderContent(item.item, index)}
                 </label>

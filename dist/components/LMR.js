@@ -10,13 +10,16 @@ import * as classNames from 'classnames';
 import '../css/va-lmr.css';
 let LMR = class LMR extends React.Component {
     render() {
-        let { className, left, children, right } = this.props;
+        let { className, left, children, right, onClick } = this.props;
         let l, r;
         if (left !== undefined)
             l = React.createElement("header", null, left);
         if (right !== undefined)
             r = React.createElement("footer", null, right);
-        return React.createElement("div", { className: classNames('va-lmr', className) },
+        let cursor;
+        if (onClick !== undefined)
+            cursor = 'cursor-pointer';
+        return React.createElement("div", { className: classNames('va-lmr', className, cursor), onClick: onClick },
             l,
             React.createElement("div", null, children),
             r);

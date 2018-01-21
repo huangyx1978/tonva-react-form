@@ -7,6 +7,7 @@ export interface SelectableItem {
 }
 export declare class Selectable extends ListBase {
     private _items;
+    private input;
     readonly items: {
         selected: boolean;
         item: any;

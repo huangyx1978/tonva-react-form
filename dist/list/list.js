@@ -30,13 +30,14 @@ let List = class List extends React.Component {
         this.listBase.selectedItems = value;
     }
     render() {
-        let { className, header, footer, before, loading, none, item } = this.props;
+        let { className, header, footer, before, loading, none, item, selectedItems } = this.props;
         if (before === undefined)
             before = 'before';
         if (loading === undefined)
             loading = 'loading';
         if (none === undefined)
             none = 'none';
+        this.listBase.selectedItems = selectedItems;
         let items = this.listBase.items;
         function staticRow(row, type) {
             if (!row)
