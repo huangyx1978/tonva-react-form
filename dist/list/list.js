@@ -23,12 +23,15 @@ let List = class List extends React.Component {
         else
             this.listBase = new Static(this);
     }
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        this.listBase.updateProps(nextProps);
+    }
     get selectedItems() {
         return this.listBase.selectedItems;
     }
-    set selectedItems(value) {
-        this.listBase.selectedItems = value;
-    }
+    //set selectedItems(value: any[]) {
+    //    this.listBase.selectedItems = value;
+    //}
     render() {
         let { className, header, footer, before, loading, none, item, selectedItems } = this.props;
         if (before === undefined)
@@ -37,7 +40,7 @@ let List = class List extends React.Component {
             loading = 'loading';
         if (none === undefined)
             none = 'none';
-        this.listBase.selectedItems = selectedItems;
+        //this.listBase.selectedItems = selectedItems;
         let items = this.listBase.items;
         function staticRow(row, type) {
             if (!row)

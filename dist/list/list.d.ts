@@ -22,6 +22,7 @@ export interface ListProps {
 export declare class List extends React.Component<ListProps> {
     private listBase;
     constructor(props: ListProps);
-    selectedItems: any[];
+    componentWillUpdate(nextProps: ListProps, nextState: any, nextContext: any): void;
+    readonly selectedItems: any[];
     render(): JSX.Element;
 }

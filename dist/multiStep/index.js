@@ -17,7 +17,7 @@ export class MultiStep extends React.Component {
     setStep(stepName) {
         let step = this.props.steps[stepName];
         if (step === undefined)
-            throw new Error('Unknown step name: ' + stepName);
+            return; //throw new Error('Unknown step name: ' + stepName);
         if (this.topView !== undefined)
             this.stepViews.push(this.topView);
         let otherButton, onOther;

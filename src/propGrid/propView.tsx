@@ -14,6 +14,7 @@ export interface PropBase {
 export interface LabeledProp extends PropBase {
     label?: string;
     bk?: string;
+    vAlign?: 'top'|'bottom'|'center'|'stretch';
 }
 
 export interface StringProp extends LabeledProp {
@@ -39,7 +40,7 @@ export interface ListProp extends LabeledProp {
 
 export interface ComponentProp extends LabeledProp {
     type: 'component';
-    component: JSX.Element;
+    component: any; //JSX.Element;
 }
 
 export type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentProp | string;

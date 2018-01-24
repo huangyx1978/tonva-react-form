@@ -38,9 +38,9 @@ export class PropGap extends PropRow {
     }
 }
 
-const valueAlignStart = ['d-flex', 'justify-content-start'];
-const valueAlignCenter = ['d-flex', 'justify-content-center'];
-const valueAlignEnd = ['d-flex', 'justify-content-end'];
+const valueAlignStart = 'justify-content-start';
+const valueAlignCenter = 'justify-content-center';
+const valueAlignEnd = 'justify-content-end';
 export abstract class LabeledPropRow extends PropRow {
     protected gridProps: PropGridProps;
     protected prop: LabeledProp;
@@ -54,13 +54,12 @@ export abstract class LabeledPropRow extends PropRow {
     }
     render(key:string):any {
         let {onClick, bk} = this.prop;
-        let style;
-        if (onClick !== undefined) {
-            style = {cursor: 'pointer'};
-        }
-        if (bk === undefined) bk = 'bg-white';
-        let cn = className('row', bk);
-        return <div key={key} className={cn} onClick={onClick} style={style}>
+        let cn = className({
+            row: true,
+            "cursor-pointer": onClick !== undefined,
+            "bg-white": bk === undefined, 
+        });
+        return <div key={key} className={cn} onClick={onClick}>
             {this.renderLabel()}
             {this.renderProp()}
         </div>;
@@ -74,13 +73,20 @@ export abstract class LabeledPropRow extends PropRow {
     }
     protected renderProp():any {
         let {label} = this.prop;
-        let align;
+        let align, vAlign;
         switch (this.gridProps.alignValue) {
             case 'left': align = valueAlignStart; break;
             case 'center': align = valueAlignCenter; break;
             case 'right': align = valueAlignEnd; break;
         }
-        let cn = className(align, label===undefined? "col-sm-12":"col-sm-10", "-items-right");
+        switch (this.prop.vAlign) {
+            case 'top': vAlign = 'align-items-start'; break;
+            default:
+            case 'center': vAlign = 'align-items-center'; break;
+            case 'bottom': vAlign = 'align-items-end'; break;
+            case 'stretch': vAlign = 'align-items-stretch'; break;
+        }
+        let cn = className(align, vAlign, label===undefined? 'col-sm-12':'col-sm-10', 'd-flex');
         return <div className={cn}>
             {this.renderPropBody()}
         </div>;

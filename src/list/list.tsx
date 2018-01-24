@@ -43,18 +43,21 @@ export class List extends React.Component<ListProps> {
         else
             this.listBase = new Static(this);
     }
+    componentWillUpdate(nextProps:ListProps, nextState, nextContext) {
+        this.listBase.updateProps(nextProps);
+    }
     get selectedItems():any[] {
         return this.listBase.selectedItems;
     }
-    set selectedItems(value: any[]) {
-        this.listBase.selectedItems = value;
-    }
+    //set selectedItems(value: any[]) {
+    //    this.listBase.selectedItems = value;
+    //}
     render() {
         let {className, header, footer, before, loading, none, item, selectedItems} = this.props;
         if (before === undefined) before = 'before';
         if (loading === undefined) loading = 'loading';
         if (none === undefined) none = 'none';
-        this.listBase.selectedItems = selectedItems;
+        //this.listBase.selectedItems = selectedItems;
         let items = this.listBase.items;
         function staticRow(row:StaticRow, type:string) {
             if (!row) return;

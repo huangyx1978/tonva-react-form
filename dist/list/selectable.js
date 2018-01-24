@@ -10,10 +10,12 @@ import * as classNames from 'classnames';
 import { ListBase } from './base';
 import { uid } from '../uid';
 export class Selectable extends ListBase {
-    get items() {
+    buildItems() {
         let { items, selectedItems, compare } = this.list.props;
-        if (items === undefined)
-            return;
+        if (items === undefined) {
+            return this._items = undefined;
+        }
+        this._selectedItems = selectedItems;
         if (selectedItems === undefined) {
             return this._items = items.map(v => {
                 return {
@@ -40,6 +42,16 @@ export class Selectable extends ListBase {
             };
         });
     }
+    get items() {
+        if (this._items === undefined)
+            this.buildItems();
+        return this._items;
+    }
+    updateProps(nextProps) {
+        if (nextProps.selectedItems === this._selectedItems)
+            return;
+        this.buildItems();
+    }
     onSelect(item, selected) {
         item.selected = selected;
         let anySelected = this._items.some(v => v.selected);
@@ -48,20 +60,18 @@ export class Selectable extends ListBase {
     get selectedItems() {
         return this._items.filter(v => v.selected === true).map(v => v.item);
     }
-    set selectedItems(value) {
-        if (value === undefined)
-            return;
-        if (this._items === undefined)
-            return;
+    /*
+    set selectedItems(value: any[]) {
+        if (value === undefined) return;
+        if (this._items === undefined) return;
         let sLen = this._items.length;
         let list = value.slice();
-        for (let n = 0; n < sLen; n++) {
+        for (let n=0; n<sLen; n++) {
             let sItem = this._items[n];
             let len = list.length;
-            if (len === 0)
-                break;
+            if (len === 0) break;
             let item = sItem.item;
-            for (let i = 0; i < len; i++) {
+            for (let i=0; i<len; i++) {
                 let v = list[i];
                 if (item === v) {
                     sItem.selected = true;
@@ -69,9 +79,9 @@ export class Selectable extends ListBase {
                     break;
                 }
             }
-        }
-        ;
+        };
     }
+    */
     //w-100 mb-0 pl-3
     //m-0 w-100
     render(item, index) {

@@ -1,3 +1,4 @@
 import * as React from 'react';
-export const Muted = (props) => React.createElement("small", { className: "text-muted" }, props.children);
+import * as classNames from 'classnames';
+export const Muted = (props) => React.createElement("small", { className: classNames('text-muted', props.className), style: props.style }, props.children);
 //# sourceMappingURL=Muted.js.map

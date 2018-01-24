@@ -12,10 +12,14 @@ export interface SelectableItem {
 
 export class Selectable extends ListBase {
     private _items: SelectableItem[];
+    private _selectedItems: any[];
     private input: HTMLInputElement;
-    @computed get items() {
+    private buildItems() {
         let {items, selectedItems, compare} = this.list.props;
-        if (items === undefined) return;
+        if (items === undefined) {
+            return this._items = undefined;
+        }
+        this._selectedItems = selectedItems;
         if (selectedItems === undefined) {
             return this._items = items.map(v => {
                 return {
@@ -42,6 +46,14 @@ export class Selectable extends ListBase {
             };
         });
     }
+    @computed get items() {
+        if (this._items === undefined) this.buildItems();
+        return this._items;
+    }
+    updateProps(nextProps:any) {
+        if (nextProps.selectedItems === this._selectedItems) return;
+        this.buildItems();
+    }
     private onSelect(item:SelectableItem, selected:boolean) {
         item.selected = selected;
         let anySelected = this._items.some(v => v.selected);
@@ -51,6 +63,7 @@ export class Selectable extends ListBase {
     get selectedItems():any[] {
         return this._items.filter(v => v.selected === true).map(v => v.item);
     }
+    /*
     set selectedItems(value: any[]) {
         if (value === undefined) return;
         if (this._items === undefined) return;
@@ -71,7 +84,7 @@ export class Selectable extends ListBase {
             }
         };
     }
-
+    */
     //w-100 mb-0 pl-3
     //m-0 w-100
     render(item:SelectableItem, index:number):JSX.Element {

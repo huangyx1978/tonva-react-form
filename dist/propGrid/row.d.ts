@@ -39,7 +39,7 @@ export declare class ListPropRow extends LabeledPropRow {
 }
 export declare class ComponentPropRow extends LabeledPropRow {
     protected prop: ComponentProp;
-    protected renderPropBody(): JSX.Element;
+    protected renderPropBody(): any;
 }
 export declare class PropContainer extends PropRow {
     render(key: string): JSX.Element;

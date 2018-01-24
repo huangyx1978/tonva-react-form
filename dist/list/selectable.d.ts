@@ -7,13 +7,12 @@ export interface SelectableItem {
 }
 export declare class Selectable extends ListBase {
     private _items;
+    private _selectedItems;
     private input;
-    readonly items: {
-        selected: boolean;
-        item: any;
-        labelId: string;
-    }[];
+    private buildItems();
+    readonly items: SelectableItem[];
+    updateProps(nextProps: any): void;
     private onSelect(item, selected);
-    selectedItems: any[];
+    readonly selectedItems: any[];
     render(item: SelectableItem, index: number): JSX.Element;
 }
