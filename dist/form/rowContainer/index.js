@@ -14,6 +14,8 @@ export class RowContainer {
         }
     }
     isOk() {
+        if (this.control === undefined)
+            return true;
         return this.control.isOk();
     }
     contains(fieldName) {

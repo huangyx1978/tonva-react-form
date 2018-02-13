@@ -13,11 +13,12 @@ export class PickIdControl extends Control {
     @observable private caption: string|JSX.Element;
     constructor(formView:FormView, field:Field, face:Face) {
         super(formView, field, face);
+        this.changeId = this.changeId.bind(this);
         this.onClick = this.onClick.bind(this);
     }
     private async onClick() {
         let {pick, fromPicked} = this.face;
-        let item = await pick(this.face, this.formView.readValues());
+        let item = await pick(this.face, this.formView.props, this.formView.readValues());
         if (item === undefined) {
             this.value = undefined;
             return;
@@ -30,11 +31,23 @@ export class PickIdControl extends Control {
         this.value = id;
         this.caption = caption;
     }
+    changeId(id:number) {
+        this.value = id;
+    }
     async setInitValues(values: any) {
         let v = values[this.field.name];
         this.value = v;
     }
-    private buildCaption():string|JSX.Element {
+    private buildContent():string|JSX.Element {
+        let {tuid, input} = this.face;
+        return <input.component id={this.value} 
+            tuid={tuid}
+            input={input}
+            entitiesUI={this.formView.props.context} 
+            params={this.formView.readValues()}
+            changeId={this.changeId} />;
+
+        /*
         let {itemFromId, fromPicked, initCaption} = this.face;
         if (this.value === undefined) {
             return initCaption || '请选择Id';
@@ -52,15 +65,19 @@ export class PickIdControl extends Control {
             }
         }
         return String(this.value);
+        */
     }
     renderControl():JSX.Element {
         return <div className="form-control-static ">
-            <button className="form-control btn btn-outline-info"
-                type="button"
-                style={{textAlign:'left', paddingLeft:'0.75rem'}}
-                onClick={this.onClick}>
-                {this.buildCaption()}
-            </button>
+            {this.buildContent()}
         </div>;
     }
 }
+/*
+<button className="form-control btn btn-outline-info"
+type="button"
+style={{textAlign:'left', paddingLeft:'0.75rem'}}
+onClick={this.onClick}>
+{this.buildContent()}
+</button>
+*/

@@ -29,6 +29,7 @@ export interface IntField extends FieldBase, NumBase {
 
 export interface DecField extends FieldBase, NumBase {
     type: 'dec';
+    step?: number;
     defaultValue?: number;
 }
 

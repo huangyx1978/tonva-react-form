@@ -1,3 +1,5 @@
+import {FormProps} from './formView';
+
 export interface FieldFaceBase {
     notes?: string;
 }
@@ -39,9 +41,24 @@ export interface TextAreaFace extends FieldFaceBase, Placeholder {
 
 export type FromPicked = (item:any)=>{id:number, caption?:string|JSX.Element};
 export type ItemFromId = (id:number)=>any;
-export type IdPick = (face: IdPickFace, params:any) => Promise<any>;
+export type IdPick = (face: IdPickFace, formProps:FormProps, params:any) => Promise<any>;
+export interface TuidInputProps {
+    id: number;
+    tuid: string;
+    input: any;
+    entitiesUI: any;
+    params: any;
+    changeId: (id:number) => void;
+}
+export type TuidInputComponent = new (props:TuidInputProps) => React.Component<TuidInputProps>;
+
 export interface IdPickFace extends FieldFaceBase {
     type: 'pick-id';
+    tuid: string;
+    input: {
+        component: TuidInputComponent;
+    }
+    inputProps: any;
     initCaption: string|JSX.Element;
     pick: IdPick;
     fromPicked: FromPicked;

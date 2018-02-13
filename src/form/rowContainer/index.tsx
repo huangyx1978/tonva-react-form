@@ -21,6 +21,7 @@ export abstract class RowContainer {
     abstract render(key:string):JSX.Element;
     
     isOk():boolean {
+        if (this.control === undefined) return true;
         return this.control.isOk();
     }
 

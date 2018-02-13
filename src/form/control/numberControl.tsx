@@ -48,6 +48,7 @@ export class NumberControl extends CharsControl {
         super.setProps();
         _.assign(this.props, {
             type: 'number',
+            step: (this.field as DecField).step,
             onKeyPress: this.onKeyPress.bind(this),
         });
     }
