@@ -1,3 +1,4 @@
+import * as React from 'react';
 export class ListBase {
     //protected props: ListProps;
     constructor(list) {
@@ -10,6 +11,8 @@ export class ListBase {
     updateProps(nextProps) { }
     renderContent(item, index) {
         let { render } = this.list.props.item;
+        if (render === undefined)
+            return React.createElement("div", { className: "px-3 py-2" }, JSON.stringify(item));
         return render(item, index);
     }
 }

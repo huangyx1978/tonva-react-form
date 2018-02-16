@@ -48,7 +48,7 @@ export interface TuidInputProps {
     input: any;
     entitiesUI: any;
     params: any;
-    changeId: (id:number) => void;
+    onPicked: (value:any) => void;
 }
 export type TuidInputComponent = new (props:TuidInputProps) => React.Component<TuidInputProps>;
 

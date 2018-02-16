@@ -46,6 +46,7 @@ export interface FormProps {
     onOther?: (values:any) => void;
     createRow?: CreateRow;
     createControl?: CreateControl;
+    readOnly?: boolean;
 }
 
 export class FormView {
@@ -100,7 +101,9 @@ export class FormView {
             for (let row of formRows) {
                 this.rows.push(this.buildRow(row, createRow));
             }
-            this.buttonsRow = this.buildRow({createControl:this.createButtons.bind(this)}, undefined);
+            if (this.props.readOnly !== true) {
+                this.buttonsRow = this.buildRow({createControl:this.createButtons.bind(this)}, undefined);
+            }
         }
         else {
             this.rows.push(elementCreateRow(this, <div className="text-warning">TonvaForm need formRows defined</div>));

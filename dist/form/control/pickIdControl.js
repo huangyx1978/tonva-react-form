@@ -18,7 +18,7 @@ import { Control } from './control';
 export class PickIdControl extends Control {
     constructor(formView, field, face) {
         super(formView, field, face);
-        this.changeId = this.changeId.bind(this);
+        this.onPicked = this.onPicked.bind(this);
         this.onClick = this.onClick.bind(this);
     }
     onClick() {
@@ -38,8 +38,8 @@ export class PickIdControl extends Control {
             this.caption = caption;
         });
     }
-    changeId(id) {
-        this.value = id;
+    onPicked(value) {
+        this.value = value.id;
     }
     setInitValues(values) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -49,7 +49,7 @@ export class PickIdControl extends Control {
     }
     buildContent() {
         let { tuid, input } = this.face;
-        return React.createElement(input.component, { id: this.value, tuid: tuid, input: input, entitiesUI: this.formView.props.context, params: this.formView.readValues(), changeId: this.changeId });
+        return React.createElement(input.component, { id: this.value, tuid: tuid, input: input, entitiesUI: this.formView.props.context, params: this.formView.readValues(), onPicked: this.onPicked });
         /*
         let {itemFromId, fromPicked, initCaption} = this.face;
         if (this.value === undefined) {

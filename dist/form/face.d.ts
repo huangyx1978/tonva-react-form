@@ -45,7 +45,7 @@ export interface TuidInputProps {
     input: any;
     entitiesUI: any;
     params: any;
-    changeId: (id: number) => void;
+    onPicked: (value: any) => void;
 }
 export declare type TuidInputComponent = new (props: TuidInputProps) => React.Component<TuidInputProps>;
 export interface IdPickFace extends FieldFaceBase {

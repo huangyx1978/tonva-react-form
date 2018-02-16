@@ -60,7 +60,9 @@ export class FormView {
             for (let row of formRows) {
                 this.rows.push(this.buildRow(row, createRow));
             }
-            this.buttonsRow = this.buildRow({ createControl: this.createButtons.bind(this) }, undefined);
+            if (this.props.readOnly !== true) {
+                this.buttonsRow = this.buildRow({ createControl: this.createButtons.bind(this) }, undefined);
+            }
         }
         else {
             this.rows.push(elementCreateRow(this, React.createElement("div", { className: "text-warning" }, "TonvaForm need formRows defined")));

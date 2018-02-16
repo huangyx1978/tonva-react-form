@@ -6,7 +6,6 @@ import {FormView, FormProps} from './formView';
 
 export interface TonvaFormProps extends FormProps {
     className?: string;
-    //formView: FormView;
     initValues?: any;
 }
 
@@ -40,7 +39,7 @@ export class TonvaForm extends React.Component<TonvaFormProps, {}> {
         let {className, children, initValues} = this.props;
         //let formView = new FormView(this.props);
         //formView.setInitValues();
-        return <div className={classNames('container', 'mt-4', className)}>
+        return <div className={className}>
             {
                 children === undefined? 
                     this.formView.render() : 

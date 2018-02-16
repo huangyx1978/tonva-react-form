@@ -37,6 +37,7 @@ export interface FormProps {
     onOther?: (values: any) => void;
     createRow?: CreateRow;
     createControl?: CreateControl;
+    readOnly?: boolean;
 }
 export declare class FormView {
     uid: string;

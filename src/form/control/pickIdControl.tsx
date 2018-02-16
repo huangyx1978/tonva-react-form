@@ -13,7 +13,7 @@ export class PickIdControl extends Control {
     @observable private caption: string|JSX.Element;
     constructor(formView:FormView, field:Field, face:Face) {
         super(formView, field, face);
-        this.changeId = this.changeId.bind(this);
+        this.onPicked = this.onPicked.bind(this);
         this.onClick = this.onClick.bind(this);
     }
     private async onClick() {
@@ -31,8 +31,8 @@ export class PickIdControl extends Control {
         this.value = id;
         this.caption = caption;
     }
-    changeId(id:number) {
-        this.value = id;
+    onPicked(value: any) {
+        this.value = value.id;
     }
     async setInitValues(values: any) {
         let v = values[this.field.name];
@@ -45,7 +45,7 @@ export class PickIdControl extends Control {
             input={input}
             entitiesUI={this.formView.props.context} 
             params={this.formView.readValues()}
-            changeId={this.changeId} />;
+            onPicked={this.onPicked} />;
 
         /*
         let {itemFromId, fromPicked, initCaption} = this.face;

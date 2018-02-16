@@ -5,7 +5,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import * as React from 'react';
-import * as classNames from 'classnames';
 import { observer } from 'mobx-react';
 import { FormView } from './formView';
 let TonvaForm = class TonvaForm extends React.Component {
@@ -36,7 +35,7 @@ let TonvaForm = class TonvaForm extends React.Component {
         let { className, children, initValues } = this.props;
         //let formView = new FormView(this.props);
         //formView.setInitValues();
-        return React.createElement("div", { className: classNames('container', 'mt-4', className) }, children === undefined ?
+        return React.createElement("div", { className: className }, children === undefined ?
             this.formView.render() :
             React.createElement("form", { onSubmit: this.formView.onSubmit }, children));
     }
