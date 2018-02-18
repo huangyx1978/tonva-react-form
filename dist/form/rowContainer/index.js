@@ -29,6 +29,14 @@ export class RowContainer {
     }
     get hasError() { return this.control.hasError; }
     get filled() { return this.control.filled; }
+    clear() {
+        if (this.control !== undefined)
+            this.control.clear();
+    }
+    clearErrors() {
+        if (this.control !== undefined)
+            this.control.clearErrors();
+    }
     readValues(values) {
         if (this.control !== undefined)
             this.control.readValues(values);

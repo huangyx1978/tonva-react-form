@@ -28,6 +28,11 @@ export class CheckControl extends Control {
         });
     }
 
+    clearValue() {
+        this.element.checked = this.field.defaultValue === this.trueValue;
+        this.value = this.getValueFromElement();
+    }
+
     setInitValues(values: any) {
         let v = values[this.field.name];
         if (v === undefined) {

@@ -18,6 +18,10 @@ export class SearchBox extends React.Component {
     }
     ref(input) {
         this.input = input;
+        this.key = this.props.initKey || '';
+        if (input === null)
+            return;
+        input.value = this.key;
     }
     onSubmit(event) {
         event.preventDefault();
@@ -33,7 +37,7 @@ export class SearchBox extends React.Component {
         return React.createElement("form", { className: className, onSubmit: this.onSubmit },
             React.createElement("div", { className: "input-group input-group-sm" },
                 lab,
-                React.createElement("input", { onChange: this.onChange, type: "text", name: "key", className: "form-control", placeholder: placeholder, maxLength: maxLength }),
+                React.createElement("input", { onChange: this.onChange, type: "text", name: "key", ref: this.ref, className: "form-control", placeholder: placeholder, maxLength: maxLength }),
                 React.createElement("button", { className: "input-group-addon", type: "submit", disabled: this.state.disabled },
                     React.createElement("i", { className: 'fa fa-search' }),
                     React.createElement("i", { className: "fa" }),

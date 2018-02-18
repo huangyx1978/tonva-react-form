@@ -15,6 +15,8 @@ export class ControlBase {
     }
     get hasError() { return false; }
     get filled() { return false; }
+    clear() { }
+    clearErrors() { }
     readValues(values) { }
     setError(fieldName, error) { }
     setInitValues(values) { }
@@ -55,6 +57,9 @@ export class Control extends ControlBase {
         let ret = this.value !== undefined && this.value !== this.field.defaultValue;
         return ret;
     }
+    clearValue() { this.value = undefined; }
+    clear() { this.clearErrors(); this.clearValue(); }
+    clearErrors() { this.isOK = undefined; this.error = undefined; }
     readValues(values) {
         values[this.field.name] = this.value;
     }

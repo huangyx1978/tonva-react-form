@@ -16,6 +16,10 @@ export class CheckControl extends Control {
             onChange: this.onChange.bind(this),
         });
     }
+    clearValue() {
+        this.element.checked = this.field.defaultValue === this.trueValue;
+        this.value = this.getValueFromElement();
+    }
     setInitValues(values) {
         let v = values[this.field.name];
         if (v === undefined) {

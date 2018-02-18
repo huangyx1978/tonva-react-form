@@ -12,6 +12,8 @@ export declare abstract class RowContainer {
     contains(fieldName: string): boolean;
     readonly hasError: boolean;
     readonly filled: boolean;
+    clear(): void;
+    clearErrors(): void;
     readValues(values: any): any;
     setError(fieldName: string, error: string): void;
     setInitValues(values: any): void;

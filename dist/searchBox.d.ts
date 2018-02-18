@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface SearchBoxProps {
     className?: string;
     label?: string;
+    initKey?: string;
     placeholder?: string;
     buttonText?: string;
     maxLength?: number;

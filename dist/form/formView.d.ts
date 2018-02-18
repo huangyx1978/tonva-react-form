@@ -49,6 +49,7 @@ export declare class FormView {
     readonly hasError: boolean;
     readonly nothing: boolean;
     readValues(): any;
+    clear(): void;
     clearErrors(): void;
     setError(fieldName: string, error: string): void;
     setInitValues(initValues: any): void;

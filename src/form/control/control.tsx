@@ -20,6 +20,8 @@ export abstract class ControlBase {
     protected abstract renderControl():JSX.Element;
     get hasError():boolean {return false;}
     get filled():boolean {return false;}
+    clear() {}
+    clearErrors() {}
     readValues(values:any):any {}
     setError(fieldName:string, error:string) {}
     setInitValues(values: any) {}
@@ -67,6 +69,9 @@ export abstract class Control extends ControlBase {
         let ret = this.value !== undefined && this.value !== this.field.defaultValue;
         return ret;
     }
+    clearValue() { this.value = undefined; }
+    clear() { this.clearErrors(); this.clearValue(); }
+    clearErrors() { this.isOK = undefined; this.error = undefined; }
     readValues(values:any):any {
         values[this.field.name] = this.value;
     }

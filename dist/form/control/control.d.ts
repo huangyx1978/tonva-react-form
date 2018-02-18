@@ -10,6 +10,8 @@ export declare abstract class ControlBase {
     protected abstract renderControl(): JSX.Element;
     readonly hasError: boolean;
     readonly filled: boolean;
+    clear(): void;
+    clearErrors(): void;
     readValues(values: any): any;
     setError(fieldName: string, error: string): void;
     setInitValues(values: any): void;
@@ -31,6 +33,9 @@ export declare abstract class Control extends ControlBase {
     protected setProps(): any;
     readonly hasError: boolean;
     readonly filled: boolean;
+    clearValue(): void;
+    clear(): void;
+    clearErrors(): void;
     readValues(values: any): any;
     setError(fieldName: string, error: string): void;
     setInitValues(values: any): void;

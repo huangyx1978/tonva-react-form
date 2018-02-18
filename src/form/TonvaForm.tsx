@@ -4,6 +4,10 @@ import * as classNames from 'classnames';
 import {observer} from 'mobx-react';
 import {FormView, FormProps} from './formView';
 
+export function tonvaDebug() {
+    let a = 0;
+}
+
 export interface TonvaFormProps extends FormProps {
     className?: string;
     initValues?: any;

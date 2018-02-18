@@ -5,7 +5,8 @@ export class EasyDate extends React.Component {
         if (date === undefined)
             return null;
         let d = (typeof date === 'string') ? new Date(Date.parse(date)) : date;
-        return d.toLocaleDateString();
+        return d.toLocaleString();
+        //return d.toLocaleTimeString() + ' ' + d.toLocaleDateString();
     }
 }
 //# sourceMappingURL=index.js.map

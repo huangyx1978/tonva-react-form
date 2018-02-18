@@ -79,7 +79,16 @@ export class FormView {
         return values;
     }
 
+    clear() {
+        for (let row of this.rows) {
+            row.clear();
+        }
+    }
+
     clearErrors() {
+        for (let row of this.rows) {
+            row.clearErrors();
+        }
     }
 
     setError(fieldName:string, error:string) {

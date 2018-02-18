@@ -10,6 +10,7 @@ export declare class CheckControl extends Control {
     private falseValue;
     protected init(): void;
     setProps(): void;
+    clearValue(): void;
     setInitValues(values: any): void;
     protected getValueFromElement(): any;
     private onChange();

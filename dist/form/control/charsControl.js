@@ -54,6 +54,7 @@ export class CharsControl extends Control {
             return null;
         return React.createElement("div", { className: "invalid-feedback" }, this.error);
     }
+    clearValue() { super.clearValue(); this.element.value = ''; }
     setError(fieldName, error) {
         if (this.field.name === fieldName)
             this.error = error;

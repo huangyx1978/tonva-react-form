@@ -60,6 +60,7 @@ export abstract class CharsControl extends Control {
         if (this.error === undefined) return null;
         return <div className="invalid-feedback">{this.error}</div>
     }
+    clearValue() { super.clearValue(); this.element.value = ''; }
     setError(fieldName:string, error:string) {
         if (this.field.name === fieldName) this.error = error;
     }

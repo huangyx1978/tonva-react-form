@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface SearchBoxProps {
     className?: string;
     label?: string;
+    initKey?: string;
     placeholder?: string;
     buttonText?: string;
     maxLength?: number;
@@ -35,6 +36,9 @@ export class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
     }
     ref(input: HTMLInputElement) {
         this.input = input;
+        this.key = this.props.initKey || '';
+        if (input === null) return;
+        input.value = this.key;
     }
     onSubmit(event: React.FormEvent<any>) {
         event.preventDefault();
@@ -50,7 +54,8 @@ export class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
                 {lab}
                 <input onChange={this.onChange} 
                     type="text" 
-                    name="key" 
+                    name="key"
+                    ref={this.ref}
                     className="form-control" 
                     placeholder={placeholder}
                     maxLength={maxLength} />

@@ -34,6 +34,12 @@ export abstract class RowContainer {
     }
     get hasError():boolean {return this.control.hasError;}
     get filled():boolean {return this.control.filled;}
+    clear() {
+        if (this.control !== undefined) this.control.clear();
+    }
+    clearErrors() {
+        if (this.control !== undefined) this.control.clearErrors();
+    }
     readValues(values:any):any {
         if (this.control !== undefined) this.control.readValues(values);
     }

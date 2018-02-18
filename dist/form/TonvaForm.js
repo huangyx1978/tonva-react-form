@@ -7,6 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { FormView } from './formView';
+export function tonvaDebug() {
+    let a = 0;
+}
 let TonvaForm = class TonvaForm extends React.Component {
     constructor(props) {
         super(props);
