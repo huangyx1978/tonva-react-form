@@ -14,8 +14,8 @@ export abstract class CharsControl extends Control {
         super.init();
         if (this.field.required === true) {
             this.rules.push((v) => {
-                if (v===undefined) return TxtRequired;
-                return true;                
+                if (v===null || v===undefined || (v as string).trim().length === 0) return TxtRequired;
+                return true;
             });
         }
     }
@@ -39,11 +39,13 @@ export abstract class CharsControl extends Control {
     };
     protected parseValue(value?:string):any {return value;}
     private onBlur() {
+        //console.log('field %s onBlure', this.field.name);
         this.validate();
     }
     private onFocus() {
-        this.error = undefined;
-        this.formView.clearErrors();
+        this.clearErrors();
+        //this.error = undefined;
+        //this.formView.clearErrors();
     }
     protected className() {
         return classNames({
@@ -57,6 +59,7 @@ export abstract class CharsControl extends Control {
         return <input className={this.className()} {...this.props} />;
     }
     protected renderError():JSX.Element {
+        //if (this.field.name === 'name') console.log('charsControl renderControl');
         if (this.error === undefined) return null;
         return <div className="invalid-feedback">{this.error}</div>
     }

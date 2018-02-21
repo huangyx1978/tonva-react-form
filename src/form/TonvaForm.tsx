@@ -41,8 +41,6 @@ export class TonvaForm extends React.Component<TonvaFormProps, {}> {
 */
     render() {
         let {className, children, initValues} = this.props;
-        //let formView = new FormView(this.props);
-        //formView.setInitValues();
         return <div className={className}>
             {
                 children === undefined? 

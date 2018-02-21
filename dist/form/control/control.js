@@ -77,7 +77,10 @@ export class Control extends ControlBase {
                         isOk = true;
                     }
                     else if (err !== undefined) {
+                        //console.log('field %s onBlur v=%s rule=%s err=%s', 
+                        //    this.field.name, JSON.stringify(v), rule, err);
                         this.error = err;
+                        this.isOK = false;
                         return;
                     }
                 }

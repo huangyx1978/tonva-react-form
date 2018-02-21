@@ -36,8 +36,6 @@ let TonvaForm = class TonvaForm extends React.Component {
     */
     render() {
         let { className, children, initValues } = this.props;
-        //let formView = new FormView(this.props);
-        //formView.setInitValues();
         return React.createElement("div", { className: className }, children === undefined ?
             this.formView.render() :
             React.createElement("form", { onSubmit: this.formView.onSubmit }, children));

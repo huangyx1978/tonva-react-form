@@ -8,7 +8,7 @@ export class CharsControl extends Control {
         super.init();
         if (this.field.required === true) {
             this.rules.push((v) => {
-                if (v === undefined)
+                if (v === null || v === undefined || v.trim().length === 0)
                     return TxtRequired;
                 return true;
             });
@@ -32,11 +32,13 @@ export class CharsControl extends Control {
     ;
     parseValue(value) { return value; }
     onBlur() {
+        //console.log('field %s onBlure', this.field.name);
         this.validate();
     }
     onFocus() {
-        this.error = undefined;
-        this.formView.clearErrors();
+        this.clearErrors();
+        //this.error = undefined;
+        //this.formView.clearErrors();
     }
     className() {
         return classNames({
@@ -50,6 +52,7 @@ export class CharsControl extends Control {
         return React.createElement("input", Object.assign({ className: this.className() }, this.props));
     }
     renderError() {
+        //if (this.field.name === 'name') console.log('charsControl renderControl');
         if (this.error === undefined)
             return null;
         return React.createElement("div", { className: "invalid-feedback" }, this.error);
