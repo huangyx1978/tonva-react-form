@@ -32,6 +32,7 @@ export interface RadioFace extends FieldFaceBase {
 export interface TextAreaFace extends FieldFaceBase, Placeholder {
     type: 'textarea';
     maxLength?: number;
+    rows?: number;
 }
 export declare type FromPicked = (item: any) => {
     id: number;

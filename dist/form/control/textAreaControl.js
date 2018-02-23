@@ -4,8 +4,11 @@ import { CharsControl } from './charsControl';
 export class TextAreaControl extends CharsControl {
     setProps() {
         let p = super.setProps();
+        let { maxLength } = this.field;
+        let { rows } = this.face;
         _.assign(p, {
-            maxLength: this.field.maxLength,
+            maxLength: maxLength,
+            rows: rows,
         });
         return p;
     }
