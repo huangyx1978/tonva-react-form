@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Control, ControlBase } from './control';
 export class UnknownControl extends Control {
     renderControl() {
-        return React.createElement("div", { className: "form-control-static" },
+        return React.createElement("div", { className: "form-control-plaintext" },
             React.createElement("div", { className: "alert alert-primary", role: "alert" },
                 "don't know how to create control",
                 React.createElement("br", null),
@@ -20,7 +20,7 @@ export class EmptyControl extends ControlBase {
         this.element = element;
     }
     renderControl() {
-        return React.createElement("div", { className: "form-control-static" }, this.element);
+        return React.createElement("div", { className: "form-control-plaintext" }, this.element);
     }
 }
 //# sourceMappingURL=unknownControl.js.map

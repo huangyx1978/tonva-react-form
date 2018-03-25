@@ -4,7 +4,7 @@ import {FormView} from '../formView';
 
 export class UnknownControl extends Control {
     renderControl():JSX.Element {
-        return <div className="form-control-static">
+        return <div className="form-control-plaintext">
             <div className="alert alert-primary" role="alert">
             don't know how to create control<br/>
             field: {JSON.stringify(this.field)}<br/>
@@ -21,7 +21,7 @@ export class EmptyControl extends ControlBase {
         this.element = element;
     }
     renderControl():JSX.Element {
-        return <div className="form-control-static">
+        return <div className="form-control-plaintext">
             {this.element}
         </div>;
     }
