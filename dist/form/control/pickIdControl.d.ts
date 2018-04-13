@@ -10,6 +10,6 @@ export declare class PickIdControl extends Control {
     private onClick();
     onPicked(value: any): void;
     setInitValues(values: any): Promise<void>;
-    private buildContent();
+    private controlContent();
     renderControl(): JSX.Element;
 }

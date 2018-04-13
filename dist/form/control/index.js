@@ -10,6 +10,7 @@ import { UnknownControl, EmptyControl } from './unknownControl';
 import { StringControl } from './stringControl';
 import { NumberControl } from './numberControl';
 import { PickIdControl } from './pickIdControl';
+import { PickTuidControl } from './pickTuidControl';
 export const createControl = (form, row) => {
     let label = row.label;
     if (row.group !== undefined)
@@ -25,6 +26,7 @@ const controls = {
     "radiobox": RadioControl,
     "select": SelectControl,
     "pick-id": PickIdControl,
+    "pick-tuid": PickTuidControl,
     "textarea": TextAreaControl,
 };
 const defaultFaces = {

@@ -22,7 +22,7 @@ export class MultiStep extends React.Component {
             this.stepViews.push(this.topView);
         let otherButton, onOther;
         if (this.stepViews.length > 0) {
-            otherButton = React.createElement(ButtonConten, { prefix: "undo", text: "上一步" });
+            otherButton = React.createElement(ButtonConten, { prefix: "undo", text: "\u4E0A\u4E00\u6B65" });
             onOther = this.onPrev;
         }
         let { header, footer } = this.props;

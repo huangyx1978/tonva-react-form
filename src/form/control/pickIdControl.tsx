@@ -9,7 +9,6 @@ import {Control} from './control';
 
 export class PickIdControl extends Control {
     protected face: IdPickFace;
-    // protected value: number;
     @observable private caption: string|JSX.Element;
     constructor(formView:FormView, field:Field, face:Face) {
         super(formView, field, face);
@@ -38,16 +37,7 @@ export class PickIdControl extends Control {
         let v = values[this.field.name];
         this.value = v;
     }
-    private buildContent():string|JSX.Element {
-        let {tuid, input} = this.face;
-        return <input.component id={this.value} 
-            tuid={tuid}
-            input={input}
-            entitiesUI={this.formView.props.context} 
-            params={this.formView.readValues()}
-            onPicked={this.onPicked} />;
-
-        /*
+    private controlContent():string|JSX.Element {
         let {itemFromId, fromPicked, initCaption} = this.face;
         if (this.value === undefined) {
             return initCaption || '请选择Id';
@@ -65,19 +55,37 @@ export class PickIdControl extends Control {
             }
         }
         return String(this.value);
-        */
     }
+    /*
+    private buildContent():string|JSX.Element {
+        let {tuid, input} = this.face;
+        if (input === undefined) {
+            //return <div>no input on idpick</div>;
+            return <div onClick={this.onClick}>{this.controlContent()}</div>;
+        }
+        return <input.component id={this.value} 
+            tuid={tuid}
+            input={input}
+            entitiesUI={this.formView.props.context} 
+            params={this.formView.readValues()}
+            onPicked={this.onPicked} />;
+    }*/
     renderControl():JSX.Element {
+        let {tuid, input} = this.face;
+        if (input === undefined) {
+            //return <div>no input on idpick</div>;
+            return <div className="form-control-plaintext px-2 border text-primary rounded cursor-pointer"
+                onClick={this.onClick}>
+                {this.controlContent()}
+            </div>;
+        }
         return <div className="form-control-static ">
-            {this.buildContent()}
+            <input.component id={this.value} 
+                tuid={tuid}
+                input={input}
+                entitiesUI={this.formView.props.context} 
+                params={this.formView.readValues()}
+                onPicked={this.onPicked} />
         </div>;
     }
 }
-/*
-<button className="form-control btn btn-outline-info"
-type="button"
-style={{textAlign:'left', paddingLeft:'0.75rem'}}
-onClick={this.onClick}>
-{this.buildContent()}
-</button>
-*/

@@ -39,7 +39,7 @@ export declare type FromPicked = (item: any) => {
     caption?: string | JSX.Element;
 };
 export declare type ItemFromId = (id: number) => any;
-export declare type IdPick = (face: IdPickFace, formProps: FormProps, params: any) => Promise<any>;
+export declare type TuidPick = (face: TuidPickFace, formProps: FormProps, params: any) => Promise<any>;
 export interface TuidInputProps {
     id: number;
     tuid: string;
@@ -49,6 +49,19 @@ export interface TuidInputProps {
     onPicked: (value: any) => void;
 }
 export declare type TuidInputComponent = new (props: TuidInputProps) => React.Component<TuidInputProps>;
+export interface TuidPickFace extends FieldFaceBase {
+    type: 'pick-tuid';
+    tuid: string;
+    input: {
+        component: TuidInputComponent;
+    };
+    inputProps: any;
+    initCaption: string | JSX.Element;
+    pick: TuidPick;
+    fromPicked: FromPicked;
+    itemFromId?: ItemFromId;
+}
+export declare type IdPick = (face: IdPickFace, formProps: FormProps, params: any) => Promise<any>;
 export interface IdPickFace extends FieldFaceBase {
     type: 'pick-id';
     tuid: string;
@@ -61,4 +74,4 @@ export interface IdPickFace extends FieldFaceBase {
     fromPicked: FromPicked;
     itemFromId?: ItemFromId;
 }
-export declare type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | IdPickFace;
+export declare type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | TuidPickFace | IdPickFace;

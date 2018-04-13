@@ -47,11 +47,8 @@ export class PickIdControl extends Control {
             this.value = v;
         });
     }
-    buildContent() {
-        let { tuid, input } = this.face;
-        return React.createElement(input.component, { id: this.value, tuid: tuid, input: input, entitiesUI: this.formView.props.context, params: this.formView.readValues(), onPicked: this.onPicked });
-        /*
-        let {itemFromId, fromPicked, initCaption} = this.face;
+    controlContent() {
+        let { itemFromId, fromPicked, initCaption } = this.face;
         if (this.value === undefined) {
             return initCaption || '请选择Id';
         }
@@ -63,26 +60,38 @@ export class PickIdControl extends Control {
                 let item = itemFromId(this.value);
                 if (item) {
                     let ret = fromPicked(item);
-                    if (ret !== undefined) return ret.caption;
+                    if (ret !== undefined)
+                        return ret.caption;
                 }
             }
         }
         return String(this.value);
-        */
     }
+    /*
+    private buildContent():string|JSX.Element {
+        let {tuid, input} = this.face;
+        if (input === undefined) {
+            //return <div>no input on idpick</div>;
+            return <div onClick={this.onClick}>{this.controlContent()}</div>;
+        }
+        return <input.component id={this.value}
+            tuid={tuid}
+            input={input}
+            entitiesUI={this.formView.props.context}
+            params={this.formView.readValues()}
+            onPicked={this.onPicked} />;
+    }*/
     renderControl() {
-        return React.createElement("div", { className: "form-control-static " }, this.buildContent());
+        let { tuid, input } = this.face;
+        if (input === undefined) {
+            //return <div>no input on idpick</div>;
+            return React.createElement("div", { className: "form-control-plaintext px-2 border text-primary rounded cursor-pointer", onClick: this.onClick }, this.controlContent());
+        }
+        return React.createElement("div", { className: "form-control-static " },
+            React.createElement(input.component, { id: this.value, tuid: tuid, input: input, entitiesUI: this.formView.props.context, params: this.formView.readValues(), onPicked: this.onPicked }));
     }
 }
 __decorate([
     observable
 ], PickIdControl.prototype, "caption", void 0);
-/*
-<button className="form-control btn btn-outline-info"
-type="button"
-style={{textAlign:'left', paddingLeft:'0.75rem'}}
-onClick={this.onClick}>
-{this.buildContent()}
-</button>
-*/ 
 //# sourceMappingURL=pickIdControl.js.map

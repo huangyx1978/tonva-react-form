@@ -17,6 +17,7 @@ import {NumberControl} from './numberControl';
 
 import {FormView, FormRow, GroupRow, FieldRow, LabelFormRow} from '../formView';
 import { PickIdControl } from './pickIdControl';
+import { PickTuidControl } from './pickTuidControl';
 
 export type CreateControl = (form:FormView, row: FormRow) => ControlBase
 
@@ -36,6 +37,7 @@ const controls:{[type:string]: new (formView:FormView, field:Field, face:Face) =
     "radiobox": RadioControl,
     "select": SelectControl,
     "pick-id": PickIdControl,
+    "pick-tuid": PickTuidControl,
     "textarea": TextAreaControl,
 };
 const defaultFaces:{[type:string]: Face} = {
