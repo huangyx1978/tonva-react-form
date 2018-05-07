@@ -31,8 +31,7 @@ export class ButtonsControl extends ControlBase {
             <button
                 className="btn btn-primary"
                 type="submit" 
-                //disabled={nothing || hasError}
-                >
+                disabled={nothing || hasError}>
                 {submitButton || '提交'}
             </button>
             {btnOther}

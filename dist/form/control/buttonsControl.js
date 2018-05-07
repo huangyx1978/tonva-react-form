@@ -20,7 +20,7 @@ export class ButtonsControl extends ControlBase {
             btnOther = React.createElement("button", { className: "btn btn-outline-info ml-auto", onClick: this.otherClick }, otherButton);
         }
         return React.createElement("div", { className: "d-flex justify-content-start" },
-            React.createElement("button", { className: "btn btn-primary", type: "submit" }, submitButton || '提交'),
+            React.createElement("button", { className: "btn btn-primary", type: "submit", disabled: nothing || hasError }, submitButton || '提交'),
             btnOther);
     }
 }
