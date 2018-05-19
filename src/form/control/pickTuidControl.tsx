@@ -13,9 +13,10 @@ export class PickTuidControl extends Control {
     @observable private caption: string|JSX.Element;
     constructor(formView:FormView, field:Field, face:Face) {
         super(formView, field, face);
-        this.onPicked = this.onPicked.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.onIdChanged = this.onIdChanged.bind(this);
+        //this.onClick = this.onClick.bind(this);
     }
+    /*
     private async onClick() {
         let {pick, fromPicked} = this.face;
         let item = await pick(this.face, this.formView.props, this.formView.readValues());
@@ -30,22 +31,24 @@ export class PickTuidControl extends Control {
         let {id, caption} = fromPicked(item);
         this.value = id;
         this.caption = caption;
-    }
-    onPicked(value: any) {
-        this.value = value.id;
+    }*/
+    onIdChanged(id: any) {
+        this.value = id.id;
     }
     async setInitValues(values: any) {
         let v = values[this.field.name];
         this.value = v;
     }
-    private buildContent():string|JSX.Element {
-        let {tuid, input} = this.face;
-        return <input.component id={this.value} 
-            tuid={tuid}
-            input={input}
-            entitiesUI={this.formView.props.context} 
-            params={this.formView.readValues()}
-            onPicked={this.onPicked} />;
+    private buildContent():JSX.Element {
+        //let {tuid, input} = this.face;
+        return <this.face.input.component 
+            {...this.face}
+            id={this.value}
+            //ui={this.face.ui}
+            //input={input}
+            //entitiesUI={this.formView.props.context} 
+            onFormValues={()=>this.formView.readValues()}
+            onIdChanged={this.onIdChanged} />;
     }
     renderControl():JSX.Element {
         return <div className="form-control-static ">

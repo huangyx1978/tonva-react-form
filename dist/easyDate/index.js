@@ -9,14 +9,14 @@ export class EasyDate extends React.Component {
         let tick = now.getTime() - d.getTime();
         let nDate = now.getDate();
         let _date = d.getDate(), hour = d.getHours(), minute = d.getMinutes(), month = d.getMonth();
-        let hm = hour + ':' + minute;
+        let hm = hour + ((minute < 10 ? ':0' : ':') + minute);
         if (tick < 24 * 3600 * 1000) {
             return _date !== nDate ? '昨天 ' + hm : hm;
         }
         if (tick < 365 * 24 * 3600 * 1000) {
-            return (month + 1) + '月' + (_date + 1) + '日 ' + hm;
+            return (month + 1) + '月' + (_date + 1) + '日 ';
         }
-        return d.getFullYear() + '年' + (month + 1) + '月' + (_date + 1) + '日 ' + hm;
+        return d.getFullYear() + '年' + (month + 1) + '月' + (_date + 1) + '日';
     }
 }
 //# sourceMappingURL=index.js.map

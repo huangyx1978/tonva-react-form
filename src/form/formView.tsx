@@ -38,7 +38,7 @@ export interface SubmitResult {
 
 export interface FormProps {
     formRows: FormRow[];
-    context?: any;              // form context，比如，可以是EntitiesUI
+    //context?: any;              // form context，比如，可以是EntitiesUI
     rules?: Rule | Rule[];
     onSubmit: (values:any) => Promise<SubmitResult|undefined>;
     submitButton?: string|JSX.Element;

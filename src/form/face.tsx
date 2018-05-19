@@ -40,32 +40,37 @@ export interface TextAreaFace extends FieldFaceBase, Placeholder {
     rows?: number;
 }
 
-export type FromPicked = (item:any)=>{id:number, caption?:string|JSX.Element};
-export type ItemFromId = (id:number)=>any;
-export type TuidPick = (face: TuidPickFace, formProps:FormProps, params:any) => Promise<any>;
+//export type TuidPick = (face: TuidPickFace, formProps:FormProps, params:any) => Promise<any>;
 export interface TuidInputProps {
     id: number;
-    tuid: string;
-    input: any;
-    entitiesUI: any;
-    params: any;
-    onPicked: (value:any) => void;
+    //readOnly?: boolean;
+    ui: any;      // TuidUI in Tonva-react-usql
+    //input: any;
+    //entitiesUI: any;
+    //params: any;
+    onFormValues?: () => any;
+    //onPicked: (value:any) => void;
+    onIdChanged?: (id:any) => void; // if no onIdChanged, then readOnly
 }
 export type TuidInputComponent = new (props:TuidInputProps) => React.Component<TuidInputProps>;
 
 export interface TuidPickFace extends FieldFaceBase {
     type: 'pick-tuid';
-    tuid: string;
+    //input: TuidInputComponent;
+    ui: any;
+    //tuid: string;
     input: {
         component: TuidInputComponent;
     }
-    inputProps: any;
-    initCaption: string|JSX.Element;
-    pick: TuidPick;
-    fromPicked: FromPicked;
-    itemFromId?: ItemFromId;
+    //inputProps: any;
+    //initCaption: string|JSX.Element;
+    //pick: TuidPick;
+    //fromPicked: FromPicked;
+    //itemFromId?: ItemFromId;
 }
 
+export type FromPicked = (item:any)=>{id:number, caption?:string|JSX.Element};
+export type ItemFromId = (id:number)=>any;
 export type IdPick = (face: IdPickFace, formProps:FormProps, params:any) => Promise<any>;
 export interface IdPickFace extends FieldFaceBase {
     type: 'pick-id';
@@ -78,6 +83,11 @@ export interface IdPickFace extends FieldFaceBase {
     pick: IdPick;
     fromPicked: FromPicked;
     itemFromId?: ItemFromId;
+}
+
+export interface IdFace extends FieldFaceBase {
+    type: 'id';
+
 }
 
 export type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | TuidPickFace | IdPickFace;

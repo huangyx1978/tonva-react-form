@@ -18,28 +18,27 @@ import { Control } from './control';
 export class PickTuidControl extends Control {
     constructor(formView, field, face) {
         super(formView, field, face);
-        this.onPicked = this.onPicked.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.onIdChanged = this.onIdChanged.bind(this);
+        //this.onClick = this.onClick.bind(this);
     }
-    onClick() {
-        return __awaiter(this, void 0, void 0, function* () {
-            let { pick, fromPicked } = this.face;
-            let item = yield pick(this.face, this.formView.props, this.formView.readValues());
-            if (item === undefined) {
-                this.value = undefined;
-                return;
-            }
-            if (fromPicked === undefined) {
-                this.value = item.id;
-                return;
-            }
-            let { id, caption } = fromPicked(item);
-            this.value = id;
-            this.caption = caption;
-        });
-    }
-    onPicked(value) {
-        this.value = value.id;
+    /*
+    private async onClick() {
+        let {pick, fromPicked} = this.face;
+        let item = await pick(this.face, this.formView.props, this.formView.readValues());
+        if (item === undefined) {
+            this.value = undefined;
+            return;
+        }
+        if (fromPicked === undefined) {
+            this.value = item.id;
+            return;
+        }
+        let {id, caption} = fromPicked(item);
+        this.value = id;
+        this.caption = caption;
+    }*/
+    onIdChanged(id) {
+        this.value = id.id;
     }
     setInitValues(values) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -48,8 +47,12 @@ export class PickTuidControl extends Control {
         });
     }
     buildContent() {
-        let { tuid, input } = this.face;
-        return React.createElement(input.component, { id: this.value, tuid: tuid, input: input, entitiesUI: this.formView.props.context, params: this.formView.readValues(), onPicked: this.onPicked });
+        //let {tuid, input} = this.face;
+        return React.createElement(this.face.input.component, Object.assign({}, this.face, { id: this.value, 
+            //ui={this.face.ui}
+            //input={input}
+            //entitiesUI={this.formView.props.context} 
+            onFormValues: () => this.formView.readValues(), onIdChanged: this.onIdChanged }));
     }
     renderControl() {
         return React.createElement("div", { className: "form-control-static " }, this.buildContent());

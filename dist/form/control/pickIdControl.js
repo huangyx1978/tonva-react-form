@@ -88,7 +88,7 @@ export class PickIdControl extends Control {
             return React.createElement("div", { className: "form-control-plaintext px-2 border text-primary rounded cursor-pointer", onClick: this.onClick }, this.controlContent());
         }
         return React.createElement("div", { className: "form-control-static " },
-            React.createElement(input.component, { id: this.value, tuid: tuid, input: input, entitiesUI: this.formView.props.context, params: this.formView.readValues(), onPicked: this.onPicked }));
+            React.createElement(input.component, { id: this.value, ui: tuid }));
     }
 }
 __decorate([

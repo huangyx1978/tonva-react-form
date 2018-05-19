@@ -29,7 +29,6 @@ export interface SubmitResult {
 }
 export interface FormProps {
     formRows: FormRow[];
-    context?: any;
     rules?: Rule | Rule[];
     onSubmit: (values: any) => Promise<SubmitResult | undefined>;
     submitButton?: string | JSX.Element;

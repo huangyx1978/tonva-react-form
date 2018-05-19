@@ -7,8 +7,7 @@ export declare class PickTuidControl extends Control {
     protected face: TuidPickFace;
     private caption;
     constructor(formView: FormView, field: Field, face: Face);
-    private onClick();
-    onPicked(value: any): void;
+    onIdChanged(id: any): void;
     setInitValues(values: any): Promise<void>;
     private buildContent();
     renderControl(): JSX.Element;

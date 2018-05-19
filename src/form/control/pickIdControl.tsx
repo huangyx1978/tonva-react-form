@@ -81,11 +81,12 @@ export class PickIdControl extends Control {
         }
         return <div className="form-control-static ">
             <input.component id={this.value} 
-                tuid={tuid}
-                input={input}
-                entitiesUI={this.formView.props.context} 
-                params={this.formView.readValues()}
-                onPicked={this.onPicked} />
+                ui={tuid}
+                //input={input}
+                //entitiesUI={this.formView.props.context} 
+                //params={this.formView.readValues()}
+                //onPicked={this.onPicked}
+                />
         </div>;
     }
 }
