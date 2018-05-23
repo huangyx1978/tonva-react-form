@@ -9,7 +9,7 @@ export declare class PickIdControl extends Control {
     constructor(formView: FormView, field: Field, face: Face);
     private onClick();
     onPicked(value: any): void;
-    setInitValues(values: any): Promise<void>;
+    setInitValues(values: any): void;
     private controlContent();
     renderControl(): JSX.Element;
 }

@@ -42,10 +42,8 @@ export class PickIdControl extends Control {
         this.value = value.id;
     }
     setInitValues(values) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let v = values[this.field.name];
-            this.value = v;
-        });
+        let v = values[this.field.name];
+        this.value = v;
     }
     controlContent() {
         let { itemFromId, fromPicked, initCaption } = this.face;

@@ -9,6 +9,7 @@ export interface TonvaFormProps extends FormProps {
 export declare class TonvaForm extends React.Component<TonvaFormProps, {}> {
     formView: FormView;
     constructor(props: TonvaFormProps);
-    componentDidMount(): void;
+    componentWillMount(): void;
+    debug(): void;
     render(): JSX.Element;
 }

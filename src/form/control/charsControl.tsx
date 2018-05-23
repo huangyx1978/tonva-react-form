@@ -56,7 +56,7 @@ export abstract class CharsControl extends Control {
         });
     }
     protected renderInput():JSX.Element {
-        return <input className={this.className()} {...this.props} />;
+        return <input className={this.className()} {...this.props} value={this.value} />;
     }
     protected renderError():JSX.Element {
         //if (this.field.name === 'name') console.log('charsControl renderControl');
@@ -70,7 +70,7 @@ export abstract class CharsControl extends Control {
     setInitValues(values: any) {
         let v = values[this.field.name];
         if (v === undefined) return;
-        this.element.value = v;
+        //this.element.value = v;
         this.value = v;
     }
     renderControl():JSX.Element {

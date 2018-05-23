@@ -49,7 +49,7 @@ export class CharsControl extends Control {
         });
     }
     renderInput() {
-        return React.createElement("input", Object.assign({ className: this.className() }, this.props));
+        return React.createElement("input", Object.assign({ className: this.className() }, this.props, { value: this.value }));
     }
     renderError() {
         //if (this.field.name === 'name') console.log('charsControl renderControl');
@@ -66,7 +66,7 @@ export class CharsControl extends Control {
         let v = values[this.field.name];
         if (v === undefined)
             return;
-        this.element.value = v;
+        //this.element.value = v;
         this.value = v;
     }
     renderControl() {

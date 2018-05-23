@@ -26,8 +26,8 @@ export class CheckControl extends Control {
             v = this.field.defaultValue;
         }
         if (v !== undefined) {
-            this.element.checked = v === this.trueValue;
-            this.value = this.getValueFromElement();
+            //this.element.checked = v === this.trueValue;
+            //this.value = this.getValueFromElement();
         }
     }
     getValueFromElement() { return this.element.checked ? this.trueValue : this.falseValue; }

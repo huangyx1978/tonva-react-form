@@ -20,25 +20,12 @@ export class TonvaForm extends React.Component<TonvaFormProps, {}> {
         super(props);
         this.formView = new FormView(this.props);
     }
-    componentDidMount() {
+    componentWillMount() {
         this.formView.setInitValues(this.props.initValues);
     }
-/*
-    static childContextTypes = {
-        formView: PropTypes.object
+    debug() {
+        let s = null;
     }
-    getChildContext(): FormView {
-        return this.formView;
-    }
-*/    
-/*
-    componentDidMount() {
-    }*/
-/*    
-    componentWillUpdate() {
-        this.formView.setInitValues();
-    }
-*/
     render() {
         let {className, children, initValues} = this.props;
         return <div className={className}>

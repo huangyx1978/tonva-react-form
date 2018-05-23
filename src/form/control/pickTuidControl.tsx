@@ -35,7 +35,7 @@ export class PickTuidControl extends Control {
     onIdChanged(id: any) {
         this.value = id.id;
     }
-    async setInitValues(values: any) {
+    setInitValues(values: any) {
         let v = values[this.field.name];
         this.value = v;
     }

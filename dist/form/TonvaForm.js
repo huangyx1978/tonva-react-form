@@ -15,25 +15,12 @@ let TonvaForm = class TonvaForm extends React.Component {
         super(props);
         this.formView = new FormView(this.props);
     }
-    componentDidMount() {
+    componentWillMount() {
         this.formView.setInitValues(this.props.initValues);
     }
-    /*
-        static childContextTypes = {
-            formView: PropTypes.object
-        }
-        getChildContext(): FormView {
-            return this.formView;
-        }
-    */
-    /*
-        componentDidMount() {
-        }*/
-    /*
-        componentWillUpdate() {
-            this.formView.setInitValues();
-        }
-    */
+    debug() {
+        let s = null;
+    }
     render() {
         let { className, children, initValues } = this.props;
         return React.createElement("div", { className: className }, children === undefined ?
