@@ -12,7 +12,7 @@ export abstract class PropRow {
 
 export class PropBorder extends PropRow {
     render(key:string): JSX.Element {
-        return <div key={'_b_' + key} className="row">
+        return <div key={'_b_' + key} className="">
             <div className="col-sm-12">
                 <div style={{borderTop: '1px solid #f0f0f0'}} />
             </div>
@@ -33,7 +33,7 @@ export class PropGap extends PropRow {
             case '=': w = 'py-1'; break;
             case '-': w = 'pb-1'; break;
         }
-        let cn = className('row', w);
+        let cn = className(w);
         return <div key={'_g_' + key} className={cn} style={{backgroundColor: '#f0f0f0'}} />;
     }
 }
@@ -55,7 +55,6 @@ export abstract class LabeledPropRow extends PropRow {
     render(key:string):any {
         let {onClick, bk} = this.prop;
         let cn = className({
-            row: true,
             "cursor-pointer": onClick !== undefined,
             "bg-white": bk === undefined, 
         });
@@ -153,7 +152,7 @@ export class ComponentPropRow extends LabeledPropRow {
 
 export class PropContainer extends PropRow {
     render(key:string): JSX.Element {
-        return <div className="row bg-white">
+        return <div className="bg-white">
             <label className="col-sm-2 col-form-label">
                 AAABBBCCC
             </label>

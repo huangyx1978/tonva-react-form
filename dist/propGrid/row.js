@@ -5,7 +5,7 @@ export class PropRow {
 }
 export class PropBorder extends PropRow {
     render(key) {
-        return React.createElement("div", { key: '_b_' + key, className: "row" },
+        return React.createElement("div", { key: '_b_' + key, className: "" },
             React.createElement("div", { className: "col-sm-12" },
                 React.createElement("div", { style: { borderTop: '1px solid #f0f0f0' } })));
     }
@@ -28,7 +28,7 @@ export class PropGap extends PropRow {
                 w = 'pb-1';
                 break;
         }
-        let cn = className('row', w);
+        let cn = className(w);
         return React.createElement("div", { key: '_g_' + key, className: cn, style: { backgroundColor: '#f0f0f0' } });
     }
 }
@@ -46,7 +46,6 @@ export class LabeledPropRow extends PropRow {
     render(key) {
         let { onClick, bk } = this.prop;
         let cn = className({
-            row: true,
             "cursor-pointer": onClick !== undefined,
             "bg-white": bk === undefined,
         });
@@ -146,7 +145,7 @@ export class ComponentPropRow extends LabeledPropRow {
 }
 export class PropContainer extends PropRow {
     render(key) {
-        return React.createElement("div", { className: "row bg-white" },
+        return React.createElement("div", { className: "bg-white" },
             React.createElement("label", { className: "col-sm-2 col-form-label" }, "AAABBBCCC"),
             React.createElement("div", { className: "col-sm-10" },
                 React.createElement("div", { className: "form-control-plaintext" }, "dsfasfa sdf asdf a")));

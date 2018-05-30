@@ -32,7 +32,7 @@ export class PropGrid extends React.Component<PropGridProps> {
     render() {
         let propView = new PropView(this.props, this.props.rows);
         propView.setValues(this.props.values);
-        return <div className="container">
+        return <div>
             {propView.render()}
         </div>;
     }
