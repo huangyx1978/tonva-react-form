@@ -8,9 +8,11 @@ export class UnknownControl extends Control {
                 React.createElement("br", null),
                 "field: ",
                 JSON.stringify(this.field),
+                " must be object ",
                 React.createElement("br", null),
                 "face: ",
                 JSON.stringify(this.face),
+                " must be object ",
                 React.createElement("br", null)));
     }
 }

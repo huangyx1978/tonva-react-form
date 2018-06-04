@@ -49,11 +49,28 @@ const defaultFaces:{[type:string]: Face} = {
 }
 function createFieldControl(form:FormView, label:string, fieldRow: FieldRow):Control {
     let {field, face} = fieldRow;
+    switch (typeof field) {
+        case 'string':
+            field = {
+                name: (field as any) as string,
+                type: 'string',
+            }
+            break;
+        case 'object':
+            break;
+        default:
+            return new UnknownControl(form, field, face);
+    }
+    let fieldType = field.type || 'string';
     if (face === undefined) {
-        face = defaultFaces[field.type];
+        face = defaultFaces[fieldType];
         if (face === undefined) return new UnknownControl(form, field, face);
     }
-    let control = controls[face.type] || UnknownControl;
+    else if (face.type === undefined) {
+        let f = defaultFaces[fieldType];
+        face.type = f===undefined? 'string' : f.type;
+    }
+    let control = controls[face.type || fieldType] || UnknownControl;
     return new control(form, field, face);
 }
 

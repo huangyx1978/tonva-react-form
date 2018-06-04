@@ -7,6 +7,7 @@ import {TextAreaFace} from '../face';
 export class TextAreaControl extends CharsControl {
     protected field: StringField;
     protected face: TextAreaFace;
+    private el: HTMLTextAreaElement;
     protected setProps() {
         let p = super.setProps();
         let {maxLength} = this.field;
@@ -18,6 +19,6 @@ export class TextAreaControl extends CharsControl {
         return p;
     };
     protected renderInput():JSX.Element {
-        return <textarea className={this.className()} {...this.props} />;
+        return <textarea ref={t=>{this.el = t;if (t!==undefined) t.value=''}} className={this.className()} {...this.props} />;
     }
 }

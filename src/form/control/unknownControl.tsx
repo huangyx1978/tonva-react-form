@@ -7,8 +7,8 @@ export class UnknownControl extends Control {
         return <div className="form-control-plaintext">
             <div className="alert alert-primary" role="alert">
             don't know how to create control<br/>
-            field: {JSON.stringify(this.field)}<br/>
-            face: {JSON.stringify(this.face)}<br/>
+            field: {JSON.stringify(this.field)} must be object <br/>
+            face: {JSON.stringify(this.face)} must be object <br/>
             </div>
         </div>;
     }

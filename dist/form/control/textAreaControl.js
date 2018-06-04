@@ -14,7 +14,8 @@ export class TextAreaControl extends CharsControl {
     }
     ;
     renderInput() {
-        return React.createElement("textarea", Object.assign({ className: this.className() }, this.props));
+        return React.createElement("textarea", Object.assign({ ref: t => { this.el = t; if (t !== undefined)
+                t.value = ''; }, className: this.className() }, this.props));
     }
 }
 //# sourceMappingURL=textAreaControl.js.map

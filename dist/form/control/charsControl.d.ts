@@ -10,6 +10,7 @@ export declare abstract class CharsControl extends Control {
     private onFocus();
     protected className(): string;
     protected renderInput(): JSX.Element;
+    protected ref(element: HTMLInputElement): void;
     protected renderError(): JSX.Element;
     clearValue(): void;
     setError(fieldName: string, error: string): void;

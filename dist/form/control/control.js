@@ -93,10 +93,12 @@ export class Control extends ControlBase {
         }
     }
     render() {
-        let { notes } = this.face;
         let n;
-        if (notes !== undefined)
-            n = React.createElement("small", { className: "text-muted" }, notes);
+        if (this.face !== undefined) {
+            let { notes } = this.face;
+            if (notes !== undefined)
+                n = React.createElement("small", { className: "text-muted" }, notes);
+        }
         return React.createElement("div", { className: "col-sm-10" },
             this.renderControl(),
             n);

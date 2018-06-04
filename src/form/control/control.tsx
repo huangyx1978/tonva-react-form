@@ -105,9 +105,11 @@ export abstract class Control extends ControlBase {
         }
     }
     render():JSX.Element {
-        let {notes} = this.face;
         let n;
-        if (notes !== undefined) n = <small className="text-muted">{notes}</small>;
+        if (this.face !== undefined) {
+            let {notes} = this.face;
+            if (notes !== undefined) n = <small className="text-muted">{notes}</small>;
+        }
         return <div className="col-sm-10">
             {this.renderControl()}
             {n}
