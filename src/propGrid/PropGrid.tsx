@@ -4,6 +4,7 @@ import {Prop, PropView} from './propView';
 import {PropContainer, PropBorder, PropGap} from './row';
 
 export interface PropGridProps {
+    className?: string;
     rows: Prop[];
     values: any;
     alignValue?: 'left'|'center'|'right';
@@ -30,9 +31,10 @@ export class PropGrid extends React.Component<PropGridProps> {
     }
 */
     render() {
-        let propView = new PropView(this.props, this.props.rows);
-        propView.setValues(this.props.values);
-        return <div>
+        let {className, rows, values} = this.props;
+        let propView = new PropView(this.props, rows);
+        propView.setValues(values);
+        return <div className={className}>
             {propView.render()}
         </div>;
     }

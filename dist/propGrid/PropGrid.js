@@ -27,9 +27,10 @@ let PropGrid = class PropGrid extends React.Component {
         }
     */
     render() {
-        let propView = new PropView(this.props, this.props.rows);
-        propView.setValues(this.props.values);
-        return React.createElement("div", null, propView.render());
+        let { className, rows, values } = this.props;
+        let propView = new PropView(this.props, rows);
+        propView.setValues(values);
+        return React.createElement("div", { className: className }, propView.render());
     }
 };
 PropGrid = __decorate([

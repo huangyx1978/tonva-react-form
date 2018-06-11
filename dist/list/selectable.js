@@ -85,9 +85,9 @@ export class Selectable extends ListBase {
     //w-100 mb-0 pl-3
     //m-0 w-100
     render(item, index) {
-        let { className, render, onSelect } = this.list.props.item;
+        let { className, key, render, onSelect } = this.list.props.item;
         let { labelId, selected } = item;
-        return React.createElement("li", { key: index, className: classNames(className) },
+        return React.createElement("li", { key: key === undefined ? index : key(item), className: classNames(className) },
             React.createElement("div", { className: "d-flex align-items-center px-3" },
                 React.createElement("input", { ref: input => {
                         if (!input)

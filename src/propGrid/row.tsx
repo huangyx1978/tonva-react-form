@@ -57,6 +57,7 @@ export abstract class LabeledPropRow extends PropRow {
         let cn = className({
             "cursor-pointer": onClick !== undefined,
             "bg-white": bk === undefined, 
+            "row": true
         });
         return <div key={key} className={cn} onClick={onClick}>
             {this.renderLabel()}
