@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import {observer} from 'mobx-react';
 import {Prop, PropView} from './propView';
 import {PropContainer, PropBorder, PropGap} from './row';
@@ -34,7 +35,8 @@ export class PropGrid extends React.Component<PropGridProps> {
         let {className, rows, values} = this.props;
         let propView = new PropView(this.props, rows);
         propView.setValues(values);
-        return <div className={className}>
+        let cn = classNames('container-fluid', className);
+        return <div className={cn}>
             {propView.render()}
         </div>;
     }

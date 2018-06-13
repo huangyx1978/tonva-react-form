@@ -13,7 +13,11 @@ export class ButtonsControl extends ControlBase {
         onOther(values);
     }
     renderControl() {
-        let { nothing, hasError, props } = this.formView;
+        console.log('buttons.renderControl');
+        let nothing = this.formView.nothing;
+        let hasError = this.formView.hasError;
+        let props = this.formView.props;
+        console.log('buttons.renderControl nothing:%s hasError:%s', nothing, hasError);
         let { submitButton, otherButton, onOther } = props;
         let btnOther;
         if (otherButton !== undefined) {

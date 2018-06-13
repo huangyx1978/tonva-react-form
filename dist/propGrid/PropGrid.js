@@ -5,6 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import * as React from 'react';
+import * as classNames from 'classnames';
 import { observer } from 'mobx-react';
 import { PropView } from './propView';
 let PropGrid = class PropGrid extends React.Component {
@@ -30,7 +31,8 @@ let PropGrid = class PropGrid extends React.Component {
         let { className, rows, values } = this.props;
         let propView = new PropView(this.props, rows);
         propView.setValues(values);
-        return React.createElement("div", { className: className }, propView.render());
+        let cn = classNames('container-fluid', className);
+        return React.createElement("div", { className: cn }, propView.render());
     }
 };
 PropGrid = __decorate([

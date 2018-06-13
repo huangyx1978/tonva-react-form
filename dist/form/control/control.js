@@ -23,6 +23,12 @@ export class ControlBase {
     isOk() { this.validate(); return !this.hasError; }
     validate() { }
 }
+__decorate([
+    computed
+], ControlBase.prototype, "hasError", null);
+__decorate([
+    computed
+], ControlBase.prototype, "filled", null);
 export class Control extends ControlBase {
     constructor(formView, field, face) {
         super(formView);
@@ -72,8 +78,11 @@ export class Control extends ControlBase {
             if (this.rules.length > 0) {
                 let isOk;
                 for (let rule of this.rules) {
+                    console.log('validate: %s', v);
                     let err = rule(v);
+                    console.log('validate: %s err: %s', v, err);
                     if (err === true) {
+                        this.error = undefined;
                         isOk = true;
                     }
                     else if (err !== undefined) {

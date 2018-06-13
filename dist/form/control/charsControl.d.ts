@@ -7,6 +7,7 @@ export declare abstract class CharsControl extends Control {
     protected setProps(): any;
     protected parseValue(value?: string): any;
     private onBlur();
+    private onChange();
     private onFocus();
     protected className(): string;
     protected renderInput(): JSX.Element;

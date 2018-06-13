@@ -40,6 +40,7 @@ export interface ListProp extends LabeledProp {
 
 export interface ComponentProp extends LabeledProp {
     type: 'component';
+    full?: boolean;
     component: any; //JSX.Element;
 }
 

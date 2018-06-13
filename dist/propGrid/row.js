@@ -61,7 +61,7 @@ export class LabeledPropRow extends PropRow {
         return React.createElement("label", { className: "col-sm-2 col-form-label" }, label);
     }
     renderProp() {
-        let { label } = this.prop;
+        let { label, full } = this.prop;
         let align, vAlign;
         switch (this.gridProps.alignValue) {
             case 'left':
@@ -89,7 +89,12 @@ export class LabeledPropRow extends PropRow {
                 vAlign = 'align-items-stretch';
                 break;
         }
-        let cn = className(align, vAlign, label === undefined ? 'col-sm-12' : 'col-sm-10', 'd-flex');
+        let col;
+        if (full !== true)
+            col = label === undefined ? 'col-sm-12' : 'col-sm-10';
+        else
+            col = 'w-100';
+        let cn = className(align, vAlign, col, 'd-flex');
         return React.createElement("div", { className: cn }, this.renderPropBody());
     }
     renderPropBody() {

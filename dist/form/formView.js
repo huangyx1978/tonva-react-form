@@ -27,6 +27,8 @@ export class FormView {
         this.onSubmit = this.onSubmit.bind(this);
     }
     get hasError() {
+        let ret = this.rows.map((v, index) => index + ': ' + v.hasError + '\n');
+        console.log(ret);
         return this.rows.some(row => row.hasError);
     }
     get nothing() {

@@ -72,7 +72,7 @@ export abstract class LabeledPropRow extends PropRow {
         </label>;
     }
     protected renderProp():any {
-        let {label} = this.prop;
+        let {label, full} = this.prop as any;
         let align, vAlign;
         switch (this.gridProps.alignValue) {
             case 'left': align = valueAlignStart; break;
@@ -86,7 +86,12 @@ export abstract class LabeledPropRow extends PropRow {
             case 'bottom': vAlign = 'align-items-end'; break;
             case 'stretch': vAlign = 'align-items-stretch'; break;
         }
-        let cn = className(align, vAlign, label===undefined? 'col-sm-12':'col-sm-10', 'd-flex');
+        let col:string;
+        if (full !== true)
+            col = label===undefined? 'col-sm-12':'col-sm-10';
+        else
+            col = 'w-100';
+        let cn = className(align, vAlign, col, 'd-flex');
         return <div className={cn}>
             {this.renderPropBody()}
         </div>;

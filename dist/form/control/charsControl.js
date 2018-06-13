@@ -20,6 +20,7 @@ export class CharsControl extends Control {
         _.assign(this.props, {
             onBlur: this.onBlur.bind(this),
             onFocus: this.onFocus.bind(this),
+            onChange: this.onChange.bind(this),
         });
         let face = this.face;
         if (face !== undefined) {
@@ -33,6 +34,10 @@ export class CharsControl extends Control {
     parseValue(value) { return value; }
     onBlur() {
         //console.log('field %s onBlure', this.field.name);
+        this.validate();
+    }
+    onChange() {
+        console.log('onChange');
         this.validate();
     }
     onFocus() {

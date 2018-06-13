@@ -18,8 +18,8 @@ export abstract class ControlBase {
         </div>;
     }
     protected abstract renderControl():JSX.Element;
-    get hasError():boolean {return false;}
-    get filled():boolean {return false;}
+    @computed get hasError():boolean {return false;}
+    @computed get filled():boolean {return false;}
     clear() {}
     clearErrors() {}
     readValues(values:any):any {}
@@ -84,8 +84,11 @@ export abstract class Control extends ControlBase {
             if (this.rules.length > 0) {
                 let isOk:boolean;
                 for (let rule of this.rules) {
+                    console.log('validate: %s', v);
                     let err = rule(v);
+                    console.log('validate: %s err: %s', v, err);
                     if (err === true) {
+                        this.error = undefined;
                         isOk = true;
                     }
                     else if (err !== undefined) {

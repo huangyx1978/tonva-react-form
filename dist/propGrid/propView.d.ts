@@ -29,6 +29,7 @@ export interface ListProp extends LabeledProp {
 }
 export interface ComponentProp extends LabeledProp {
     type: 'component';
+    full?: boolean;
     component: any;
 }
 export declare type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentProp | string;
