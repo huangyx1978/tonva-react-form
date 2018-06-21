@@ -73,8 +73,11 @@ export class List extends React.Component<ListProps> {
             content = staticRow(loading, 'loading');
         else if (items.length === 0)
             content = staticRow(none, 'none');
-        else 
-            content = items.map((item, index) => this.listBase.render(item, index));
+        else {
+            content = items.map((item, index) => {
+                return this.listBase.render(item, index);
+            });
+        }
         return <ul className={classNames('va-list', className)}>
             {staticRow(header, 'header')}
             {content}

@@ -43,8 +43,8 @@ export class Selectable extends ListBase {
         });
     }
     get items() {
-        if (this._items === undefined)
-            this.buildItems();
+        //if (this._items === undefined) 
+        this.buildItems();
         return this._items;
     }
     updateProps(nextProps) {
