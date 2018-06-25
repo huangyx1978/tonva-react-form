@@ -102,7 +102,7 @@ export class Selectable extends ListBase {
                     onChange={(e)=>{
                         this.onSelect(item, e.target.checked)} 
                     }/>
-                <label className="" style={{flex:1}} htmlFor={labelId}>
+                <label className="" style={{flex:1, marginBottom:0}} htmlFor={labelId}>
                     {this.renderContent(item.item, index)}
                 </label>
             </div>

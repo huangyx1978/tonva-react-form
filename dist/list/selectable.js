@@ -97,7 +97,7 @@ export class Selectable extends ListBase {
                     }, className: "", type: "checkbox", value: "", id: labelId, defaultChecked: selected, onChange: (e) => {
                         this.onSelect(item, e.target.checked);
                     } }),
-                React.createElement("label", { className: "", style: { flex: 1 }, htmlFor: labelId }, this.renderContent(item.item, index))));
+                React.createElement("label", { className: "", style: { flex: 1, marginBottom: 0 }, htmlFor: labelId }, this.renderContent(item.item, index))));
     }
 }
 __decorate([
