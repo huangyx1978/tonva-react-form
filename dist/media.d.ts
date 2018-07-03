@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 export interface MediaProps {
     icon: string | JSX.Element;

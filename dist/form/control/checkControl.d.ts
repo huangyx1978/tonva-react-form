@@ -13,6 +13,6 @@ export declare class CheckControl extends Control {
     clearValue(): void;
     setInitValues(values: any): void;
     protected getValueFromElement(): any;
-    private onChange();
+    private onChange;
     renderControl(): JSX.Element;
 }

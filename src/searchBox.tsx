@@ -7,7 +7,7 @@ export interface SearchBoxProps {
     placeholder?: string;
     buttonText?: string;
     maxLength?: number;
-    onSearch: (key:string)=>void;
+    onSearch: (key:string)=>Promise<void>;
 }
 
 export interface SearchBoxState {
@@ -40,10 +40,12 @@ export class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
         if (input === null) return;
         input.value = this.key;
     }
-    onSubmit(event: React.FormEvent<any>) {
+    async onSubmit(event: React.FormEvent<any>) {
         event.preventDefault();
         if (!this.key) return;
-        this.props.onSearch(this.key);
+        if (this.input) this.input.disabled = true;
+        await this.props.onSearch(this.key);
+        if (this.input) this.input.disabled = false;
     }
     render() {
         let {className, label, placeholder, buttonText, maxLength} = this.props;

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { FormEvent } from 'react';
 import { Rule } from './rule';
 import { Field } from './field';
@@ -52,10 +51,10 @@ export declare class FormView {
     clearErrors(): void;
     setError(fieldName: string, error: string): void;
     setInitValues(initValues: any): void;
-    private buildRows(props);
-    private buildRow(formRow, formRowCreator);
-    private createButtons(form, row);
-    private isOk();
+    private buildRows;
+    private buildRow;
+    private createButtons;
+    private isOk;
     render(): JSX.Element;
     buttons(): JSX.Element;
     onSubmit(event: FormEvent<HTMLFormElement>): Promise<void>;

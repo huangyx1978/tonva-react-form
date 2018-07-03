@@ -38,7 +38,7 @@ export declare class PropView {
     private props;
     private rows;
     constructor(gridProps: PropGridProps, props: Prop[]);
-    private buildRows();
+    private buildRows;
     setValues(values: any): void;
     render(): any[];
 }

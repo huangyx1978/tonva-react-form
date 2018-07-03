@@ -8,6 +8,6 @@ export declare class NumberControl extends CharsControl {
     protected parseValue(value?: string): any;
     protected setProps(): void;
     onKeyPress(event: KeyboardEvent): void;
-    private onKeyDot();
-    private onKeyNeg();
+    private onKeyDot;
+    private onKeyNeg;
 }

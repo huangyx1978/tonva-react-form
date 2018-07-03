@@ -9,6 +9,6 @@ export declare class PickTuidControl extends Control {
     constructor(formView: FormView, field: Field, face: Face);
     onIdChanged(id: any): void;
     setInitValues(values: any): void;
-    private buildContent();
+    private buildContent;
     renderControl(): JSX.Element;
 }

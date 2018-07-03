@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import { FormView, FormProps } from './formView';
 export declare function tonvaDebug(): void;

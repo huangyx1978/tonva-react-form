@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 export interface SearchBoxProps {
     className?: string;
@@ -7,7 +6,7 @@ export interface SearchBoxProps {
     placeholder?: string;
     buttonText?: string;
     maxLength?: number;
-    onSearch: (key: string) => void;
+    onSearch: (key: string) => Promise<void>;
 }
 export interface SearchBoxState {
     disabled: boolean;
@@ -18,6 +17,6 @@ export declare class SearchBox extends React.Component<SearchBoxProps, SearchBox
     constructor(props: any);
     onChange(evt: React.ChangeEvent<any>): void;
     ref(input: HTMLInputElement): void;
-    onSubmit(event: React.FormEvent<any>): void;
+    onSubmit(event: React.FormEvent<any>): Promise<void>;
     render(): JSX.Element;
 }

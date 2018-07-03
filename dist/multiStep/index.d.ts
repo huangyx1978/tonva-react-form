@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import { FormProps, FormRow, SubmitResult } from '../form';
 export interface Step {
@@ -31,9 +30,9 @@ export declare class MultiStep extends React.Component<MultiStepProps, MultiStep
     private stepViews;
     private topView;
     constructor(props: any);
-    private setStep(stepName);
+    private setStep;
     componentWillMount(): void;
-    private onPrev(values);
-    private onNext(values);
+    private onPrev;
+    private onNext;
     render(): JSX.Element;
 }

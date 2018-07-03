@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import { Prop } from './propView';
 export interface PropGridProps {

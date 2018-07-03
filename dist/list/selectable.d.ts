@@ -9,10 +9,10 @@ export declare class Selectable extends ListBase {
     private _items;
     private _selectedItems;
     private input;
-    private buildItems();
+    private buildItems;
     readonly items: SelectableItem[];
     updateProps(nextProps: any): void;
-    private onSelect(item, selected);
+    private onSelect;
     readonly selectedItems: any[];
     render(item: SelectableItem, index: number): JSX.Element;
 }

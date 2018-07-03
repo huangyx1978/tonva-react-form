@@ -7,9 +7,9 @@ export declare class PickIdControl extends Control {
     protected face: IdPickFace;
     private caption;
     constructor(formView: FormView, field: Field, face: Face);
-    private onClick();
+    private onClick;
     onPicked(value: any): void;
     setInitValues(values: any): void;
-    private controlContent();
+    private controlContent;
     renderControl(): JSX.Element;
 }

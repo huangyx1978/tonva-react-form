@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import '../css/va-lmr.css';
 export interface LMRProps {

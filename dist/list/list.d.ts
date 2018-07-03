@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import "../css/va-list.css";
 export declare type StaticRow = string | JSX.Element | ((items: any) => string | JSX.Element);
@@ -12,7 +11,7 @@ export interface ListProps {
         onClick?: (item: any) => void;
         key?: (item: any) => string;
     };
-    compare?: (item: any, selectItem) => boolean;
+    compare?: (item: any, selectItem: any) => boolean;
     selectedItems?: any[];
     header?: StaticRow;
     footer?: StaticRow;
