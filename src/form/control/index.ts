@@ -12,7 +12,7 @@ import {RadioControl} from './radioControl';
 import {TextAreaControl} from './textAreaControl';
 import {SelectControl} from './selectControl';
 import {UnknownControl, EmptyControl} from './unknownControl';
-import {StringControl} from './stringControl';
+import {StringControl, PasswordControl} from './stringControl';
 import {NumberControl} from './numberControl';
 
 import {FormView, FormRow, GroupRow, FieldRow, LabelFormRow} from '../formView';
@@ -32,6 +32,7 @@ export const createControl:CreateControl = (form:FormView, row: LabelFormRow):Co
 
 const controls:{[type:string]: new (formView:FormView, field:Field, face:Face) => Control} = {
     "string": StringControl,
+    "password": PasswordControl,
     "number": NumberControl,
     "checkbox": CheckControl,
     "radiobox": RadioControl,

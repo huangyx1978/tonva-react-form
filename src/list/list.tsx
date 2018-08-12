@@ -7,7 +7,6 @@ import {Clickable} from './clickable';
 import {Static} from './static';
 import {Selectable} from './selectable';
 import "../css/va-list.css";
-import Row from 'reactstrap/lib/Row';
 
 export type StaticRow = string|JSX.Element|((items:any)=>string|JSX.Element);
 
@@ -50,9 +49,6 @@ export class List extends React.Component<ListProps> {
     get selectedItems():any[] {
         return this.listBase.selectedItems;
     }
-    //set selectedItems(value: any[]) {
-    //    this.listBase.selectedItems = value;
-    //}
     render() {
         let {className, header, footer, before, loading, none, item, selectedItems} = this.props;
         if (before === undefined) before = 'before';

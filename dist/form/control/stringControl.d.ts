@@ -5,3 +5,6 @@ export declare class StringControl extends CharsControl {
     protected setProps(): any;
     protected parseValue(value?: string): any;
 }
+export declare class PasswordControl extends StringControl {
+    protected setProps(): any;
+}

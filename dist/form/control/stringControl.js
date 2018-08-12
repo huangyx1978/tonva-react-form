@@ -18,4 +18,15 @@ export class StringControl extends CharsControl {
         return value;
     }
 }
+export class PasswordControl extends StringControl {
+    setProps() {
+        let p = super.setProps();
+        _.assign(p, {
+            type: 'password',
+            maxLength: this.field.maxLength,
+        });
+        return p;
+    }
+    ;
+}
 //# sourceMappingURL=stringControl.js.map

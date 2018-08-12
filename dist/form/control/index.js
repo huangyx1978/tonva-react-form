@@ -7,7 +7,7 @@ import { RadioControl } from './radioControl';
 import { TextAreaControl } from './textAreaControl';
 import { SelectControl } from './selectControl';
 import { UnknownControl, EmptyControl } from './unknownControl';
-import { StringControl } from './stringControl';
+import { StringControl, PasswordControl } from './stringControl';
 import { NumberControl } from './numberControl';
 import { PickIdControl } from './pickIdControl';
 import { PickTuidControl } from './pickTuidControl';
@@ -21,6 +21,7 @@ export const createControl = (form, row) => {
 };
 const controls = {
     "string": StringControl,
+    "password": PasswordControl,
     "number": NumberControl,
     "checkbox": CheckControl,
     "radiobox": RadioControl,
