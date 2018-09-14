@@ -11,6 +11,7 @@ import { StringControl, PasswordControl } from './stringControl';
 import { NumberControl } from './numberControl';
 import { PickIdControl } from './pickIdControl';
 import { PickTuidControl } from './pickTuidControl';
+import { PickControl } from './pickControl';
 export const createControl = (form, row) => {
     let label = row.label;
     if (row.group !== undefined)
@@ -29,6 +30,7 @@ const controls = {
     "pick-id": PickIdControl,
     "pick-tuid": PickTuidControl,
     "textarea": TextAreaControl,
+    "pick": PickControl,
 };
 const defaultFaces = {
     "string": { type: 'string' },

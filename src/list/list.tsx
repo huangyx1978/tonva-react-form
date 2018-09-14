@@ -8,7 +8,7 @@ import {Static} from './static';
 import {Selectable} from './selectable';
 import "../css/va-list.css";
 
-export type StaticRow = string|JSX.Element|((items:any)=>string|JSX.Element);
+export type StaticRow = string|JSX.Element|(()=>string|JSX.Element);
 
 export interface ListProps {
     className?: string|string[];
@@ -58,9 +58,12 @@ export class List extends React.Component<ListProps> {
         let items = this.listBase.items;
         function staticRow(row:StaticRow, type:string) {
             if (!row) return;
-            return <li className={"va-list-"+type}>
-                {typeof row === 'function'? row(items) : row}
-            </li>;
+            switch (typeof row) {
+                default:
+                case 'string': return <li className={"va-list-"+type}>{row}</li>;
+                case 'function': return <li className={"va-list-"+type}>{(row as ()=>string|JSX.Element)()}</li>;
+                case 'object': return <li>{row}</li>
+            } 
         }
         let content:any;
         if (items === null)

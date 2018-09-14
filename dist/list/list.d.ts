@@ -1,6 +1,6 @@
 import * as React from 'react';
 import "../css/va-list.css";
-export declare type StaticRow = string | JSX.Element | ((items: any) => string | JSX.Element);
+export declare type StaticRow = string | JSX.Element | (() => string | JSX.Element);
 export interface ListProps {
     className?: string | string[];
     items: any[];

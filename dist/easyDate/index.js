@@ -2,7 +2,7 @@ import * as React from 'react';
 export class EasyDate extends React.Component {
     render() {
         let { date } = this.props;
-        if (date === undefined)
+        if (!date)
             return null;
         let d = (typeof date === 'string') ? new Date(Date.parse(date)) : date;
         let now = new Date();

@@ -2,6 +2,10 @@ ul.va-list {
     list-style: none;
     background-color: #f0f0f0;
     padding: 0;
+    margin-bottom: -1px;
+}
+ul.va-list-top-border {
+    padding-top: 1px;
 }
 ul.va-list>li {
     display: flex;
@@ -35,17 +39,17 @@ ul.va-list>li>label>div {
 
 li.va-list-before {
     color: green;
-    font-size: smaller;
+    font-size: 80%;
     padding: 8px 16px;
 }
 li.va-list-loading {
     color: green;
-    font-size: smaller;
+    font-size: 80%;
     padding: 8px 16px;
 }
 li.va-list-none {
     color: #e0e0e0;
-    font-size: smaller;
+    font-size: 80%;
     padding: 8px 16px;
 }
 li.va-list-header {

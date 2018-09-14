@@ -1,4 +1,5 @@
 import {FormProps} from './formView';
+import { StatelessComponent } from 'react';
 
 export interface FieldFaceBase {
     notes?: string;
@@ -85,9 +86,15 @@ export interface IdPickFace extends FieldFaceBase {
     itemFromId?: ItemFromId;
 }
 
-export interface IdFace extends FieldFaceBase {
-    type: 'id';
-
+export interface PickFace extends FieldFaceBase {
+    type: 'pick';
+    content: StatelessComponent<any>;
+    pick: (face: PickFace, formProps:FormProps, params:any) => Promise<any>;
+    fromPicked: (item:any)=>{id:number, caption?:string|JSX.Element};
 }
 
-export type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | TuidPickFace | IdPickFace;
+export interface IdFace extends FieldFaceBase {
+    type: 'id';
+}
+
+export type Face = StringFace | NumberFace | CheckBoxFace | SelectFace | RadioFace | TextAreaFace | TuidPickFace | IdPickFace | PickFace;

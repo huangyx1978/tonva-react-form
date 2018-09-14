@@ -1,6 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import * as classNames from 'classnames';
 import {observer} from 'mobx-react';
 import {FormView, FormProps} from './formView';
 
