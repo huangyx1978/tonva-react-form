@@ -12,6 +12,9 @@ ul.va-list>li {
     margin-bottom: 1px;
     background-color: white;
 }
+ul.va-list>li.va-list-gap {
+    background-color: transparent;
+}
 ul.va-list>li>div {
     flex: 1;
     display: flex;
