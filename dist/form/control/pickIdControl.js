@@ -16,13 +16,9 @@ import * as React from 'react';
 import { observable } from 'mobx';
 import { Control } from './control';
 export class PickIdControl extends Control {
-    constructor(formView, field, face) {
-        super(formView, field, face);
-        this.onPicked = this.onPicked.bind(this);
-        this.onClick = this.onClick.bind(this);
-    }
-    onClick() {
-        return __awaiter(this, void 0, void 0, function* () {
+    constructor() {
+        super(...arguments);
+        this.onClick = () => __awaiter(this, void 0, void 0, function* () {
             let { pick, fromPicked } = this.face;
             let item = yield pick(this.face, this.formView.props, this.formView.readValues());
             if (item === undefined) {
@@ -37,9 +33,9 @@ export class PickIdControl extends Control {
             this.value = id;
             this.caption = caption;
         });
-    }
-    onPicked(value) {
-        this.value = value.id;
+        this.onPicked = (value) => {
+            this.value = value.id;
+        };
     }
     setInitValues(values) {
         let v = values[this.field.name];

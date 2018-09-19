@@ -12,7 +12,8 @@ export class IconText extends React.Component<IconTextProps> {
     render() {
         let {icon, iconClass, text, textClass} = this.props;
         return <div className="py-2">
-            <FA className={iconClass} name={icon} size="lg" fixWidth={true} /><FA fixWidth={true} name="" /><span className={textClass}>{text}</span>
+            <FA className={iconClass} name={icon} fixWidth={true} />
+            <span className={textClass}>{text}</span>
         </div>;
     }
 }

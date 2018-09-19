@@ -10,12 +10,8 @@ import {Control} from './control';
 export class PickIdControl extends Control {
     protected face: IdPickFace;
     @observable private caption: string|JSX.Element;
-    constructor(formView:FormView, field:Field, face:Face) {
-        super(formView, field, face);
-        this.onPicked = this.onPicked.bind(this);
-        this.onClick = this.onClick.bind(this);
-    }
-    private async onClick() {
+
+    private onClick = async () => {
         let {pick, fromPicked} = this.face;
         let item = await pick(this.face, this.formView.props, this.formView.readValues());
         if (item === undefined) {
@@ -30,7 +26,7 @@ export class PickIdControl extends Control {
         this.value = id;
         this.caption = caption;
     }
-    onPicked(value: any) {
+    onPicked = (value: any) => {
         this.value = value.id;
     }
     setInitValues(values: any) {
