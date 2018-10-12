@@ -1,21 +1,18 @@
 {
+    "extends": "../tsproject.json",
     "compilerOptions": {
-      "module": "esnext",
-      "moduleResolution": "node",
-      "target": "es6",
-      "declaration": true,
-      "lib": ["es2016", "dom"],
-      "outDir": "./dist",
-      "rootDir": "src",
-      "sourceMap": true,
-      "jsx": "react",
-      "experimentalDecorators": true,
-      "composite": true
+        "composite": true,
+        "outDir": "./dist",
+        "rootDir": "."
     },
+    "references": [
+        { "path": "../tonva-tools" }
+    ],
     "include": [
-      "src/**/*"
+        "src/**/*"
     ],
     "exclude": [
-      "src/old/**"
+        "node_modules",
+        "dist"
     ]
 }
