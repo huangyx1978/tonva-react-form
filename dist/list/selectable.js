@@ -11,7 +11,8 @@ import { ListBase } from './base';
 import { uid } from '../uid';
 export class Selectable extends ListBase {
     buildItems() {
-        let { items, selectedItems, compare } = this.list.props;
+        let { selectedItems, compare } = this.list.props;
+        let items = this.items;
         if (items === undefined) {
             return this._items = undefined;
         }

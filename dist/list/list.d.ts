@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { PageItems } from 'tonva-tools';
 import "../css/va-list.css";
+import { IObservableArray } from 'mobx';
 export declare type StaticRow = string | JSX.Element | (() => string | JSX.Element);
 export interface ListProps {
     className?: string | string[];
-    items: any[];
+    items: any[] | IObservableArray<any> | PageItems<any>;
     item: {
         className?: string | string[];
         render?: (item: any, index: number) => JSX.Element;
@@ -22,6 +24,7 @@ export interface ListProps {
 export declare class List extends React.Component<ListProps> {
     private listBase;
     constructor(props: ListProps);
+    _$scroll: (direct: "top" | "bottom") => void;
     componentWillUpdate(nextProps: ListProps, nextState: any, nextContext: any): void;
     readonly selectedItems: any[];
     render(): JSX.Element;

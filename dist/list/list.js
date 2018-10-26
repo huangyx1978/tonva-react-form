@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import * as React from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { observer } from 'mobx-react';
 import { Clickable } from './clickable';
 import { Static } from './static';
@@ -14,6 +14,9 @@ import "../css/va-list.css";
 let List = class List extends React.Component {
     constructor(props) {
         super(props);
+        this._$scroll = (direct) => {
+            console.log('############### items scroll to ' + direct);
+        };
         let { item } = this.props;
         let { onClick, onSelect } = item;
         if (onSelect !== undefined)
@@ -38,7 +41,7 @@ let List = class List extends React.Component {
         if (none === undefined)
             none = 'none';
         //this.listBase.selectedItems = selectedItems;
-        let items = this.listBase.items;
+        let { isPaged, items, loading: isLoading } = this.listBase;
         function staticRow(row, type) {
             if (!row)
                 return;

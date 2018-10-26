@@ -1,17 +1,19 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import {observer} from 'mobx-react';
+import {PageItems} from 'tonva-tools';
 import {ListBase} from './base';
 import {Clickable} from './clickable';
 import {Static} from './static';
 import {Selectable} from './selectable';
 import "../css/va-list.css";
+import { IObservableArray } from 'mobx';
 
 export type StaticRow = string|JSX.Element|(()=>string|JSX.Element);
 
 export interface ListProps {
     className?: string|string[];
-    items: any[];
+    items: any[] | IObservableArray<any> | PageItems<any>;
     item: {
         className?: string|string[];
         render?: (item:any, index:number) => JSX.Element;
@@ -42,6 +44,9 @@ export class List extends React.Component<ListProps> {
         else
             this.listBase = new Static(this);
     }
+    _$scroll = (direct: 'top'|'bottom') => {
+        console.log('############### items scroll to ' + direct);
+    }
     componentWillUpdate(nextProps:ListProps, nextState, nextContext) {
         this.listBase.updateProps(nextProps);
     }
@@ -54,7 +59,7 @@ export class List extends React.Component<ListProps> {
         if (loading === undefined) loading = 'loading';
         if (none === undefined) none = 'none';        
         //this.listBase.selectedItems = selectedItems;
-        let items = this.listBase.items;
+        let {isPaged, items, loading:isLoading} = this.listBase;
         function staticRow(row:StaticRow, type:string) {
             if (!row) return;
             switch (typeof row) {

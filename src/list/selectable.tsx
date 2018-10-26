@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {observable, computed} from 'mobx';
+import {observable, computed, IObservableArray} from 'mobx';
 import * as classNames from 'classnames';
 import {ListBase} from './base';
 import {uid} from '../uid';
@@ -15,7 +15,8 @@ export class Selectable extends ListBase {
     private _selectedItems: any[];
     private input: HTMLInputElement;
     private buildItems() {
-        let {items, selectedItems, compare} = this.list.props;
+        let {selectedItems, compare} = this.list.props;
+        let items = this.items;
         if (items === undefined) {
             return this._items = undefined;
         }
