@@ -1,3 +1,11 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import * as React from 'react';
 import * as classNames from 'classnames';
 export class SearchBox extends React.Component {
@@ -17,16 +25,16 @@ export class SearchBox extends React.Component {
                 return;
             input.value = this.key;
         };
-        this.onSubmit = async (evt) => {
+        this.onSubmit = (evt) => __awaiter(this, void 0, void 0, function* () {
             evt.preventDefault();
             if (!this.key)
                 return;
             if (this.input)
                 this.input.disabled = true;
-            await this.props.onSearch(this.key);
+            yield this.props.onSearch(this.key);
             if (this.input)
                 this.input.disabled = false;
-        };
+        });
         this.state = {
             disabled: false,
         };
