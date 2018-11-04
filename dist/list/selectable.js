@@ -11,14 +11,24 @@ import { ListBase } from './base';
 import { uid } from '../uid';
 export class Selectable extends ListBase {
     buildItems() {
-        let { selectedItems, compare } = this.list.props;
-        let items = this.items;
+        let { items, selectedItems, compare } = this.list.props;
+        let itemsArray;
         if (items === undefined) {
             return this._items = undefined;
         }
+        if (items === null) {
+            return this._items = null;
+        }
+        if (Array.isArray(items) === true) {
+            itemsArray = items;
+        }
+        else {
+            itemsArray = items.items;
+        }
+        //let items = this.items;
         this._selectedItems = selectedItems;
         if (selectedItems === undefined) {
-            return this._items = items.map(v => {
+            return this._items = itemsArray.map(v => {
                 return {
                     selected: false,
                     item: v,
@@ -27,7 +37,7 @@ export class Selectable extends ListBase {
             });
         }
         if (compare === undefined) {
-            return this._items = items.map(v => {
+            return this._items = itemsArray.map(v => {
                 return {
                     selected: selectedItems.find(si => si === v) !== undefined,
                     item: v,
@@ -35,7 +45,7 @@ export class Selectable extends ListBase {
                 };
             });
         }
-        return this._items = items.map(v => {
+        return this._items = itemsArray.map(v => {
             return {
                 selected: selectedItems.find(si => compare(v, si)) !== undefined,
                 item: v,

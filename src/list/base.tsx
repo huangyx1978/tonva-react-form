@@ -14,6 +14,7 @@ export abstract class ListBase {
     }
     get items():any[]|IObservableArray<any> {
         let items = this.list.props.items;
+        if (items === null) return null;
         if (items === undefined) return undefined;
         if (Array.isArray(items) === true)
             return items as IObservableArray<any>;

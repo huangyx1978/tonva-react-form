@@ -16,6 +16,8 @@ export class ListBase {
     }
     get items() {
         let items = this.list.props.items;
+        if (items === null)
+            return null;
         if (items === undefined)
             return undefined;
         if (Array.isArray(items) === true)
