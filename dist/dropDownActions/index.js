@@ -1,32 +1,44 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-export class DropdownActions extends React.Component {
-    constructor(props) {
-        super(props);
-        this.toggle = this.toggle.bind(this);
-        this.state = {
+var DropdownActions = /** @class */ (function (_super) {
+    __extends(DropdownActions, _super);
+    function DropdownActions(props) {
+        var _this = _super.call(this, props) || this;
+        _this.toggle = _this.toggle.bind(_this);
+        _this.state = {
             dropdownOpen: false
         };
+        return _this;
     }
-    toggle() {
+    DropdownActions.prototype.toggle = function () {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
         });
-    }
-    render() {
-        let { icon, actions, isRight } = this.props;
+    };
+    DropdownActions.prototype.render = function () {
+        var _a = this.props, icon = _a.icon, actions = _a.actions, isRight = _a.isRight;
         if (isRight === undefined)
             isRight = true;
-        let hasIcon = actions.some(v => v.icon !== undefined);
+        var hasIcon = actions.some(function (v) { return v.icon !== undefined; });
         return React.createElement(ButtonDropdown, { isOpen: this.state.dropdownOpen, toggle: this.toggle, size: "sm" },
             React.createElement(DropdownToggle, { caret: true, size: "sm", className: "cursor-pointer" },
                 React.createElement("i", { className: classNames('fa', 'fa-' + (icon || 'ellipsis-v')) })),
-            React.createElement(DropdownMenu, { right: isRight }, actions.map((v, index) => {
-                let { icon, caption, action } = v;
+            React.createElement(DropdownMenu, { right: isRight }, actions.map(function (v, index) {
+                var icon = v.icon, caption = v.caption, action = v.action;
                 if (icon === undefined && caption === undefined)
                     return React.createElement("div", { className: "dropdown-divider" });
-                let i;
+                var i;
                 if (hasIcon === true) {
                     if (icon !== undefined)
                         icon = 'fa-' + icon;
@@ -44,6 +56,8 @@ export class DropdownActions extends React.Component {
                     " ",
                     caption);
             })));
-    }
-}
+    };
+    return DropdownActions;
+}(React.Component));
+export { DropdownActions };
 //# sourceMappingURL=index.js.map
