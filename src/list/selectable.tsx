@@ -16,6 +16,7 @@ export class Selectable extends ListBase {
     private _selectedItems: any[];
     private input: HTMLInputElement;
     private buildItems() {
+        console.log('buildItems in selectable.tsx');
         let {items, selectedItems, compare} = this.list.props;
         let itemsArray:any[] | IObservableArray<any>;
         if (items === undefined) {
