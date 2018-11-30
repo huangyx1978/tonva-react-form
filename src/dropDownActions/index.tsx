@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import {ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-    Row, Col, Button} from 'reactstrap';
+    Row, Col, Button, Dropdown, UncontrolledDropdown, UncontrolledButtonDropdown} from 'reactstrap';
 
 export interface Action {
     icon?: string;
@@ -22,12 +22,11 @@ export interface DropdownActionsState {
 export class DropdownActions extends React.Component<DropdownActionsProps, DropdownActionsState> {
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
         this.state = {
             dropdownOpen: false
         };
     }
-    toggle() {
+    private toggle = () => {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
         });
@@ -36,7 +35,7 @@ export class DropdownActions extends React.Component<DropdownActionsProps, Dropd
         let {icon, actions, isRight} = this.props;
         if (isRight === undefined) isRight = true;
         let hasIcon = actions.some(v => v.icon!==undefined);
-        return <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} size="sm">
+        return <UncontrolledButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret={true} size="sm" className="cursor-pointer">
                 <i className={classNames('fa', 'fa-'+(icon||'ellipsis-v'))} />
             </DropdownToggle>
@@ -55,6 +54,6 @@ export class DropdownActions extends React.Component<DropdownActionsProps, Dropd
                     return <DropdownItem key={index} onClick={action}>{i} {caption}</DropdownItem>
                 })}
             </DropdownMenu>
-        </ButtonDropdown>
+        </UncontrolledButtonDropdown>
     }
 }

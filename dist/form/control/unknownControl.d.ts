@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { Control, ControlBase } from './control';
 import { FormView } from '../formView';
 export declare class UnknownControl extends Control {

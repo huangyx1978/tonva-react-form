@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { PickFace } from '../face';
 import { Control } from './control';
 export declare class PickControl extends Control {

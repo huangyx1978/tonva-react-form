@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { FormView } from '../formView';
 import { Field } from '../field';
 import { Face, SelectFace } from '../face';

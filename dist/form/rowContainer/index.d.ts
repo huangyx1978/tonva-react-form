@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { FormView, FormRow } from '../formView';
 import { ControlBase } from '../control';
 export declare type CreateRow = (form: FormView, row: FormRow) => RowContainer;

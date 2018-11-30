@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { PropGridProps } from './PropGrid';
 import { LabeledProp, StringProp, NumberProp, ListProp, ComponentProp } from './propView';
 export declare abstract class PropRow {

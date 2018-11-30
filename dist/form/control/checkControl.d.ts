@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { BoolField } from '../field';
 import { CheckBoxFace } from '../face';
 import { Control } from './control';

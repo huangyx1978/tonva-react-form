@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ListBase } from './base';
 export interface SelectableItem {
     selected: boolean;

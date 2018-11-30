@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { CharsControl } from './charsControl';
 import { StringField } from '../field';
 import { TextAreaFace } from '../face';

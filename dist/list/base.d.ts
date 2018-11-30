@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { List } from './list';
 import { IObservableArray } from 'mobx';
 export declare abstract class ListBase {

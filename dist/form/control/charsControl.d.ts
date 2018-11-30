@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { Control } from './control';
 export declare abstract class CharsControl extends Control {
     protected init(): void;
