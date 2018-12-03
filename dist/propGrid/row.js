@@ -182,8 +182,8 @@ var ListPropRow = /** @class */ (function (_super) {
         if (items === undefined)
             return React.createElement("div", null);
         // new row(item)
-        return React.createElement("div", null, items.map(function (item, index) { return React.createElement(React.Fragment, { key: index },
-            index === 0 ? null : React.createElement("div", { style: { borderBottom: '1px solid #f0f0f0' } }),
+        return React.createElement("div", { className: "w-100" }, items.map(function (item, index) { return React.createElement(React.Fragment, { key: index },
+            index === 0 ? null : React.createElement("div", { style: { width: '100%', borderBottom: '1px solid #f0f0f0' } }),
             React.createElement(row, item)); }));
     };
     return ListPropRow;

@@ -137,10 +137,10 @@ export class ListPropRow extends LabeledPropRow {
         let items:any[] = typeof list === 'string'? this.content : list;
         if (items === undefined) return <div/>;
         // new row(item)
-        return <div>
+        return <div className="w-100">
             {
                 items.map((item, index) => <React.Fragment key={index}>
-                    {index===0? null: <div style={{borderBottom:'1px solid #f0f0f0'}} />}
+                    {index===0? null: <div style={{width:'100%', borderBottom:'1px solid #f0f0f0'}} />}
                     {React.createElement(row, item)}
                 </React.Fragment>)
             }
