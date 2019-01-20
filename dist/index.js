@@ -1,4 +1,5 @@
 export * from './form';
+export * from './list';
 export * from './dropDownActions';
 export * from './easyDate';
 export * from './propGrid';
@@ -8,5 +9,4 @@ export * from './listView';
 export * from './searchBox';
 export * from './multiStep';
 export * from './uid';
-export * from './list';
 //# sourceMappingURL=index.js.map

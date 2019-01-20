@@ -1,5 +1,5 @@
-import { List } from './list';
 import { IObservableArray } from 'mobx';
+import { List } from './index';
 export declare abstract class ListBase {
     protected list: List;
     constructor(list: List);
