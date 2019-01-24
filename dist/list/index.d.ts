@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { IObservableArray } from 'mobx';
 import { PageItems } from 'tonva-tools';
 import "../css/va-list.css";
+import { IObservableArray } from 'mobx';
 declare type StaticRow = string | JSX.Element | (() => string | JSX.Element);
 export interface ListProps {
     className?: string | string[];
