@@ -11,6 +11,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -47,30 +53,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import * as React from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
+import { observable } from 'mobx';
+/*
+export interface SearchBoxState {
+    disabled: boolean;
+}*/
 var SearchBox = /** @class */ (function (_super) {
     __extends(SearchBox, _super);
-    function SearchBox(props) {
-        var _this = _super.call(this, props) || this;
+    function SearchBox() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.key = null;
+        /*
+        constructor(props: SearchBoxProps) {
+            super(props);
+            this.state = {
+                disabled: false,
+            }
+        }*/
         _this.onChange = function (evt) {
             _this.key = evt.target.value;
             if (_this.key !== undefined) {
                 _this.key = _this.key.trim();
             }
-            _this.setState({ disabled: !_this.key });
+            _this.disabled = !_this.key;
+            //this.setState({disabled: !this.key});
         };
-        _this.ref = function (input) {
-            _this.input = input;
-            _this.key = _this.props.initKey || '';
-            if (input === null)
-                return;
-            input.value = _this.key;
-        };
+        /*
+        ref = (input: HTMLInputElement) => {
+            this.input = input;
+            this.key = this.props.initKey || '';
+            if (input === null) return;
+            input.value = this.key;
+        }*/
         _this.onSubmit = function (evt) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         evt.preventDefault();
+                        if (this.key === null)
+                            this.key = this.props.initKey || '';
                         if (!this.key)
                             return [2 /*return*/];
                         if (this.input)
@@ -84,13 +106,10 @@ var SearchBox = /** @class */ (function (_super) {
                 }
             });
         }); };
-        _this.state = {
-            disabled: false,
-        };
         return _this;
     }
     SearchBox.prototype.render = function () {
-        var _a = this.props, className = _a.className, label = _a.label, placeholder = _a.placeholder, buttonText = _a.buttonText, maxLength = _a.maxLength, size = _a.size;
+        var _a = this.props, className = _a.className, inputClassName = _a.inputClassName, label = _a.label, placeholder = _a.placeholder, buttonText = _a.buttonText, maxLength = _a.maxLength, size = _a.size;
         var inputSize;
         switch (size) {
             default:
@@ -110,13 +129,18 @@ var SearchBox = /** @class */ (function (_super) {
         return React.createElement("form", { className: className, onSubmit: this.onSubmit },
             React.createElement("div", { className: classNames("input-group", inputSize) },
                 lab,
-                React.createElement("input", { onChange: this.onChange, type: "text", name: "key", ref: this.ref, className: "form-control", placeholder: placeholder, maxLength: maxLength }),
+                React.createElement("input", { onChange: this.onChange, type: "text", name: "key", 
+                    //ref={this.ref}
+                    className: classNames('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: this.props.initKey, maxLength: maxLength }),
                 React.createElement("div", { className: "input-group-append" },
-                    React.createElement("button", { className: "btn btn-primary", type: "submit", disabled: this.state.disabled },
+                    React.createElement("button", { className: "btn btn-primary", type: "submit", disabled: this.disabled },
                         React.createElement("i", { className: 'fa fa-search' }),
                         React.createElement("i", { className: "fa" }),
                         buttonText))));
     };
+    __decorate([
+        observable
+    ], SearchBox.prototype, "disabled", void 0);
     return SearchBox;
 }(React.Component));
 export { SearchBox };

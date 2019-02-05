@@ -34,6 +34,7 @@ var CharsControl = /** @class */ (function (_super) {
     }
     CharsControl.prototype.init = function () {
         _super.prototype.init.call(this);
+        this.value = this.field.defaultValue;
         if (this.field.required === true) {
             this.rules.push(function (v) {
                 if (v === null || v === undefined || v.trim().length === 0)
@@ -49,6 +50,7 @@ var CharsControl = /** @class */ (function (_super) {
             onBlur: this.onBlur.bind(this),
             onFocus: this.onFocus.bind(this),
             onChange: this.onChange.bind(this),
+            defaultValue: this.field.defaultValue,
         });
         var face = this.face;
         if (face !== undefined) {

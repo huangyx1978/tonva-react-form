@@ -7,17 +7,14 @@ export interface SearchBoxProps {
     buttonText?: string;
     maxLength?: number;
     size?: 'sm' | 'md' | 'lg';
+    inputClassName?: string;
     onSearch: (key: string) => Promise<void>;
 }
-export interface SearchBoxState {
-    disabled: boolean;
-}
-export declare class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
+export declare class SearchBox extends React.Component<SearchBoxProps> {
     private input;
     private key;
-    constructor(props: any);
-    onChange: (evt: React.ChangeEvent<any>) => void;
-    ref: (input: HTMLInputElement) => void;
+    private disabled;
+    private onChange;
     onSubmit: (evt: React.FormEvent<any>) => Promise<void>;
     render(): JSX.Element;
 }

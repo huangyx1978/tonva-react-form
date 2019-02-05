@@ -12,6 +12,7 @@ const TxtRequired = '必须填入要求内容';
 export abstract class CharsControl extends Control {
     protected init() {
         super.init();
+        this.value = this.field.defaultValue;
         if (this.field.required === true) {
             this.rules.push((v) => {
                 if (v===null || v===undefined || (v as string).trim().length === 0) return TxtRequired;
@@ -29,6 +30,7 @@ export abstract class CharsControl extends Control {
             onBlur: this.onBlur.bind(this),
             onFocus: this.onFocus.bind(this),
             onChange: this.onChange.bind(this),
+            defaultValue: this.field.defaultValue,
         });
         let face = this.face as Placeholder;
         if (face !== undefined) {

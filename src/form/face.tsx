@@ -11,6 +11,7 @@ export interface Placeholder {
 
 export interface StringFace extends FieldFaceBase, Placeholder {
     type: 'string';
+    readonly?: boolean;
 }
 
 export interface NumberFace extends FieldFaceBase, Placeholder {

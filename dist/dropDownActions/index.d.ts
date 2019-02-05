@@ -13,7 +13,11 @@ export interface DropdownActionsState {
     dropdownOpen: boolean;
 }
 export declare class DropdownActions extends React.Component<DropdownActionsProps, DropdownActionsState> {
+    private menu;
+    private button;
     constructor(props: any);
+    componentWillMount(): void;
+    private handleDocumentClick;
     private toggle;
     render(): JSX.Element;
 }
