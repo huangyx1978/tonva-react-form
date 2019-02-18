@@ -66,7 +66,7 @@ var Image = /** @class */ (function (_super) {
             var src;
             return __generator(this, function (_a) {
                 src = this.props.src;
-                if (src === undefined) {
+                if (!src) {
                     this.src = defaultImage;
                     return [2 /*return*/];
                 }
@@ -80,9 +80,8 @@ var Image = /** @class */ (function (_super) {
         });
     };
     Image.prototype.render = function () {
-        var _a = this.props, src = _a.src, className = _a.className, style = _a.style;
-        if (src === undefined)
-            return React.createElement("img", { src: this.src, className: className, style: style });
+        var _a = this.props, className = _a.className, style = _a.style;
+        return React.createElement("img", { src: this.src, className: className, style: style });
     };
     __decorate([
         observable
