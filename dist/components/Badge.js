@@ -19,7 +19,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import '../css/va-badge.css';
 var Badge = /** @class */ (function (_super) {
     __extends(Badge, _super);
