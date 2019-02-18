@@ -15,19 +15,18 @@ export class Image extends React.Component<ImageProps> {
     @observable private src: string;
     async componentWillMount() {
         let {src} = this.props;
-        if (src === undefined) {
+        if (!src) {
             this.src = defaultImage;
             return;
         }
         if (src.startsWith(':') === false) {
             this.src = src;
-            return 
+            return;
         }
         this.src = defaultImage;
     }
     render() {
-        let {src, className, style} = this.props;
-        if (src === undefined) 
+        let {className, style} = this.props;
         return <img src={this.src} className={className} style={style} />;
     }
 }
