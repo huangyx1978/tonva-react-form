@@ -23,7 +23,6 @@ var StringControl = /** @class */ (function (_super) {
         _.assign(p, {
             type: 'text',
             maxLength: this.field.maxLength,
-            readOnly: this.face && this.face.readonly
         });
         return p;
     };

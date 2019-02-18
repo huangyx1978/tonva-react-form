@@ -24,8 +24,8 @@ var DropdownActions = /** @class */ (function (_super) {
                 return;
             if (!_this.menu)
                 return;
-            if (!_this.menu.contains(evt.target))
-                _this.toggle();
+            //if (!this.menu.contains(evt.target)) 
+            _this.toggle();
         };
         _this.toggle = function () {
             _this.setState({
@@ -40,6 +40,10 @@ var DropdownActions = /** @class */ (function (_super) {
     DropdownActions.prototype.componentWillMount = function () {
         document.addEventListener('click', this.handleDocumentClick);
         document.addEventListener('touchstart', this.handleDocumentClick);
+    };
+    DropdownActions.prototype.componentWillUnmount = function () {
+        document.removeEventListener('click', this.handleDocumentClick);
+        document.removeEventListener('touchstart', this.handleDocumentClick);
     };
     DropdownActions.prototype.render = function () {
         var _this = this;
@@ -69,7 +73,7 @@ var DropdownActions = /** @class */ (function (_super) {
                         i,
                         " ",
                         caption);
-                return React.createElement("div", { className: "dropdown-item", key: index, onClick: action },
+                return React.createElement("a", { className: "dropdown-item", key: index, href: "#", onClick: function (evt) { evt.preventDefault(); action(); } },
                     i,
                     " ",
                     caption);
@@ -78,4 +82,44 @@ var DropdownActions = /** @class */ (function (_super) {
     return DropdownActions;
 }(React.Component));
 export { DropdownActions };
+/*
+export class DropdownActions extends React.Component<DropdownActionsProps, DropdownActionsState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dropdownOpen: false
+        };
+    }
+    private toggle = () => {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen
+        });
+    }
+    render() {
+        let {icon, actions, isRight} = this.props;
+        if (isRight === undefined) isRight = true;
+        let hasIcon = actions.some(v => v.icon!==undefined);
+        return <UncontrolledButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle caret={true} size="sm" className="cursor-pointer">
+                <i className={classNames('fa', 'fa-'+(icon||'ellipsis-v'))} />
+            </DropdownToggle>
+            <DropdownMenu right={isRight}>
+                {actions.map((v,index) => {
+                    let {icon, caption, action} = v;
+                    if (icon === undefined && caption === undefined)
+                        return <div className="dropdown-divider" />;
+                    let i;
+                    if (hasIcon === true) {
+                        if (icon !== undefined) icon = 'fa-' + icon;
+                        i = <><i className={classNames('fa', icon, 'fa-fw')} aria-hidden={true}></i>&nbsp; </>;
+                    }
+                    if (action === undefined)
+                        return <h6 className="dropdown-header">{i} {caption}</h6>;
+                    return <DropdownItem key={index} onClick={action}>{i} {caption}</DropdownItem>
+                })}
+            </DropdownMenu>
+        </UncontrolledButtonDropdown>
+    }
+}
+*/ 
 //# sourceMappingURL=index.js.map
