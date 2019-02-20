@@ -3,4 +3,3 @@ export * from './LMR';
 export * from './FA';
 export * from './IconText';
 export * from './Muted';
-export * from './image';

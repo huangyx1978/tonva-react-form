@@ -4,8 +4,4 @@ export interface ImageProps {
     className?: string;
     style?: React.CSSProperties;
 }
-export declare class Image extends React.Component<ImageProps> {
-    private src;
-    componentWillMount(): Promise<void>;
-    render(): JSX.Element;
-}
+export declare function Image(props: ImageProps): JSX.Element;
