@@ -9,6 +9,7 @@ export interface SearchBoxProps {
     size?: 'sm' | 'md' | 'lg';
     inputClassName?: string;
     onSearch: (key: string) => Promise<void>;
+    onFocus?: () => void;
     allowEmptySearch?: boolean;
 }
 export declare class SearchBox extends React.Component<SearchBoxProps> {
@@ -16,6 +17,7 @@ export declare class SearchBox extends React.Component<SearchBoxProps> {
     private key;
     private disabled;
     private onChange;
-    onSubmit: (evt: React.FormEvent<any>) => Promise<void>;
+    private onSubmit;
+    clear(): void;
     render(): JSX.Element;
 }

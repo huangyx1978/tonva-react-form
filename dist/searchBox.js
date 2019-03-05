@@ -64,13 +64,6 @@ var SearchBox = /** @class */ (function (_super) {
     function SearchBox() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.key = null;
-        /*
-        constructor(props: SearchBoxProps) {
-            super(props);
-            this.state = {
-                disabled: false,
-            }
-        }*/
         _this.onChange = function (evt) {
             _this.key = evt.target.value;
             if (_this.key !== undefined) {
@@ -82,13 +75,6 @@ var SearchBox = /** @class */ (function (_super) {
                 _this.disabled = !_this.key;
             }
         };
-        /*
-        ref = (input: HTMLInputElement) => {
-            this.input = input;
-            this.key = this.props.initKey || '';
-            if (input === null) return;
-            input.value = this.key;
-        }*/
         _this.onSubmit = function (evt) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -113,8 +99,13 @@ var SearchBox = /** @class */ (function (_super) {
         }); };
         return _this;
     }
+    SearchBox.prototype.clear = function () {
+        if (this.input)
+            this.input.value = '';
+    };
     SearchBox.prototype.render = function () {
-        var _a = this.props, className = _a.className, inputClassName = _a.inputClassName, label = _a.label, placeholder = _a.placeholder, buttonText = _a.buttonText, maxLength = _a.maxLength, size = _a.size;
+        var _this = this;
+        var _a = this.props, className = _a.className, inputClassName = _a.inputClassName, onFocus = _a.onFocus, label = _a.label, placeholder = _a.placeholder, buttonText = _a.buttonText, maxLength = _a.maxLength, size = _a.size;
         var inputSize;
         switch (size) {
             default:
@@ -134,9 +125,7 @@ var SearchBox = /** @class */ (function (_super) {
         return React.createElement("form", { className: className, onSubmit: this.onSubmit },
             React.createElement("div", { className: classNames("input-group", inputSize) },
                 lab,
-                React.createElement("input", { onChange: this.onChange, type: "text", name: "key", 
-                    //ref={this.ref}
-                    className: classNames('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: this.props.initKey, maxLength: maxLength }),
+                React.createElement("input", { ref: function (v) { return _this.input = v; }, onChange: this.onChange, type: "text", name: "key", onFocus: onFocus, className: classNames('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: this.props.initKey, maxLength: maxLength }),
                 React.createElement("div", { className: "input-group-append" },
                     React.createElement("button", { className: "btn btn-primary", type: "submit", disabled: this.disabled },
                         React.createElement("i", { className: 'fa fa-search' }),

@@ -1,6 +1,6 @@
 import * as React from 'react';
 export interface MediaProps {
-    icon: string | JSX.Element;
+    icon: string;
     main: string | JSX.Element;
     discription?: string | JSX.Element;
     px?: number;
