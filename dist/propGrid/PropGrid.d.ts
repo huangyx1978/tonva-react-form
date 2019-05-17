@@ -5,6 +5,7 @@ export interface PropGridProps {
     rows: Prop[];
     values: any;
     alignValue?: 'left' | 'center' | 'right';
+    labelFixLeft?: boolean;
 }
 export declare class PropGrid extends React.Component<PropGridProps> {
     render(): JSX.Element;

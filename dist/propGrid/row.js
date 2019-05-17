@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import * as React from 'react';
-import * as className from 'classnames';
+import className from 'classnames';
 var PropRow = /** @class */ (function () {
     function PropRow() {
     }
@@ -27,7 +27,7 @@ var PropBorder = /** @class */ (function (_super) {
     }
     PropBorder.prototype.render = function (key) {
         return React.createElement("div", { key: '_b_' + key, className: "" },
-            React.createElement("div", { className: "col-sm-12" },
+            React.createElement("div", { className: "w-100" },
                 React.createElement("div", { style: { borderTop: '1px solid #f0f0f0' } })));
     };
     return PropBorder;
@@ -69,6 +69,7 @@ var LabeledPropRow = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.gridProps = gridProps;
         _this.prop = prop;
+        _this.col = gridProps.labelFixLeft === true ? 'col' : 'col-sm';
         return _this;
         //this.values = values;
     }
@@ -87,10 +88,10 @@ var LabeledPropRow = /** @class */ (function (_super) {
         var label = this.prop.label;
         if (label === undefined)
             return null;
-        return React.createElement("label", { className: "col-sm-2 col-form-label" }, label);
+        return React.createElement("label", { className: this.col + '-3 col-form-label' }, label);
     };
     LabeledPropRow.prototype.renderProp = function () {
-        var _a = this.prop, label = _a.label, full = _a.full;
+        var label = this.prop.label;
         var align, vAlign;
         switch (this.gridProps.alignValue) {
             case 'left':
@@ -118,11 +119,7 @@ var LabeledPropRow = /** @class */ (function (_super) {
                 vAlign = 'align-items-stretch';
                 break;
         }
-        var col;
-        if (full !== true)
-            col = label === undefined ? 'col-sm-12' : 'col-sm-10';
-        else
-            col = 'w-100';
+        var col = this.col + (label === undefined ? '-12' : '-9');
         var cn = className(align, vAlign, col, 'd-flex');
         return React.createElement("div", { className: cn }, this.renderPropBody());
     };
@@ -201,21 +198,44 @@ var ComponentPropRow = /** @class */ (function (_super) {
         var component = this.prop.component;
         return component;
     };
+    ComponentPropRow.prototype.renderProp = function () {
+        var _a = this.prop, label = _a.label, full = _a.full;
+        var align, vAlign;
+        switch (this.gridProps.alignValue) {
+            case 'left':
+                align = valueAlignStart;
+                break;
+            case 'center':
+                align = valueAlignCenter;
+                break;
+            case 'right':
+                align = valueAlignEnd;
+                break;
+        }
+        switch (this.prop.vAlign) {
+            case 'top':
+                vAlign = 'align-items-start';
+                break;
+            default:
+            case 'center':
+                vAlign = 'align-items-center';
+                break;
+            case 'bottom':
+                vAlign = 'align-items-end';
+                break;
+            case 'stretch':
+                vAlign = 'align-items-stretch';
+                break;
+        }
+        var col;
+        if (full !== true)
+            col = this.col + (label === undefined ? '-12' : '-9');
+        else
+            col = 'w-100';
+        var cn = className(align, vAlign, col, 'd-flex');
+        return React.createElement("div", { className: cn }, this.renderPropBody());
+    };
     return ComponentPropRow;
 }(LabeledPropRow));
 export { ComponentPropRow };
-var PropContainer = /** @class */ (function (_super) {
-    __extends(PropContainer, _super);
-    function PropContainer() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    PropContainer.prototype.render = function (key) {
-        return React.createElement("div", { className: "bg-white" },
-            React.createElement("label", { className: "col-sm-2 col-form-label" }, "AAABBBCCC"),
-            React.createElement("div", { className: "col-sm-10" },
-                React.createElement("div", { className: "form-control-plaintext" }, "dsfasfa sdf asdf a")));
-    };
-    return PropContainer;
-}(PropRow));
-export { PropContainer };
 //# sourceMappingURL=row.js.map

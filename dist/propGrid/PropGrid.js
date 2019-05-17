@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import * as React from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { observer } from 'mobx-react';
 import { PropView } from './propView';
 var PropGrid = /** @class */ (function (_super) {
@@ -26,24 +26,6 @@ var PropGrid = /** @class */ (function (_super) {
     function PropGrid() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    /*
-        private propView: PropView;
-        constructor(props:PropGridProps) {
-            super(props);
-        }
-    */
-    /*
-        componentWillMount() {
-            this.propView = new PropView(this.props.rows);
-            this.propView.setValues(this.props.values);
-        }
-    
-        componentWillReceiveProps(nextProps: Readonly<PropGridProps>, nextContext: any) {
-            this.propView = new PropView(this.props.rows);
-            this.propView.setValues(nextProps.values);
-            this.forceUpdate();
-        }
-    */
     PropGrid.prototype.render = function () {
         var _a = this.props, className = _a.className, rows = _a.rows, values = _a.values;
         var propView = new PropView(this.props, rows);
