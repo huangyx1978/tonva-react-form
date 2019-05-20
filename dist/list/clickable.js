@@ -21,7 +21,7 @@ var Clickable = /** @class */ (function (_super) {
     }
     Clickable.prototype.render = function (item, index) {
         var _a = this.list.props.item, className = _a.className, key = _a.key, onClick = _a.onClick;
-        return React.createElement("li", { key: key === undefined ? index : key(item), className: classNames('va-row-clickable', className), onClick: function () { return onClick(item); } }, this.renderContent(item, index));
+        return React.createElement("li", { key: key === undefined ? index : key(item), className: classNames('va-row-clickable', className), onClick: function () { return onClick && onClick(item); } }, this.renderContent(item, index));
     };
     return Clickable;
 }(ListBase));
